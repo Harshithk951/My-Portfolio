@@ -1,0 +1,100 @@
+import { motion } from 'framer-motion';
+import { Mail, Phone, Github, Linkedin } from 'lucide-react';
+import ContactForm from './ContactForm';
+
+const CTASection = () => {
+  const contactItems = [
+    {
+      icon: Mail,
+      label: 'Email Me',
+      value: 'mharshithkumar6@gmail.com',
+      href: 'mailto:mharshithkumar6@gmail.com',
+      color: 'glow-pink'
+    },
+    {
+      icon: Phone,
+      label: 'Call Me',
+      value: '+91 8977795636',
+      href: 'tel:+918977795636',
+      color: 'glow-green'
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      value: '@Harshithk951',
+      href: 'https://github.com/Harshithk951',
+      color: 'glow-blue'
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      value: 'Harshith Kumar',
+      href: 'https://www.linkedin.com/in/harshith-kumar-dev',
+      color: 'glow-yellow'
+    }
+  ];
+
+  return (
+    <section id="contact" className="py-20 relative bg-[#0b0b0b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter mb-4 leading-tight text-white">
+            Let&apos;s Build Something<br />Awesome Together 🚀
+          </h2>
+          <p className="text-xl text-white/60 font-light max-w-2xl mx-auto">
+            I&apos;m open for freelance projects, collaborations, and startup partnerships.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Contact Info Grid */}
+          <div className="lg:col-span-1 grid grid-cols-1 gap-4">
+            {contactItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.a
+                  key={index}
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className={`glow-card ${item.color} p-6 flex items-center gap-4 group cursor-pointer`}
+                >
+                  <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
+                    <Icon size={24} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-white/50 uppercase tracking-wider">{item.label}</p>
+                    <p className="font-medium text-white/90 group-hover:text-white transition-colors">{item.value}</p>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-2 glow-card glow-blue p-8 md:p-12"
+          >
+            <h3 className="text-2xl font-bold mb-8 text-white">Get in Touch</h3>
+            <ContactForm />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CTASection;
