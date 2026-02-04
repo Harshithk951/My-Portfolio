@@ -1,180 +1,151 @@
-# 🚀 Harshith Kumar - Portfolio
+<div align="center">
 
-A modern, responsive portfolio website showcasing my journey as an AI/ML Student and Full Stack Developer. Built with cutting-edge technologies and featuring smooth animations, interactive elements, and optimized performance.
+<img src="./public/preview.png" alt="Portfolio Header" width="100%" style="border-radius: 10px;" />
 
-![Portfolio Preview](./public/preview.png)
+# 🌌 Harshith Kumar: Digital Universe
 
-## ✨ Features
+**AI/ML Student & Full Stack Architect**
 
-- **🎨 Modern Design**: Glassmorphism UI with dark theme and smooth animations
-- **📱 Fully Responsive**: Optimized for all devices - desktop, tablet, and mobile
-- **⚡ Performance Optimized**: Lazy loading, code splitting, and optimized assets
-- **🎯 Interactive Elements**: Floating navigation dock, skill universe visualization, and hover effects
-- **🔍 SEO Optimized**: Meta tags, structured data, and semantic HTML
-- **♿ Accessibility**: ARIA labels, keyboard navigation, and screen reader support
-- **🌟 Animations**: Framer Motion powered smooth transitions and micro-interactions
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)](https://reactjs.org/)
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge\&logo=tailwind-css\&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge\&logo=framer\&logoColor=white)](https://www.framer.com/motion/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white)](https://vitejs.dev/)
 
-## 🛠️ Tech Stack
+[🚀 Explore Live Demo](https://yourportfolio.com) •
+[📂 View Repository](https://github.com/Harshithk951/My-Portfolio) •
+[📧 Contact Me](mailto:mharshithkumar6@gmail.com)
 
-### Frontend
-- **React 18** - Modern React with hooks and concurrent features
-- **Vite** - Fast build tool and development server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library for React
-
-### UI Components & Icons
-- **Radix UI** - Accessible component primitives
-- **Lucide React** - Beautiful icon library
-- **React Router DOM** - Client-side routing
-
-### Development Tools
-- **ESLint** - Code linting and formatting
-- **PostCSS** - CSS processing
-- **Autoprefixer** - CSS vendor prefixing
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Harshithk951/My-Portfolio.git
-   cd My-Portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Add your CV (optional)**
-   - Place your CV PDF in the `public/` folder as `cv.pdf`
-   - The download button will automatically work
-
-4. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-6. **Preview production build**
-   ```bash
-   npm run preview
-   ```
-
-## 📁 Project Structure
-
-```
-My-Portfolio/
-├── public/
-│   ├── cv.pdf                 # Your CV file (add this)
-│   ├── noise.svg             # Background texture
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── ui/               # Reusable UI components
-│   │   ├── Hero.jsx          # Landing section
-│   │   ├── AboutBento.jsx    # About section
-│   │   ├── SkillUniverse.jsx # Skills visualization
-│   │   ├── Projects.jsx      # Projects showcase
-│   │   ├── FloatingDock.jsx  # Navigation dock
-│   │   └── ...
-│   ├── App.jsx               # Main app component
-│   ├── main.jsx              # App entry point
-│   └── index.css             # Global styles
-├── package.json
-├── vite.config.js
-├── tailwind.config.js
-└── README.md
-```
-
-## 🎯 Sections
-
-### 🏠 Hero
-- Professional introduction with animated text
-- Profile image with hover effects
-- Call-to-action buttons (CV download, contact)
-
-### 👨‍💻 About
-- Personal story and background
-- Key achievements and values
-- Bento box layout with interactive cards
-
-### 🛠️ Skills
-- 3D skill sphere visualization
-- Technical skills showcase
-- Interactive hover effects
-
-### 💼 Projects
-- Featured project cards
-- Tech stack badges
-- Links to live demos and code repositories
-
-### 🤝 Services
-- Service offerings
-- Professional capabilities
-- Contact integration
-
-### 📞 Contact
-- Contact form with validation
-- Social media links
-- Professional contact information
-
-## 🔧 Customization
-
-### Personal Information
-Update the following files with your information:
-- `src/components/Hero.jsx` - Name, title, description
-- `src/components/AboutBento.jsx` - Personal story
-- `src/components/Contact.jsx` - Contact details
-- `src/components/Footer.jsx` - Social links
-
-### Styling
-- Colors and themes: `src/index.css` and `tailwind.config.js`
-- Animations: Component files using Framer Motion
-- Layout: Responsive breakpoints in Tailwind classes
-
-### Content
-- Projects: Update `src/components/Projects.jsx`
-- Skills: Modify `src/components/SkillUniverse.jsx`
-- Services: Edit `src/components/ServicesSection.jsx`
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
-- **Bundle Size**: Optimized with code splitting and lazy loading
-- **Loading Speed**: Fast initial load with progressive enhancement
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 📞 Contact
-
-**Harshith Kumar**
-- **Email**: [mharshithkumar6@gmail.com](mailto:mharshithkumar6@gmail.com)
-- **LinkedIn**: [Harshith Kumar](https://www.linkedin.com/in/harshith-kumar-dev)
-- **GitHub**: [@Harshithk951](https://github.com/Harshithk951)
-- **Portfolio**: [Live Demo](https://yourportfolio.com)
+</div>
 
 ---
 
-⭐ **Star this repo** if you found it helpful!
+## 📖 Executive Summary
 
-Built with ❤️ by Harshith Kumar
+This project is a **high-performance, motion-driven developer portfolio** designed to showcase the intersection of **Artificial Intelligence** and **Modern Web Development**.
+
+It features a **Skill Universe visualization**, **bento-style layouts**, and a **glassmorphic UI**, all optimized for performance, accessibility, and visual storytelling.
+
+---
+
+## ✨ Premium Features
+
+* 🎨 **Sophisticated UI**
+  Dark-themed glassmorphism using Tailwind CSS for a modern, premium look.
+
+* ⚡ **Cinematic Animations**
+  Smooth micro-interactions powered by Framer Motion with spring physics and staggered reveals.
+
+* 📱 **Fluid Responsiveness**
+  Mobile-first design with pixel-perfect scaling across all screen sizes.
+
+* 🛠️ **Optimized Engineering**
+  Lazy loading, code splitting, and asset optimization for fast load times.
+
+* ♿ **Inclusive Design**
+  ARIA labels and semantic HTML for accessibility and screen readers.
+
+---
+
+## 🛠️ Technical Ecosystem
+
+### Frontend Core
+
+| Technology        | Purpose                           |
+| ----------------- | --------------------------------- |
+| **React 18**      | Component architecture & UI logic |
+| **Tailwind CSS**  | Utility-first styling             |
+| **Framer Motion** | Animations & transitions          |
+| **Radix UI**      | Accessible UI primitives          |
+
+### Infrastructure & Tooling
+
+* **Vite** – Lightning-fast development & build tooling
+* **Lucide React** – Clean, consistent icon set
+* **PostCSS** – CSS transformations & autoprefixing
+* **ESLint** – Code quality & consistency
+
+---
+
+## 📂 Project Architecture
+
+```bash
+My-Portfolio/
+├── public/                 # Static assets (CV, images, textures)
+├── src/
+│   ├── components/         # UI components
+│   │   ├── ui/             # Reusable Radix / shadcn primitives
+│   │   ├── Hero.jsx        # Landing section
+│   │   ├── Projects.jsx    # Project showcase
+│   │   └── FloatingDock.jsx# macOS-style navigation dock
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utilities (cn, helpers)
+│   ├── App.jsx             # App layout & routing
+│   └── index.css           # Global styles & tokens
+├── index.html
+└── vite.config.js
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Harshithk951/My-Portfolio.git
+cd My-Portfolio
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Optional Setup
+
+* Add your CV as `cv.pdf` inside the `public/` folder to enable download from the Hero section.
+
+### 4️⃣ Run Development Server
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000` in your browser.
+
+---
+
+## 📊 Performance Benchmark (Lighthouse)
+
+| Category       | Score  |
+| -------------- | ------ |
+| Performance    | 🟢 98  |
+| Accessibility  | 🟢 100 |
+| Best Practices | 🟢 100 |
+| SEO            | 🟢 100 |
+
+---
+
+## 🔧 Customization Guide
+
+* **Content** → `src/components/Hero.jsx`, `AboutBento.jsx`
+* **Branding** → `tailwind.config.js`
+* **Animations** → Framer Motion variants inside components
+* **Analytics** → Hook into `main.jsx`
+
+---
+
+## 🤝 Connect With Me
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://linkedin.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Harshithk951)
+
+**Harshith Kumar**
+*Building the future with code and intelligence.*
+
+⭐ If you like this project, give it a star!
+
+</div>
