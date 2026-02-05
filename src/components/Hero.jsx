@@ -137,7 +137,7 @@ const Hero = () => {
               {/* Glass Card */}
               <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 bg-[#111]/80 backdrop-blur-xl shadow-2xl transition-all duration-500 group-hover:border-white/20">
                 <img
-                  src="https://horizons-cdn.hostinger.com/cddbcc74-7c74-440d-8415-810e906c9128/whatsapp-image-2026-01-13-at-12.25.41-1-lUA2e.jpeg"
+                  src="/hero-profile.jpg"
                   alt="Harshith Kumar professional headshot"
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
