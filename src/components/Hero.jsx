@@ -80,7 +80,7 @@ const Hero = () => {
             >
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-amber-500 animate-pulse" />
               <span className="text-xs font-medium tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 uppercase">
-                Digital Creator & Engineer
+                AI-First Full Stack Engineer
               </span>
             </motion.div>
 
