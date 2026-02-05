@@ -105,7 +105,6 @@ const Hero = () => {
                   {words[currentWord]}
                 </motion.span>
               </span>
-              <span>complex problems.</span>
             </div>
 
             <p className="text-lg text-white/50 max-w-lg leading-relaxed">
