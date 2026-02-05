@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Trophy } from 'lucide-react';
+import { ExternalLink, Github, Trophy, Heart, TrendingUp } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const ProjectsShowcase = () => {
@@ -12,19 +12,22 @@ const ProjectsShowcase = () => {
       description: 'A comprehensive platform connecting university students with resources, events, and collaboration opportunities. Hackathon Winner 🏆',
       tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
       color: 'glow-pink',
-      badge: 'Hackathon Winner 🏆'
+      badge: 'Hackathon Winner 🏆',
+      icon: Github
     },
     {
       title: 'Smart Health Care',
       description: 'Complete clinic management system with patient records, appointment scheduling, and billing integration using modern stack.',
       tech: ['React', 'Express', 'MongoDB', 'Firebase'],
       color: 'glow-yellow',
+      icon: Heart
     },
     {
       title: 'Smart Sales Agent',
       description: 'AI-powered sales assistant using machine learning to optimize customer interactions and improve conversion rates.',
       tech: ['React', 'Python', 'AI/ML', 'Node.js'],
       color: 'glow-blue',
+      icon: TrendingUp
     }
   ];
 
@@ -70,12 +73,13 @@ const ProjectsShowcase = () => {
             >
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-white/10 rounded-xl">
-                  {project.badge ? <Trophy size={24} className="text-yellow-400" /> : <Github size={24} className="text-white" />}
+                  {project.badge ? <Trophy size={24} className="text-yellow-400" /> : <project.icon size={24} className="text-white" />}
                 </div>
                 <div className="flex gap-2">
                   <button 
                     onClick={handleGitHub}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
+                    title="View on GitHub"
                   >
                     <Github size={20} />
                   </button>
