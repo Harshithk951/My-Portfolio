@@ -28,6 +28,10 @@ const ProjectsShowcase = () => {
     }
   ];
 
+  const handleGitHub = () => {
+    window.open('https://github.com/Harshithk951', '_blank');
+  };
+
   const handleAction = (action) => {
     toast({
       title: "Coming Soon",
@@ -68,7 +72,7 @@ const ProjectsShowcase = () => {
                 </div>
                 <div className="flex gap-2">
                   <button 
-                    onClick={() => handleAction('code')}
+                    onClick={handleGitHub}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
                   >
                     <Github size={20} />
