@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 
 import LoadingAnimation from './components/LoadingAnimation';
 import Navbar from './components/Navbar';
@@ -86,6 +87,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
       </Routes>
       <Toaster />
+      <Analytics />
     </Router>
   );
 }

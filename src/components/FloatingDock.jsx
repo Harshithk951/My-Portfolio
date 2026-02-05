@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Home, User, Briefcase, Code, Mail, Github, Linkedin, Cog } from 'lucide-react';
+import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 
 const FloatingDock = () => {
   const navItems = [
