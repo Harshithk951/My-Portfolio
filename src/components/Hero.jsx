@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
@@ -6,6 +6,15 @@ import { smoothScrollTo } from '@/lib/utils';
 
 const Hero = () => {
   const { toast } = useToast();
+  const [currentWord, setCurrentWord] = useState(0);
+  const words = ['solves', 'builds', 'designs', 'creates', 'transforms'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleDownloadCV = () => {
     // Create a link to download the CV
@@ -84,9 +93,16 @@ const Hero = () => {
 
             <div className="text-xl sm:text-2xl text-white/60 font-light flex flex-wrap items-center gap-2">
               <span>I am a guy who</span>
-              <span className="px-3 py-1 rounded-full bg-white text-black font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                solves
-              </span>
+              <motion.span 
+                key={currentWord}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5 }}
+                className="px-3 py-1 rounded-full bg-white text-black font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              >
+                {words[currentWord]}
+              </motion.span>
               <span>complex problems.</span>
             </div>
 
