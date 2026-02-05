@@ -93,16 +93,18 @@ const Hero = () => {
 
             <div className="text-xl sm:text-2xl text-white/60 font-light flex flex-wrap items-center gap-2">
               <span>I am a guy who</span>
-              <motion.span 
-                key={currentWord}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
-                className="px-3 py-1 rounded-full bg-white text-black font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              >
-                {words[currentWord]}
-              </motion.span>
+              <span className="px-3 py-1 rounded-full bg-white text-black font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <motion.span
+                  key={currentWord}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-block"
+                >
+                  {words[currentWord]}
+                </motion.span>
+              </span>
               <span>complex problems.</span>
             </div>
 
