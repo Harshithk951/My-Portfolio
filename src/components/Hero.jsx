@@ -19,7 +19,7 @@ const Hero = () => {
   const handleDownloadCV = () => {
     // Create a link to download the CV
     const link = document.createElement('a');
-    link.href = '/Harshith_Kumar_CV.pdf'; // Path to your CV file in the public folder
+    link.href = '/cv.pdf'; // Path to your CV file in the public folder
     link.download = 'Harshith_Kumar_CV.pdf'; // Name for the downloaded file
     document.body.appendChild(link);
     link.click();
