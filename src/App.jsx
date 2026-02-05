@@ -46,7 +46,7 @@ function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Harshith | Digital Creator & Engineer</title>
+        <title>Harshith | AI-First Full Stack Engineer</title>
         <meta 
           name="description" 
           content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." 
