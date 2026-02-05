@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { submitContactForm } from '@/lib/supabase';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -28,35 +29,23 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Supabase Integration Fallback (LocalStorage)
-      // Since Supabase isn't connected in this environment, we simulate the backend call
-      // and store in localStorage for prototype demonstration.
-      
-      const newSubmission = {
-        id: crypto.randomUUID(),
-        ...formData,
-        created_at: new Date().toISOString(),
-        status: 'new'
-      };
+      // Submit to Supabase
+      const result = await submitContactForm(formData);
 
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      // Store in localStorage
-      const existingSubmissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
-      localStorage.setItem('contact_submissions', JSON.stringify([...existingSubmissions, newSubmission]));
-
-      toast({
-        title: "Message Sent Successfully! 🚀",
-        description: "Thank you for reaching out. I'll get back to you shortly.",
-      });
-
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      if (result.success) {
+        toast({
+          title: "Message Sent Successfully! 🚀",
+          description: "Thank you for reaching out. I'll get back to you shortly.",
+        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        throw new Error(result.error);
+      }
       
     } catch (error) {
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again later.",
+        description: error.message || "Something went wrong. Please try again later.",
         variant: "destructive"
       });
     } finally {
