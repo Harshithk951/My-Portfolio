@@ -29,7 +29,9 @@ const ProjectsShowcase = () => {
   ];
 
   const handleGitHub = () => {
-    window.open('https://github.com/Harshithk951', '_blank');
+    setTimeout(() => {
+      window.open('https://github.com/Harshithk951', '_blank');
+    }, 0);
   };
 
   const handleAction = (action) => {
