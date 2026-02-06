@@ -15,14 +15,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-black/50 backdrop-blur-xl">
+    <footer className="relative py-12 px-4 sm:px-6 lg:px-8 xl:px-12 border-t border-white/10 bg-black/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+        <div className="flex flex-col sm:flex-col md:flex-row justify-between items-center gap-6 md:gap-8 mb-12">
           <div className="text-center md:text-left">
             <h3 className="text-3xl font-black tracking-tight mb-2 text-white">Let's Connect.</h3>
             <p className="text-white/50">Have an idea? Let's turn it into a reality.</p>
           </div>
-          
+
           <button
             onClick={scrollToContact}
             className="px-8 py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform"
@@ -31,12 +31,12 @@ const Footer = () => {
           </button>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5">
+        <div className="flex flex-col sm:flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5">
           <div className="text-center md:text-left">
             <h4 className="font-bold text-xl mb-1 text-white">Harshith.</h4>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4 sm:gap-5 md:gap-6">
             <SocialIcon href="https://github.com/Harshithk951" icon={Github} />
             <SocialIcon href="https://www.linkedin.com/in/harshith-kumar-dev" icon={Linkedin} />
             <SocialIcon href="mailto:mharshithkumar6@gmail.com" icon={Mail} />

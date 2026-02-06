@@ -47,7 +47,7 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="py-20 relative bg-[#0b0b0b]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter mb-4 text-white">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             What I Build
           </h2>
           <p className="text-xl text-white/60 font-light">
@@ -63,7 +63,7 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -74,13 +74,13 @@ const ServicesSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className={`glow-card ${service.color} p-8 group`}
+                className={`glow-card ${service.color} p-6 sm:p-7 md:p-8 group`}
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
                     <Icon size={32} className="text-white" />
                   </div>
-                  <button 
+                  <button
                     onClick={handleLearnMore}
                     className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors"
                   >
@@ -95,7 +95,7 @@ const ServicesSection = () => {
 
                 <div className="flex flex-wrap gap-2">
                   {service.tags.map((tag, i) => (
-                    <span 
+                    <span
                       key={i}
                       className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80"
                     >

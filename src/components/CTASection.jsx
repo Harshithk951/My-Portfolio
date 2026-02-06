@@ -36,7 +36,7 @@ const CTASection = () => {
 
   return (
     <section id="contact" className="py-20 relative bg-[#0b0b0b]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,17 +44,17 @@ const CTASection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter mb-4 leading-tight text-white">
-            Let&apos;s Build Something<br />Awesome Together 🚀
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 leading-tight text-white">
+            Let&apos;s Build Something<br className="hidden sm:block" />Awesome Together 🚀
           </h2>
           <p className="text-xl text-white/60 font-light max-w-2xl mx-auto">
             I&apos;m open for freelance projects, collaborations, and startup partnerships.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Contact Info Grid */}
-          <div className="lg:col-span-1 grid grid-cols-1 gap-4">
+          <div className="md:col-span-2 lg:col-span-1 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-1 gap-4">
             {contactItems.map((item, index) => {
               const Icon = item.icon;
               return (
@@ -67,7 +67,7 @@ const CTASection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className={`glow-card ${item.color} p-6 flex items-center gap-4 group cursor-pointer`}
+                  className={`glow-card ${item.color} p-5 sm:p-6 flex items-center gap-4 group cursor-pointer min-h-[80px]`}
                 >
                   <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
                     <Icon size={24} className="text-white" />
@@ -86,7 +86,7 @@ const CTASection = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-2 glow-card glow-blue p-8 md:p-12"
+            className="md:col-span-2 lg:col-span-2 glow-card glow-blue p-6 sm:p-8 md:p-10 lg:p-12"
           >
             <h3 className="text-2xl font-bold mb-8 text-white">Get in Touch</h3>
             <ContactForm />

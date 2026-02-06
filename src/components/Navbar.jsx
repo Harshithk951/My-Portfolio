@@ -33,7 +33,7 @@ const Navbar = () => {
     // Since I can only modify Navbar, Hero, Footer, let's stick to the IDs.
     // Note: The previous ServicesSection file wasn't editable in this prompt but was in context. 
     // I will use smoothScrollTo.
-    
+
     // Check if the href matches a section
     smoothScrollTo(href);
     setIsMobileMenuOpen(false);
@@ -43,11 +43,10 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10' : 'bg-transparent'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between h-16">
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -57,7 +56,7 @@ const Navbar = () => {
             H
           </motion.div>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 xl:space-x-8">
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
@@ -88,12 +87,12 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-black/95 backdrop-blur-lg border-b border-white/10"
           >
-            <div className="px-4 py-4 space-y-3">
+            <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="block w-full text-left text-white/80 hover:text-white transition-colors py-2"
+                  className="block w-full text-left text-white/80 hover:text-white transition-colors py-3 px-2 rounded-lg hover:bg-white/5 min-h-[44px] flex items-center"
                 >
                   {item.name}
                 </button>

@@ -9,7 +9,7 @@ const SkillUniverse = () => {
   const animationRef = useRef(null);
 
   const skills = [
-    'react', 'nodejs', 'python', 'tensorflow', 'mongodb', 
+    'react', 'nodejs', 'python', 'tensorflow', 'mongodb',
     'postgresql', 'docker', 'git', 'javascript', 'typescript',
     'nextjs', 'express', 'tailwindcss', 'figma', 'aws'
   ];
@@ -48,13 +48,25 @@ const SkillUniverse = () => {
   }, []);
 
   useEffect(() => {
-    const animate = () => {
+    let lastTime = 0;
+    const fps = 60;
+    const interval = 1000 / fps;
+
+    const animate = (currentTime) => {
+      // Throttle to 60fps for better performance
+      if (currentTime - lastTime < interval) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastTime = currentTime;
+
       const distance = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
       const maxDistance = 400;
-      const speedMultiplier = Math.min(distance / maxDistance, 1) * 2;
+      const speedMultiplier = Math.min(distance / maxDistance, 1) * 1.5;
 
-      rotationRef.current.y += 0.002 * (1 + speedMultiplier);
-      rotationRef.current.x += 0.001 * speedMultiplier;
+      // Reduced rotation speed for smoother performance
+      rotationRef.current.y += 0.0015 * (1 + speedMultiplier);
+      rotationRef.current.x += 0.0008 * speedMultiplier;
 
       iconsRef.current.forEach((icon, i) => {
         if (!icon) return;
@@ -69,6 +81,7 @@ const SkillUniverse = () => {
         const translateX = rotatedX * 200;
         const translateY = rotatedY * 200;
 
+        // Use transform for GPU acceleration
         icon.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
         icon.style.opacity = scale;
         icon.style.zIndex = Math.floor(scale * 100);
@@ -77,7 +90,7 @@ const SkillUniverse = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -87,26 +100,26 @@ const SkillUniverse = () => {
 
   return (
     <section id="skills" className="min-h-screen py-20 flex items-center justify-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl sm:text-6xl lg:text-7xl header-text text-center mb-16"
+          className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl header-text text-center mb-16"
         >
           Skill Universe
         </motion.h2>
 
         <div
           ref={containerRef}
-          className="relative w-full h-[500px] flex items-center justify-center"
+          className="relative w-full h-[300px] xs:h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center"
         >
           {skills.map((skill, i) => (
             <div
               key={skill}
               ref={(el) => (iconsRef.current[i] = el)}
-              className="absolute w-16 h-16 transition-opacity duration-300"
+              className="absolute w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 transition-opacity duration-300"
             >
               <img
                 src={`https://skillicons.dev/icons?i=${skill}`}

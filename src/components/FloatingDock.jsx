@@ -10,14 +10,14 @@ const FloatingDock = () => {
     { icon: Mail, label: 'Contact', href: '#contact' }
   ];
 
-const socialItems = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com', isExternal: true },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', isExternal: true },
-  
-];
+  const socialItems = [
+    { icon: Github, label: 'GitHub', href: 'https://github.com', isExternal: true },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', isExternal: true },
+
+  ];
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:block">
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden lg:block">
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

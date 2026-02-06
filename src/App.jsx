@@ -22,10 +22,10 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time for system ready check
+    // Reduced loading time for faster initial display
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2800);
+    }, 1200);
 
     // Handle back/forward cache restoration
     const handlePageShow = (event) => {
@@ -47,9 +47,9 @@ function HomePage() {
     <>
       <Helmet>
         <title>Harshith | AI-First Full Stack Engineer</title>
-        <meta 
-          name="description" 
-          content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." 
+        <meta
+          name="description"
+          content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
         />
       </Helmet>
 

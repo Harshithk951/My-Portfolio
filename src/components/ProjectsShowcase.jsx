@@ -46,7 +46,7 @@ const ProjectsShowcase = () => {
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -54,13 +54,13 @@ const ProjectsShowcase = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter mb-4 text-white">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             My Creations
           </h2>
           <p className="text-xl text-white/60 font-light">Built with Code & Passion</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -69,21 +69,21 @@ const ProjectsShowcase = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className={`glow-card ${project.color} p-8 flex flex-col h-full`}
+              className={`glow-card ${project.color} p-6 sm:p-7 md:p-8 flex flex-col h-full`}
             >
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-white/10 rounded-xl">
                   {project.badge ? <Trophy size={24} className="text-yellow-400" /> : <project.icon size={24} className="text-white" />}
                 </div>
                 <div className="flex gap-2">
-                  <button 
+                  <button
                     onClick={handleGitHub}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
                     title="View on GitHub"
                   >
                     <Github size={20} />
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleAction('demo')}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
                   >
@@ -95,14 +95,14 @@ const ProjectsShowcase = () => {
               <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all">
                 {project.title}
               </h3>
-              
+
               <p className="text-white/70 mb-6 flex-grow leading-relaxed">
                 {project.description}
               </p>
 
               <div className="flex flex-wrap gap-2 mt-auto">
                 {project.tech.map((tag, i) => (
-                  <span 
+                  <span
                     key={i}
                     className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/80"
                   >
