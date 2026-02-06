@@ -167,7 +167,7 @@ const Hero = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-6 space-y-4">
                   <div className="flex justify-between items-end">
                     <div>
-                      <h3 className="text-white font-bold text-xl">Harshith Kumar</h3>
+                      <h2 className="text-white font-bold text-xl">Harshith Kumar</h2>
                       <p className="text-white/60 text-sm">Full Stack Developer</p>
                     </div>
 

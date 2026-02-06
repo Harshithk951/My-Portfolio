@@ -80,12 +80,14 @@ const ProjectsShowcase = () => {
                     onClick={handleGitHub}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
                     title="View on GitHub"
+                    aria-label="View project on GitHub"
                   >
                     <Github size={20} />
                   </button>
                   <button
                     onClick={() => handleAction('demo')}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
+                    aria-label="View live demo"
                   >
                     <ExternalLink size={20} />
                   </button>
