@@ -14,7 +14,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Error",
@@ -126,16 +126,14 @@ const Contact = () => {
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return (
-                    <motion.button
+                    <button
                       key={index}
                       onClick={handleSocialClick}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                       className={`glow-card ${social.color} p-4 flex flex-col items-center gap-2`}
                     >
                       <Icon size={24} />
                       <span className="text-sm font-light">{social.label}</span>
-                    </motion.button>
+                    </button>
                   );
                 })}
               </div>
