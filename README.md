@@ -11,7 +11,7 @@
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge\&logo=framer\&logoColor=white)](https://www.framer.com/motion/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white)](https://vitejs.dev/)
 
-[🚀 Explore Live Demo](https://yourportfolio.com) •
+[🚀 Explore Live Demo](https://www.harshithkumar.in) •
 [📂 View Repository](https://github.com/Harshithk951/My-Portfolio) •
 [📧 Contact Me](mailto:mharshithkumar6@gmail.com)
 
