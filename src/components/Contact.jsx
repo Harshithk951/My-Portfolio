@@ -61,13 +61,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="glow-card glow-pink p-8"
-          >
+          <div className="glow-card glow-pink p-8">
             <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -108,15 +102,9 @@ const Contact = () => {
                 Send Message
               </Button>
             </form>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             <div className="glow-card glow-blue p-8">
               <h3 className="text-2xl font-bold mb-4">Social Links</h3>
               <p className="text-white/70 font-light mb-6">
@@ -145,7 +133,7 @@ const Contact = () => {
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
