@@ -51,6 +51,16 @@ function HomePage() {
           name="description"
           content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
         />
+        <link rel="canonical" href="https://harshithkumar.in/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://harshithkumar.in/" />
+        <meta property="og:title" content="Harshith Kumar | AI-First Full Stack Engineer" />
+        <meta property="og:description" content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." />
+        <meta property="og:image" content="https://harshithkumar.in/preview.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Harshith Kumar | AI-First Full Stack Engineer" />
+        <meta name="twitter:description" content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast." />
+        <meta name="twitter:image" content="https://harshithkumar.in/preview.png" />
       </Helmet>
 
       <AnimatePresence mode="wait">

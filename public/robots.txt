@@ -1,0 +1,8 @@
+# robots.txt for Harshith Kumar Portfolio
+# Allow all crawlers full access
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://harshithkumar.in/sitemap.xml
