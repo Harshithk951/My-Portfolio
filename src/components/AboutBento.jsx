@@ -76,8 +76,7 @@ const AboutBento = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className={`glow-card ${card.color} p-6 sm:p-7 md:p-8 flex flex-col justify-start group hover:shadow-2xl h-full`}
+                className={`glow-card ${card.color} p-6 sm:p-7 md:p-8 flex flex-col justify-start group hover:shadow-2xl h-full hover:-translate-y-2 transition-transform duration-300`}
               >
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors">
                   <Icon size={24} className="text-white" />

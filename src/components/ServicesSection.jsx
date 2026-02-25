@@ -73,8 +73,7 @@ const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-                className={`glow-card ${service.color} p-6 sm:p-7 md:p-8 group`}
+                className={`glow-card ${service.color} p-6 sm:p-7 md:p-8 group hover:-translate-y-1 transition-transform duration-300`}
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">

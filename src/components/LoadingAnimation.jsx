@@ -6,15 +6,21 @@ const LOAD_DURATION = 1000; // ms — finishes before the 1200ms unmount
 const LoadingAnimation = () => {
   const [percent, setPercent] = useState(0);
   const startRef = useRef(null);
+  const lastPercentRef = useRef(0);
 
   useEffect(() => {
     const tick = (now) => {
       if (!startRef.current) startRef.current = now;
       const elapsed = now - startRef.current;
-      // Ease-out curve: fast start, slow finish — feels like real boot
       const raw = Math.min(elapsed / LOAD_DURATION, 1);
       const eased = 1 - Math.pow(1 - raw, 3);
-      setPercent(Math.round(eased * 100));
+      const rounded = Math.round(eased * 100);
+
+      // Only trigger re-render when the displayed number changes
+      if (rounded !== lastPercentRef.current) {
+        lastPercentRef.current = rounded;
+        setPercent(rounded);
+      }
 
       if (raw < 1) {
         requestAnimationFrame(tick);
@@ -52,10 +58,9 @@ const LoadingAnimation = () => {
       >
         {/* Progress bar */}
         <div className="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-green-500 rounded-full"
+          <div
+            className="h-full bg-green-500 rounded-full transition-none"
             style={{ width: `${percent}%` }}
-            transition={{ duration: 0.05 }}
           />
         </div>
 

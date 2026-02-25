@@ -132,6 +132,20 @@ body::after {
   scroll-behavior: smooth;
 }
 
+/* Infinite perspective grid animation */
+@keyframes grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+.animate-grid-scroll {
+  animation: grid-scroll 8s linear infinite;
+}
+
 /* Respect user's motion preferences for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
 

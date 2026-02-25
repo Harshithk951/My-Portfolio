@@ -60,22 +60,16 @@ const Hero = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b0b] via-[#111] to-[#0b0b0b] z-10" />
         <div
-          className="absolute inset-0 z-0 opacity-[0.08] hidden sm:block"
+          className="absolute inset-0 z-0 opacity-[0.08] hidden sm:block animate-grid-scroll"
           style={{
             backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
             transform: 'perspective(1000px) rotateX(60deg) translateY(-100px) scale(2)',
             transformOrigin: 'top center',
-            willChange: 'transform'
+            willChange: 'background-position'
           }}
-        >
-          <motion.div
-            animate={{ y: [0, 50] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-            className="w-full h-full"
-          />
-        </div>
+        />
 
         {/* Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0b0b0b_100%)] z-10 pointer-events-none" />
