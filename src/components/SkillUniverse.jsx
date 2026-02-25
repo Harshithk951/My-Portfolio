@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 // Skill icon SVG fallbacks — renders a styled badge if the external image fails
@@ -95,30 +95,12 @@ const SkillUniverse = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // IntersectionObserver — only animate when section is in viewport
+  // Animation loop + IntersectionObserver (single effect to keep `animate` in scope)
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisibleRef.current = entry.isIntersecting;
-        if (entry.isIntersecting && !animationRef.current) {
-          animationRef.current = requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Core animation loop
-  useEffect(() => {
-    const animate = (currentTime) => {
-      // Stop loop when off-screen to save CPU
+    const animate = () => {
       if (!isVisibleRef.current) {
         animationRef.current = null;
         return;
@@ -158,11 +140,24 @@ const SkillUniverse = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Start animation
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting && !animationRef.current) {
+          animationRef.current = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+
+    // Start immediately
     isVisibleRef.current = true;
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
+      observer.disconnect();
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
