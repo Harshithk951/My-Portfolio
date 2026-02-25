@@ -4,31 +4,50 @@ import { ArrowRight, Download, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 
+const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
+
 const Hero = () => {
   const { toast } = useToast();
   const [currentWord, setCurrentWord] = useState(0);
-  const words = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
+      setCurrentWord((prev) => (prev + 1) % WORDS.length);
     }, 2000);
     return () => clearInterval(interval);
   }, []);
 
-  const handleDownloadCV = () => {
-    // Create a link to download the CV
-    const link = document.createElement('a');
-    link.href = '/cv.pdf'; // Path to your CV file in the public folder
-    link.download = 'Harshith_Kumar_CV.pdf'; // Name for the downloaded file
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownloadCV = async () => {
+    try {
+      // Verify file exists before attempting download
+      const res = await fetch('/cv.pdf', { method: 'HEAD' });
+      if (!res.ok) {
+        toast({
+          title: "CV Unavailable",
+          description: "The CV file is currently being updated. Please try again later.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    toast({
-      title: "CV Download",
-      description: "Your CV download has started! 📄",
-    });
+      const link = document.createElement('a');
+      link.href = '/cv.pdf';
+      link.download = 'Harshith_Kumar_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast({
+        title: "CV Download",
+        description: "Your CV download has started! 📄",
+      });
+    } catch {
+      toast({
+        title: "Download Failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const scrollToContact = () => {
@@ -102,7 +121,7 @@ const Hero = () => {
                   transition={{ duration: 0.5 }}
                   className="inline-block"
                 >
-                  {words[currentWord]}
+                  {WORDS[currentWord]}
                 </motion.span>
               </span>
             </div>

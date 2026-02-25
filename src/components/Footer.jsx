@@ -40,7 +40,7 @@ const Footer = () => {
             <SocialIcon href="https://github.com/Harshithk951" icon={Github} />
             <SocialIcon href="https://www.linkedin.com/in/harshith-kumar-dev" icon={Linkedin} />
             <SocialIcon href="mailto:mharshithkumar6@gmail.com" icon={Mail} />
-            <SocialIcon href="#" icon={Instagram} />
+            <SocialIcon href="https://www.instagram.com/harshithk951" icon={Instagram} />
           </div>
 
           <button

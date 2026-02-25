@@ -1,5 +1,63 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
+
+// Skill icon SVG fallbacks — renders a styled badge if the external image fails
+const SkillIcon = React.memo(({ skill }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div
+        className="w-full h-full rounded-xl bg-white/10 border border-white/20 flex items-center justify-center select-none"
+        title={skill}
+      >
+        <span className="text-[10px] sm:text-xs font-bold text-white/80 uppercase tracking-tight leading-none text-center px-1">
+          {skill.length > 6 ? skill.slice(0, 4) : skill}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={`https://skillicons.dev/icons?i=${skill}&theme=dark`}
+      alt={skill}
+      loading="eager"
+      decoding="async"
+      width={48}
+      height={48}
+      className="w-full h-full rounded-xl"
+      onError={() => setHasError(true)}
+    />
+  );
+});
+
+SkillIcon.displayName = 'SkillIcon';
+
+// Hoisted outside component — no re-creation on render
+const SKILLS = [
+  'react', 'nodejs', 'python', 'tensorflow', 'mongodb',
+  'postgresql', 'docker', 'git', 'javascript', 'typescript',
+  'nextjs', 'express', 'tailwindcss', 'figma', 'aws'
+];
+
+const fibonacciSphere = (samples) => {
+  const points = [];
+  const phi = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < samples; i++) {
+    const y = 1 - (i / (samples - 1)) * 2;
+    const radius = Math.sqrt(1 - y * y);
+    const theta = phi * i;
+    points.push({
+      x: Math.cos(theta) * radius,
+      y,
+      z: Math.sin(theta) * radius
+    });
+  }
+  return points;
+};
+
+const POSITIONS = fibonacciSphere(SKILLS.length);
 
 const SkillUniverse = () => {
   const containerRef = useRef(null);
@@ -7,96 +65,110 @@ const SkillUniverse = () => {
   const mouseRef = useRef({ x: 0, y: 0 });
   const rotationRef = useRef({ x: 0, y: 0 });
   const animationRef = useRef(null);
+  const isVisibleRef = useRef(false);
 
-  const skills = [
-    'react', 'nodejs', 'python', 'tensorflow', 'mongodb',
-    'postgresql', 'docker', 'git', 'javascript', 'typescript',
-    'nextjs', 'express', 'tailwindcss', 'figma', 'aws'
-  ];
+  // Responsive sphere radius based on container size
+  const getRadius = useCallback(() => {
+    if (!containerRef.current) return 140;
+    const width = containerRef.current.offsetWidth;
+    if (width < 400) return 100;   // mobile
+    if (width < 640) return 130;   // small
+    if (width < 768) return 160;   // medium
+    return 200;                     // desktop
+  }, []);
 
-  const fibonacciSphere = (samples) => {
-    const points = [];
-    const phi = Math.PI * (3 - Math.sqrt(5));
-
-    for (let i = 0; i < samples; i++) {
-      const y = 1 - (i / (samples - 1)) * 2;
-      const radius = Math.sqrt(1 - y * y);
-      const theta = phi * i;
-      const x = Math.cos(theta) * radius;
-      const z = Math.sin(theta) * radius;
-      points.push({ x, y, z });
-    }
-    return points;
-  };
-
-  const [positions] = useState(() => fibonacciSphere(skills.length));
-
+  // Mouse tracking (desktop only — skip on touch devices)
   useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
       mouseRef.current = {
-        x: e.clientX - centerX,
-        y: e.clientY - centerY
+        x: e.clientX - (rect.left + rect.width / 2),
+        y: e.clientY - (rect.top + rect.height / 2)
       };
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // IntersectionObserver — only animate when section is in viewport
   useEffect(() => {
-    let lastTime = 0;
-    const fps = 60;
-    const interval = 1000 / fps;
+    const container = containerRef.current;
+    if (!container) return;
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting && !animationRef.current) {
+          animationRef.current = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Core animation loop
+  useEffect(() => {
     const animate = (currentTime) => {
-      // Throttle to 60fps for better performance
-      if (currentTime - lastTime < interval) {
-        animationRef.current = requestAnimationFrame(animate);
+      // Stop loop when off-screen to save CPU
+      if (!isVisibleRef.current) {
+        animationRef.current = null;
         return;
       }
-      lastTime = currentTime;
 
       const distance = Math.sqrt(mouseRef.current.x ** 2 + mouseRef.current.y ** 2);
-      const maxDistance = 400;
-      const speedMultiplier = Math.min(distance / maxDistance, 1) * 1.5;
+      const speedMultiplier = Math.min(distance / 400, 1) * 1.5;
 
-      // Reduced rotation speed for smoother performance
       rotationRef.current.y += 0.0015 * (1 + speedMultiplier);
       rotationRef.current.x += 0.0008 * speedMultiplier;
 
-      iconsRef.current.forEach((icon, i) => {
-        if (!icon) return;
+      const cosY = Math.cos(rotationRef.current.y);
+      const sinY = Math.sin(rotationRef.current.y);
+      const cosX = Math.cos(rotationRef.current.x);
+      const sinX = Math.sin(rotationRef.current.x);
+      const sphereRadius = getRadius();
 
-        const pos = positions[i];
-        const rotatedX = pos.x * Math.cos(rotationRef.current.y) - pos.z * Math.sin(rotationRef.current.y);
-        const rotatedZ = pos.x * Math.sin(rotationRef.current.y) + pos.z * Math.cos(rotationRef.current.y);
-        const rotatedY = pos.y * Math.cos(rotationRef.current.x) - rotatedZ * Math.sin(rotationRef.current.x);
-        const finalZ = pos.y * Math.sin(rotationRef.current.x) + rotatedZ * Math.cos(rotationRef.current.x);
+      for (let i = 0; i < iconsRef.current.length; i++) {
+        const icon = iconsRef.current[i];
+        if (!icon) continue;
+
+        const pos = POSITIONS[i];
+        const rotatedX = pos.x * cosY - pos.z * sinY;
+        const rotatedZ = pos.x * sinY + pos.z * cosY;
+        const rotatedY = pos.y * cosX - rotatedZ * sinX;
+        const finalZ = pos.y * sinX + rotatedZ * cosX;
 
         const scale = (finalZ + 2) / 3;
-        const translateX = rotatedX * 200;
-        const translateY = rotatedY * 200;
+        const tx = rotatedX * sphereRadius;
+        const ty = rotatedY * sphereRadius;
 
-        // Use transform for GPU acceleration
-        icon.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
-        icon.style.opacity = scale;
+        icon.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
+        icon.style.opacity = Math.max(scale, 0.15);
         icon.style.zIndex = Math.floor(scale * 100);
-      });
+      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
+    // Start animation
+    isVisibleRef.current = true;
     animationRef.current = requestAnimationFrame(animate);
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
-  }, [positions]);
+  }, [getRadius]);
 
   return (
     <section id="skills" className="min-h-screen py-20 flex items-center justify-center">
@@ -113,20 +185,16 @@ const SkillUniverse = () => {
 
         <div
           ref={containerRef}
-          className="relative w-full h-[300px] xs:h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center"
+          className="relative w-full h-[320px] xs:h-[360px] sm:h-[420px] md:h-[500px] lg:h-[600px] flex items-center justify-center"
         >
-          {skills.map((skill, i) => (
+          {SKILLS.map((skill, i) => (
             <div
               key={skill}
               ref={(el) => (iconsRef.current[i] = el)}
-              className="absolute w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 transition-opacity duration-300"
+              className="absolute w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 will-change-transform"
+              style={{ backfaceVisibility: 'hidden' }}
             >
-              <img
-                src={`https://skillicons.dev/icons?i=${skill}`}
-                alt={skill}
-                loading="lazy"
-                className="w-full h-full"
-              />
+              <SkillIcon skill={skill} />
             </div>
           ))}
         </div>

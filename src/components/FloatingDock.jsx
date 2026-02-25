@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Home, User, Briefcase, Code, Mail, Github, Linkedin, Cog } from 'lucide-react';
+import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 
 const FloatingDock = () => {
   const navItems = [
@@ -11,9 +11,8 @@ const FloatingDock = () => {
   ];
 
   const socialItems = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com', isExternal: true },
-    { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', isExternal: true },
-
+    { icon: Github, label: 'GitHub', href: 'https://github.com/Harshithk951', isExternal: true },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/harshith-kumar-dev', isExternal: true },
   ];
 
   return (

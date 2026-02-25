@@ -13,28 +13,33 @@ const ProjectsShowcase = () => {
       tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
       color: 'glow-pink',
       badge: 'Hackathon Winner 🏆',
-      icon: Github
+      icon: Github,
+      repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub'
     },
     {
       title: 'Smart Health Care',
       description: 'Complete clinic management system with patient records, appointment scheduling, and billing integration using modern stack.',
       tech: ['React', 'Express', 'MongoDB', 'Firebase'],
       color: 'glow-yellow',
-      icon: Heart
+      icon: Heart,
+      repoUrl: 'https://github.com/Harshithk951/Smart-Health-Care'
     },
     {
       title: 'Smart Sales Agent',
       description: 'AI-powered sales assistant using machine learning to optimize customer interactions and improve conversion rates.',
       tech: ['React', 'Python', 'AI/ML', 'Node.js'],
       color: 'glow-blue',
-      icon: TrendingUp
+      icon: TrendingUp,
+      repoUrl: 'https://github.com/Harshithk951/Smart-Sales-Agent'
     }
   ];
 
-  const handleGitHub = () => {
-    setTimeout(() => {
-      window.open('https://github.com/Harshithk951', '_blank');
-    }, 0);
+  const handleGitHub = (repoUrl) => {
+    if (repoUrl) {
+      window.open(repoUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      window.open('https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
+    }
   };
 
   const handleAction = (action) => {
@@ -77,10 +82,10 @@ const ProjectsShowcase = () => {
                 </div>
                 <div className="flex gap-2">
                   <button
-                    onClick={handleGitHub}
+                    onClick={() => handleGitHub(project.repoUrl)}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
                     title="View on GitHub"
-                    aria-label="View project on GitHub"
+                    aria-label={`View ${project.title} on GitHub`}
                   >
                     <Github size={20} />
                   </button>

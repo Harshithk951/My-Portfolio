@@ -14,8 +14,8 @@ const CTASection = () => {
     {
       icon: Phone,
       label: 'Call Me',
-      value: '+91 8977795636',
-      href: 'tel:+918977795636',
+      value: 'Available on request',
+      href: 'mailto:mharshithkumar6@gmail.com?subject=Phone%20Number%20Request',
       color: 'glow-green'
     },
     {
