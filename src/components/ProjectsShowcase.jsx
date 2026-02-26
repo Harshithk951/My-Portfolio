@@ -49,7 +49,7 @@ const PROJECTS = [
     tech: ['React', 'Python', 'AI/ML', 'Node.js'],
     color: 'glow-blue',
     icon: TrendingUp,
-    repoUrl: 'https://github.com/Harshithk951/Smart-Sales-Agent'
+    repoUrl: 'https://github.com/Harshithk951/sales-intelligence-agent'
   },
   {
     title: 'Achievers Club',
