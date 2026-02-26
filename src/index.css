@@ -146,6 +146,27 @@ body::after {
   animation: grid-scroll 8s linear infinite;
 }
 
+@keyframes project-carousel-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.project-carousel-track {
+  animation: project-carousel-marquee var(--carousel-duration, 45s) linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  contain: layout paint style;
+}
+
+.project-carousel-track.paused {
+  animation-play-state: paused;
+}
+
 /* Respect user's motion preferences for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
 
@@ -160,5 +181,10 @@ body::after {
 
   .glow-card {
     transition: none !important;
+  }
+
+  .project-carousel-track {
+    animation: none !important;
+    transform: translate3d(0, 0, 0) !important;
   }
 }

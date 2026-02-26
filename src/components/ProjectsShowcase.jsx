@@ -1,7 +1,6 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useAnimationControls } from 'framer-motion';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+import { motion } from 'framer-motion';
 import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
 
 // ── Project Data (hoisted — no re-creation) ──────────────────────────
 const PROJECTS = [
@@ -13,7 +12,7 @@ const PROJECTS = [
     badge: 'AI Powered 🤖',
     icon: FileSearch,
     repoUrl: 'https://github.com/Harshithk951/ResumeOptima',
-    demoUrl: 'https://ats.harshithkumar.in/'
+    liveUrl: 'https://ats.harshithkumar.in/'
   },
   {
     title: 'Aviation Crew Wellness',
@@ -23,7 +22,7 @@ const PROJECTS = [
     badge: 'AI Powered 🤖',
     icon: Plane,
     repoUrl: 'https://github.com/Harshithk951/Aviation-crew-fatigue---wellness-app',
-    demoUrl: 'https://aviation-crew-fatigue-wellness-app.vercel.app/'
+    liveUrl: 'https://aviation-crew-fatigue-wellness-app.vercel.app/'
   },
   {
     title: 'Uni-Connect Hub',
@@ -32,7 +31,8 @@ const PROJECTS = [
     color: 'glow-blue',
     badge: 'Hackathon Winner 🏆',
     icon: Github,
-    repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub'
+    repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub',
+    liveUrl: 'https://alumni-connect-nu.vercel.app/'
   },
   {
     title: 'Smart Health Care',
@@ -40,7 +40,8 @@ const PROJECTS = [
     tech: ['React', 'Express', 'MongoDB', 'Firebase'],
     color: 'glow-green',
     icon: Heart,
-    repoUrl: 'https://github.com/Harshithk951/Smart-Health-Care'
+    repoUrl: 'https://github.com/Harshithk951/Smart-Health-Care',
+    liveUrl: 'https://ramu-clinic.vercel.app/'
   },
   {
     title: 'Smart Sales Agent',
@@ -57,7 +58,7 @@ const PROJECTS = [
     color: 'glow-yellow',
     icon: Users,
     repoUrl: 'https://github.com/Harshithk951/Forever-Achievers-Club-',
-    demoUrl: 'https://forever-achievers-club-1.vercel.app/'
+    liveUrl: 'https://forever-achievers-club-1.vercel.app/'
   },
   {
     title: 'AuraSpace Interiors',
@@ -66,7 +67,7 @@ const PROJECTS = [
     color: 'glow-pink',
     icon: Palette,
     repoUrl: 'https://github.com/Harshithk951/AuraSpace-Interiors',
-    demoUrl: 'https://interioir-designs.vercel.app/'
+    liveUrl: 'https://interioir-designs.vercel.app/'
   },
   {
     title: 'To-Do Full Stack',
@@ -76,17 +77,15 @@ const PROJECTS = [
     badge: 'Full Stack 🚀',
     icon: CheckSquare,
     repoUrl: 'https://github.com/Harshithk951/To-Do-Full-Stack',
-    demoUrl: 'https://to-do-full-stack-tudm.vercel.app'
+    liveUrl: 'https://to-do-full-stack-tudm.vercel.app'
   }
 ];
 
-// ── Card width constants (match Tailwind classes) ─────────────────────
-const CARD_WIDTH = 440;   // w-[440px]
-const CARD_GAP = 36;      // gap-9
-const SCROLL_SPEED = 45;  // seconds per full set
+// ── Carousel constants ────────────────────────────────────────────────
+const CAROUSEL_DURATION = 45; // seconds per full set
 
 // ── Single Project Card (memoized) ────────────────────────────────────
-const ProjectCard = React.memo(({ project, onHover, onLeave, handleGitHub, handleDemo }) => {
+const ProjectCard = React.memo(({ project, onHover, onLeave, handleGitHub, handleLive }) => {
   const Icon = project.icon;
   return (
     <div
@@ -108,13 +107,17 @@ const ProjectCard = React.memo(({ project, onHover, onLeave, handleGitHub, handl
           >
             <Github size={20} />
           </button>
-          <button
-            onClick={() => handleDemo(project.demoUrl, project.title)}
-            className="p-2.5 hover:bg-white/10 rounded-full transition-colors text-green-400 hover:text-green-300"
-            aria-label={project.demoUrl ? `View ${project.title} live demo` : 'Demo coming soon'}
-          >
-            <ExternalLink size={20} />
-          </button>
+          {project.liveUrl && (
+            <button
+              onClick={() => handleLive(project.liveUrl)}
+              className="px-3 py-2.5 hover:bg-white/10 rounded-full transition-colors text-green-400 hover:text-green-300 flex items-center gap-1.5"
+              aria-label={`View ${project.title} live site`}
+              title={`Open ${project.title} live site`}
+            >
+              <ExternalLink size={20} />
+              <span className="text-xs font-semibold tracking-wide uppercase">Live</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -149,102 +152,59 @@ ProjectCard.displayName = 'ProjectCard';
 
 // ── Main Component ────────────────────────────────────────────────────
 const ProjectsShowcase = () => {
-  const { toast } = useToast();
-  const controls = useAnimationControls();
-  const trackRef = useRef(null);
-  const isPausedRef = useRef(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(true);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
 
   // Duplicate array for seamless loop
   const duplicated = [...PROJECTS, ...PROJECTS];
-  const singleSetWidth = PROJECTS.length * (CARD_WIDTH + CARD_GAP);
 
   const handleGitHub = useCallback((repoUrl) => {
     window.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
   }, []);
 
-  const handleDemo = useCallback((demoUrl, title) => {
-    if (demoUrl) {
-      window.open(demoUrl, '_blank', 'noopener,noreferrer');
-    } else {
-      toast({ title: 'Coming Soon', description: `The ${title} demo will be available shortly! 🚀` });
-    }
-  }, [toast]);
-
-  // Start / resume the infinite scroll
-  const startScroll = useCallback(() => {
-    if (isPausedRef.current) return;
-    controls.start({
-      x: -singleSetWidth,
-      transition: {
-        x: { duration: SCROLL_SPEED, ease: 'linear' }
-      }
-    }).then(() => {
-      if (!isPausedRef.current) {
-        // Instantly reset to 0 and restart - no visible jump due to duplicated content
-        controls.set({ x: 0 });
-        startScroll();
-      }
-    });
-  }, [controls, singleSetWidth]);
+  const handleLive = useCallback((liveUrl) => {
+    window.open(liveUrl, '_blank', 'noopener,noreferrer');
+  }, []);
 
   const pauseScroll = useCallback(() => {
-    isPausedRef.current = true;
-    controls.stop();
-  }, [controls]);
+    setIsPaused(true);
+  }, []);
 
   const resumeScroll = useCallback(() => {
-    isPausedRef.current = false;
-    // Read current position and animate remaining distance
-    const track = trackRef.current;
-    if (!track) return;
-    const style = getComputedStyle(track);
-    const matrix = new DOMMatrix(style.transform);
-    const currentX = matrix.m41;
-    // Wrap into range [0, singleSetWidth)
-    const wrapped = ((currentX % singleSetWidth) + singleSetWidth) % singleSetWidth;
-    const remaining = singleSetWidth - wrapped;
-    const remainingRatio = remaining / singleSetWidth;
-
-    controls.start({
-      x: [currentX, currentX - remaining],
-      transition: {
-        x: { duration: SCROLL_SPEED * remainingRatio, ease: 'linear' }
-      }
-    }).then(() => {
-      if (!isPausedRef.current) {
-        // Instantly reset and restart loop
-        controls.set({ x: 0 });
-        startScroll();
-      }
-    });
-  }, [controls, singleSetWidth, startScroll]);
+    setIsPaused(false);
+  }, []);
 
   // IntersectionObserver — only animate in viewport
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          isPausedRef.current = false;
-          controls.set({ x: 0 });
-          startScroll();
-        } else {
-          controls.stop();
-        }
+        setIsInView(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
 
-    observer.observe(track);
+    observer.observe(section);
     return () => observer.disconnect();
-  }, [controls, startScroll]);
+  }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsDocumentVisible(!document.hidden);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  const shouldAnimate = isInView && isDocumentVisible && !isPaused;
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
+    <section ref={sectionRef} id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <motion.div
@@ -269,11 +229,9 @@ const ProjectsShowcase = () => {
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 bg-gradient-to-l from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
 
         <div className="overflow-hidden">
-          <motion.div
-            ref={trackRef}
-            animate={controls}
-            className="flex gap-9 will-change-transform"
-            style={{ width: 'max-content' }}
+          <div
+            className={`project-carousel-track flex gap-9 ${shouldAnimate ? '' : 'paused'}`}
+            style={{ width: 'max-content', ['--carousel-duration']: `${CAROUSEL_DURATION}s` }}
           >
             {duplicated.map((project, index) => (
               <ProjectCard
@@ -282,10 +240,10 @@ const ProjectsShowcase = () => {
                 onHover={pauseScroll}
                 onLeave={resumeScroll}
                 handleGitHub={handleGitHub}
-                handleDemo={handleDemo}
+                handleLive={handleLive}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
