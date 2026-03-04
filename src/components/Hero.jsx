@@ -5,6 +5,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 import { CometCard } from '@/components/ui/comet-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
+import StarfieldBackground from '@/components/StarfieldBackground';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
@@ -59,25 +60,9 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b0b0b] px-4 sm:px-6 lg:px-8">
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b0b] via-[#111] to-[#0b0b0b] z-10" />
-        <div
-          className="absolute inset-0 z-0 opacity-[0.08] hidden sm:block animate-grid-scroll"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-            transform: 'perspective(1000px) rotateX(60deg) translateY(-100px) scale(2)',
-            transformOrigin: 'top center',
-            willChange: 'background-position'
-          }}
-        />
-
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0b0b0b_100%)] z-10 pointer-events-none" />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f] px-4 sm:px-6 lg:px-8">
+      {/* Starfield Background */}
+      <StarfieldBackground className="pointer-events-none" count={400} speed={0.5} twinkle />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">

@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
 import { sendAnalyticsEvent } from '@/lib/analytics';
+import { Marquee } from '@/components/ui/marquee';
 
-// ── Project Data (hoisted — no re-creation) ──────────────────────────
+// ── Project Data ──────────────────────────────────────────────────────
 const PROJECTS = [
   {
     title: 'ResumeOptima',
@@ -82,48 +83,45 @@ const PROJECTS = [
   }
 ];
 
-// ── Carousel constants ────────────────────────────────────────────────
-const CAROUSEL_DURATION = 45; // seconds per full set
+// Split into two rows
+const firstRow = PROJECTS.slice(0, Math.ceil(PROJECTS.length / 2));
+const secondRow = PROJECTS.slice(Math.ceil(PROJECTS.length / 2));
 
 // ── Single Project Card (memoized) ────────────────────────────────────
-const ProjectCard = React.memo(({ project, onHover, onLeave, handleGitHub, handleLive }) => {
+const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
   const Icon = project.icon;
   return (
     <div
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      onTouchStart={onHover}
-      onTouchEnd={onLeave}
-      className={`glow-card ${project.color} p-7 sm:p-8 md:p-9 flex flex-col w-[440px] min-w-[440px] h-[380px] shrink-0 cursor-default select-none`}
+      className={`glow-card ${project.color} p-6 sm:p-7 md:p-8 flex flex-col w-[320px] sm:w-[380px] md:w-[420px] h-[320px] sm:h-[350px] md:h-[370px] shrink-0 cursor-default select-none`}
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="p-3.5 bg-white/10 rounded-xl">
-          {project.badge ? <Trophy size={24} className="text-yellow-400" /> : <Icon size={24} className="text-white" />}
+      <div className="flex justify-between items-start mb-5">
+        <div className="p-3 bg-white/10 rounded-xl">
+          {project.badge ? <Trophy size={22} className="text-yellow-400" /> : <Icon size={22} className="text-white" />}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           <button
             onClick={() => handleGitHub(project.repoUrl)}
             className="p-2.5 hover:bg-white/10 rounded-full transition-colors text-white"
             aria-label={`View ${project.title} on GitHub`}
           >
-            <Github size={20} />
+            <Github size={18} />
           </button>
           {project.liveUrl && (
             <button
               onClick={() => handleLive(project.liveUrl)}
-              className="px-3 py-2.5 hover:bg-white/10 rounded-full transition-colors text-green-400 hover:text-green-300 flex items-center gap-1.5"
+              className="px-2.5 py-2.5 hover:bg-white/10 rounded-full transition-colors text-green-400 hover:text-green-300 flex items-center gap-1.5"
               aria-label={`View ${project.title} live site`}
               title={`Open ${project.title} live site`}
             >
-              <ExternalLink size={20} />
+              <ExternalLink size={18} />
               <span className="text-xs font-semibold tracking-wide uppercase">Live</span>
             </button>
           )}
         </div>
       </div>
 
-      <div className="flex items-center gap-3 mb-3">
-        <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+      <div className="flex items-center gap-3 mb-2.5">
+        <h3 className="text-xl sm:text-2xl font-bold text-white">{project.title}</h3>
         {project.badge && (
           <span className="px-2.5 py-0.5 bg-yellow-500/10 border border-yellow-500/30 rounded-full text-[11px] font-semibold text-yellow-400 whitespace-nowrap">
             {project.badge}
@@ -131,7 +129,7 @@ const ProjectCard = React.memo(({ project, onHover, onLeave, handleGitHub, handl
         )}
       </div>
 
-      <p className="text-white/65 text-[15px] mb-6 flex-grow leading-[1.7] line-clamp-3">
+      <p className="text-white/65 text-sm sm:text-[15px] mb-5 flex-grow leading-[1.7] line-clamp-3">
         {project.description}
       </p>
 
@@ -153,14 +151,6 @@ ProjectCard.displayName = 'ProjectCard';
 
 // ── Main Component ────────────────────────────────────────────────────
 const ProjectsShowcase = () => {
-  const sectionRef = useRef(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isInView, setIsInView] = useState(true);
-  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
-
-  // Duplicate array for seamless loop
-  const duplicated = [...PROJECTS, ...PROJECTS];
-
   const handleGitHub = useCallback((repoUrl) => {
     sendAnalyticsEvent('github_click', { url: repoUrl });
     window.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
@@ -171,43 +161,8 @@ const ProjectsShowcase = () => {
     window.open(liveUrl, '_blank', 'noopener,noreferrer');
   }, []);
 
-  const pauseScroll = useCallback(() => {
-    setIsPaused(true);
-  }, []);
-
-  const resumeScroll = useCallback(() => {
-    setIsPaused(false);
-  }, []);
-
-  // IntersectionObserver — only animate in viewport
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      setIsDocumentVisible(!document.hidden);
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, []);
-
-  const shouldAnimate = isInView && isDocumentVisible && !isPaused;
-
   return (
-    <section ref={sectionRef} id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
+    <section id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <motion.div
@@ -215,7 +170,7 @@ const ProjectsShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             My Creations
@@ -224,30 +179,36 @@ const ProjectsShowcase = () => {
         </motion.div>
       </div>
 
-      {/* Carousel */}
-      <div className="relative w-full">
+      {/* Two-row Marquee */}
+      <div className="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden">
         {/* Gradient fade — left */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 bg-gradient-to-r from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 bg-gradient-to-r from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
         {/* Gradient fade — right */}
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 bg-gradient-to-l from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 bg-gradient-to-l from-[#0b0b0b] to-transparent z-10 pointer-events-none" />
 
-        <div className="overflow-hidden">
-          <div
-            className={`project-carousel-track flex gap-9 ${shouldAnimate ? '' : 'paused'}`}
-            style={{ width: 'max-content', ['--carousel-duration']: `${CAROUSEL_DURATION}s` }}
-          >
-            {duplicated.map((project, index) => (
-              <ProjectCard
-                key={`${project.title}-${index}`}
-                project={project}
-                onHover={pauseScroll}
-                onLeave={resumeScroll}
-                handleGitHub={handleGitHub}
-                handleLive={handleLive}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Row 1 — scrolls left */}
+        <Marquee pauseOnHover className="[--duration:45s] [--gap:1.5rem]">
+          {firstRow.map((project) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              handleGitHub={handleGitHub}
+              handleLive={handleLive}
+            />
+          ))}
+        </Marquee>
+
+        {/* Row 2 — scrolls right (reverse) */}
+        <Marquee reverse pauseOnHover className="[--duration:45s] [--gap:1.5rem]">
+          {secondRow.map((project) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              handleGitHub={handleGitHub}
+              handleLive={handleLive}
+            />
+          ))}
+        </Marquee>
       </div>
     </section>
   );
