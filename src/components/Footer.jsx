@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import { smoothScrollTo } from '@/lib/utils';
+import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -11,6 +12,7 @@ const Footer = () => {
   };
 
   const scrollToContact = () => {
+    sendAnalyticsEvent('contact_click', { source: 'footer' });
     smoothScrollTo('#contact');
   };
 
@@ -68,6 +70,10 @@ const SocialIcon = ({ href, icon: Icon }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => sendAnalyticsEvent(
+        href.includes('github') ? 'github_click' : 'contact_click',
+        { source: 'footer', label: getLabel() }
+      )}
       className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"
       aria-label={getLabel()}
     >

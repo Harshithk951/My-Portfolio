@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { submitContactForm } from '@/lib/supabase';
+import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -27,6 +28,7 @@ const ContactForm = () => {
     }
 
     setIsSubmitting(true);
+    sendAnalyticsEvent('contact_click');
 
     try {
       // Submit to Supabase

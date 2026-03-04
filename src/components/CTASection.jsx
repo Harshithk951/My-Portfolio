@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 import ContactForm from './ContactForm';
+import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const CTASection = () => {
   const contactItems = [
@@ -67,6 +68,10 @@ const CTASection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
+                  onClick={() => sendAnalyticsEvent(
+                    item.label === 'GitHub' ? 'github_click' : 'contact_click',
+                    { label: item.label, value: item.value }
+                  )}
                   className={`glow-card ${item.color} p-5 sm:p-6 flex items-center gap-4 group cursor-pointer min-h-[80px]`}
                 >
                   <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">

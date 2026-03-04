@@ -4,6 +4,7 @@ import { ArrowRight, Download, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 import { CometCard } from '@/components/ui/comet-card';
+import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
@@ -19,6 +20,7 @@ const Hero = () => {
   }, []);
 
   const handleDownloadCV = async () => {
+    sendAnalyticsEvent('resume_download');
     try {
       // Verify file exists before attempting download
       const res = await fetch('/cv.pdf', { method: 'HEAD' });
@@ -52,6 +54,7 @@ const Hero = () => {
   };
 
   const scrollToContact = () => {
+    sendAnalyticsEvent('hire_me_click');
     smoothScrollTo('#contact');
   };
 

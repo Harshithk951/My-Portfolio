@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
+import { sendAnalyticsEvent } from '@/lib/analytics';
 
 // ── Project Data (hoisted — no re-creation) ──────────────────────────
 const PROJECTS = [
@@ -161,10 +162,12 @@ const ProjectsShowcase = () => {
   const duplicated = [...PROJECTS, ...PROJECTS];
 
   const handleGitHub = useCallback((repoUrl) => {
+    sendAnalyticsEvent('github_click', { url: repoUrl });
     window.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
   }, []);
 
   const handleLive = useCallback((liveUrl) => {
+    sendAnalyticsEvent('project_open', { url: liveUrl });
     window.open(liveUrl, '_blank', 'noopener,noreferrer');
   }, []);
 
