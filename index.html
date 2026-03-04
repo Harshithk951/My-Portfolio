@@ -51,9 +51,19 @@
 		content="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." />
 	<meta name="twitter:image" content="https://harshithkumar.in/preview.png" />
 
-	<!-- Preconnect to Google Fonts for faster loading -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<!-- Preconnect to critical origins -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://skillicons.dev" crossorigin>
+	<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+
+	<!-- Preload LCP hero image -->
+	<link rel="preload" as="image" href="/hero-profile.jpg" fetchpriority="high">
+
+	<!-- Google Fonts — loaded non-render-blocking -->
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap" media="print" onload="this.media='all'">
+	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap"></noscript>
 
 	<!-- Structured Data (JSON-LD) -->
 	<script type="application/ld+json">

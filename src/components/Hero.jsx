@@ -172,7 +172,7 @@ const Hero = () => {
                     <img
                       src="/hero-profile.jpg"
                       alt="Harshith Kumar professional headshot"
-                      loading="lazy"
+                      fetchPriority="high"
                       className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
                       draggable={false}
                       style={{
