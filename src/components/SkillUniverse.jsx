@@ -6,7 +6,7 @@ import { IconCloud } from '@/components/ui/icon-cloud';
 const SKILLS = [
   'react', 'nodedotjs', 'python', 'tensorflow', 'mongodb',
   'postgresql', 'docker', 'git', 'javascript', 'typescript',
-  'nextdotjs', 'express', 'tailwindcss', 'figma', 'amazonaws',
+  'nextdotjs', 'express', 'tailwindcss', 'figma', 'amazonwebservices',
 ];
 
 const SkillUniverse = () => {
