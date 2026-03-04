@@ -132,6 +132,20 @@ body::after {
   scroll-behavior: smooth;
 }
 
+/* Comet card rotating border animation */
+@keyframes comet-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-comet-spin {
+  animation: comet-spin 4s linear infinite;
+}
+
 /* Infinite perspective grid animation */
 @keyframes grid-scroll {
   0% {

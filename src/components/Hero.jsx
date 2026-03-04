@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
+import { CometCard } from '@/components/ui/comet-card';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
@@ -76,37 +77,37 @@ const Hero = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">
 
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col items-start space-y-6"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-5 sm:space-y-7"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
             >
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-amber-500 animate-pulse" />
-              <span className="text-xs font-medium tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 uppercase">
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-violet-500 to-amber-500 animate-pulse" />
+              <span className="text-[10px] sm:text-sm font-medium tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 uppercase">
                 AI-First Full Stack Engineer
               </span>
             </motion.div>
 
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter text-white leading-[0.9]">
               Hey, I'm <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500">
                 Harshith
               </span>
             </h1>
 
-            <div className="text-lg xs:text-xl sm:text-2xl text-white/60 font-light flex flex-wrap items-center gap-2">
+            <div className="text-base xs:text-lg sm:text-2xl md:text-3xl text-white/60 font-light flex flex-wrap items-center justify-center lg:justify-start gap-2">
               <span>I am a guy who</span>
-              <span className="px-3 py-1 rounded-full bg-white text-black font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              <span className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white text-black font-bold text-base sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                 <motion.span
                   key={currentWord}
                   initial={{ opacity: 0, y: 10 }}
@@ -120,7 +121,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <p className="text-lg text-white/50 max-w-lg leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl leading-relaxed">
               AI/ML Student | Full Stack Developer | Building Digital Experiences that merge creativity with engineering precision.
             </p>
 
@@ -128,73 +129,70 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col xs:flex-row flex-wrap gap-4 pt-4"
+              className="flex flex-col xs:flex-row flex-wrap justify-center lg:justify-start gap-3 sm:gap-5 pt-3 sm:pt-5 w-full"
             >
               <button
                 onClick={scrollToContact}
-                className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 will-change-transform"
+                className="group relative px-7 py-3.5 sm:px-10 sm:py-5 bg-white text-black rounded-full font-bold text-base sm:text-xl overflow-hidden transition-transform hover:scale-105 active:scale-95 will-change-transform"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative flex items-center gap-2">
-                  Hire Me <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <span className="relative flex items-center justify-center gap-2">
+                  Hire Me <ArrowRight size={20} className="sm:w-[22px] sm:h-[22px] group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
 
               <button
                 onClick={handleDownloadCV}
-                className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-medium text-lg hover:bg-white/5 hover:border-white/40 transition-all flex items-center gap-2 active:scale-95"
+                className="px-7 py-3.5 sm:px-10 sm:py-5 bg-transparent border border-white/20 text-white rounded-full font-medium text-base sm:text-xl hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2 active:scale-95"
               >
-                Download CV <Download size={20} />
+                Download CV <Download size={20} className="sm:w-[22px] sm:h-[22px]" />
               </button>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Floating Profile Card */}
+          {/* Right Content - Comet Card Profile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative h-[400px] sm:h-[500px] lg:h-[600px] xl:h-[650px] flex items-center justify-center"
+            className="relative flex items-center justify-center lg:justify-end"
           >
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="relative w-full max-w-sm aspect-[3/4] group will-change-transform"
-            >
-              {/* Back Glow */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 to-amber-600/30 rounded-3xl blur-3xl group-hover:blur-[100px] transition-all duration-700 opacity-60" />
-
-              {/* Glass Card */}
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 bg-[#111]/80 backdrop-blur-xl shadow-2xl transition-all duration-500 group-hover:border-white/20">
-                <img
-                  src="/hero-profile.jpg"
-                  alt="Harshith Kumar professional headshot"
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
-                />
-
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80" />
-
-                {/* Card Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 space-y-4">
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <h2 className="text-white font-bold text-xl">Harshith Kumar</h2>
-                      <p className="text-white/60 text-sm">Full Stack Developer</p>
-                    </div>
-
-                    <button
-                      onClick={scrollToContact}
-                      className="p-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white transition-colors backdrop-blur-sm"
-                      aria-label="Contact Me"
-                    >
-                      <Mail size={20} />
-                    </button>
+            <CometCard>
+              <div
+                className="flex w-[260px] xs:w-[300px] sm:w-[360px] lg:w-[340px] xl:w-[380px] cursor-pointer flex-col items-stretch rounded-[16px] border-0 bg-[#1F2121] p-1.5 sm:p-2 md:p-4"
+                style={{
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                <div className="mx-2 flex-1">
+                  <div className="relative mt-2 aspect-[3/4] w-full">
+                    <img
+                      src="/hero-profile.jpg"
+                      alt="Harshith Kumar professional headshot"
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
+                      draggable={false}
+                      style={{
+                        boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
+                      }}
+                    />
                   </div>
                 </div>
+                <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 text-white">
+                  <div>
+                    <h2 className="text-xl font-bold">Harshith Kumar</h2>
+                    <p className="text-sm text-white/60">Full Stack Developer</p>
+                  </div>
+                  <button
+                    onClick={scrollToContact}
+                    className="p-2.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white transition-colors backdrop-blur-sm"
+                    aria-label="Contact Me"
+                  >
+                    <Mail size={18} />
+                  </button>
+                </div>
               </div>
-            </motion.div>
+            </CometCard>
           </motion.div>
 
         </div>
