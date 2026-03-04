@@ -154,16 +154,30 @@ const Hero = () => {
               >
                 <div className="mx-2 flex-1">
                   <div className="relative mt-2 aspect-[3/4] w-full">
-                    <img
-                      src="/hero-profile.jpg"
-                      alt="Harshith Kumar professional headshot"
-                      fetchPriority="high"
-                      className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
-                      draggable={false}
-                      style={{
-                        boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
-                      }}
-                    />
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcSet="/hero-profile-420w.webp 420w, /hero-profile-624w.webp 624w, /hero-profile.webp 864w"
+                        sizes="(max-width: 480px) 260px, (max-width: 640px) 300px, (max-width: 1024px) 340px, 380px"
+                      />
+                      <source
+                        type="image/jpeg"
+                        srcSet="/hero-profile-420w.jpg 420w, /hero-profile-624w.jpg 624w, /hero-profile.jpg 864w"
+                        sizes="(max-width: 480px) 260px, (max-width: 640px) 300px, (max-width: 1024px) 340px, 380px"
+                      />
+                      <img
+                        src="/hero-profile-624w.jpg"
+                        alt="Harshith Kumar professional headshot"
+                        fetchPriority="high"
+                        width={624}
+                        height={855}
+                        className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
+                        draggable={false}
+                        style={{
+                          boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
+                        }}
+                      />
+                    </picture>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 text-white">

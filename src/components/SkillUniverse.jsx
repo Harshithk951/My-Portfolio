@@ -2,16 +2,22 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { IconCloud } from '@/components/ui/icon-cloud';
 
-// Same skill set — mapped to Simple Icons CDN for colored SVGs
-const SKILLS = [
+// Skill slugs on cdn.simpleicons.org (AWS not available there → use devicon)
+const SIMPLE_ICON_SKILLS = [
   'react', 'nodedotjs', 'python', 'tensorflow', 'mongodb',
   'postgresql', 'docker', 'git', 'javascript', 'typescript',
-  'nextdotjs', 'express', 'tailwindcss', 'figma', 'amazonwebservices',
+  'nextdotjs', 'express', 'tailwindcss', 'figma',
 ];
+
+const AWS_ICON_URL =
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg';
 
 const SkillUniverse = () => {
   const images = useMemo(
-    () => SKILLS.map((slug) => `https://cdn.simpleicons.org/${slug}`),
+    () => [
+      ...SIMPLE_ICON_SKILLS.map((slug) => `https://cdn.simpleicons.org/${slug}`),
+      AWS_ICON_URL,
+    ],
     []
   );
 
