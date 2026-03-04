@@ -2,22 +2,27 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { IconCloud } from '@/components/ui/icon-cloud';
 
-// Skill slugs on cdn.simpleicons.org (AWS not available there → use devicon)
-const SIMPLE_ICON_SKILLS = [
-  'react', 'nodedotjs', 'python', 'tensorflow', 'mongodb',
-  'postgresql', 'docker', 'git', 'javascript', 'typescript',
-  'nextdotjs', 'express', 'tailwindcss', 'figma',
+const DEVICON_IMAGES = [
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
 ];
-
-const AWS_ICON_URL =
-  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg';
 
 const SkillUniverse = () => {
   const images = useMemo(
-    () => [
-      ...SIMPLE_ICON_SKILLS.map((slug) => `https://cdn.simpleicons.org/${slug}`),
-      AWS_ICON_URL,
-    ],
+    () => DEVICON_IMAGES,
     []
   );
 
