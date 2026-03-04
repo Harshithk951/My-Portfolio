@@ -155,9 +155,9 @@ const Hero = () => {
 
           {/* Right Content - Comet Card Profile */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 1, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             className="relative flex items-center justify-center lg:justify-end"
           >
             <CometCard>

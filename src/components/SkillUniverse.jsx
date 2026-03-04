@@ -67,15 +67,23 @@ const SkillUniverse = () => {
   const animationRef = useRef(null);
   const isVisibleRef = useRef(false);
 
-  // Responsive sphere radius based on container size
-  const getRadius = useCallback(() => {
-    if (!containerRef.current) return 140;
-    const width = containerRef.current.offsetWidth;
-    if (width < 400) return 100;   // mobile
-    if (width < 640) return 130;   // small
-    if (width < 768) return 160;   // medium
-    return 200;                     // desktop
+  // Responsive sphere radius — uses ResizeObserver to avoid forced reflow
+  const radiusRef = useRef(140);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      radiusRef.current = w < 400 ? 100 : w < 640 ? 130 : w < 768 ? 160 : 200;
+    };
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    update();
+    return () => ro.disconnect();
   }, []);
+
+  const getRadius = useCallback(() => radiusRef.current, []);
 
   // Mouse tracking (desktop only — skip on touch devices)
   useEffect(() => {
