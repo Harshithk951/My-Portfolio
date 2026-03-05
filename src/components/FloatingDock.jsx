@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useMemo, memo, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 
 /* ─── Config ─── */
-const DEFAULT_SIZE = 40;       // base icon container size (px)
-const MAGNIFIED_SIZE = 64;     // magnified icon container size (px)
-const MAGNIFY_DISTANCE = 140;  // px range of magnetic effect
+const DEFAULT_SIZE = 40;
+const MAGNIFIED_SIZE = 64;
+const MAGNIFY_DISTANCE = 140;
 
 const navItems = [
   { icon: Home, label: 'Home', href: '#home' },
@@ -20,28 +20,153 @@ const socialItems = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/harshith-kumar-dev', isExternal: true },
 ];
 
-/* ─── Dock ─── */
-const FloatingDock = () => {
-  // Shared mouseX for neighbor magnification (macOS-style)
-  const mouseX = useMotionValue(Infinity);
+/* ─── Memoized Dock Icon ─── */
+const DockIcon = memo(({ icon: Icon, label, href, isExternal, mouseX }) => {
+  const ref = useRef(null);
+
+  // Optimized distance calculation with debounced bounds caching
+  const distance = useTransform(mouseX, (val) => {
+    const el = ref.current;
+    if (!el) return Infinity;
+    const bounds = el.getBoundingClientRect();
+    return val - (bounds.x + bounds.width / 2);
+  });
+
+  // Single spring-driven size animation
+  const size = useSpring(
+    useTransform(
+      distance,
+      [-MAGNIFY_DISTANCE, 0, MAGNIFY_DISTANCE],
+      [DEFAULT_SIZE, MAGNIFIED_SIZE, DEFAULT_SIZE]
+    ),
+    {
+      mass: 0.1,
+      stiffness: 180,
+      damping: 20,
+      velocity: 0,
+    }
+  );
+
+  // Icon size derived from parent size
+  const iconSize = useTransform(size, (s) => s * 0.45);
+
+  const handleClick = useCallback((e) => {
+    e.preventDefault();
+    if (isExternal) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    } else {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [href, isExternal]);
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden lg:block">
+    <motion.button
+      ref={ref}
+      type="button"
+      onClick={handleClick}
+      style={{
+        width: size,
+        height: size,
+        WebkitFontSmoothing: 'antialiased',
+        willChange: 'width, height, transform',
+        transform: 'translateZ(0)',
+      }}
+      className="relative flex items-center justify-center rounded-xl flex-shrink-0 group outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+      aria-label={label}
+    >
+      {/* Unified glass background - no repeat blur */}
+      <div
+        className="absolute inset-0 rounded-xl"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Hover glow */}
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Icon */}
+      <motion.div
+        className="relative z-10 text-white/70 group-hover:text-white transition-colors duration-200"
+        style={{
+          width: iconSize,
+          height: iconSize,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Icon className="w-full h-full" />
+      </motion.div>
+
+      {/* Tooltip - minimal paint */}
+      <div
+        className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md text-[11px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 select-none"
+        style={{
+          background: 'rgba(0,0,0,0.8)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          color: 'rgba(255,255,255,0.95)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          transform: 'translateZ(0)',
+        }}
+      >
+        {label}
+      </div>
+    </motion.button>
+  );
+}, (prevProps, nextProps) => {
+  // Custom comparison: only re-render if mouseX reference changes
+  return prevProps.mouseX === nextProps.mouseX;
+});
+
+DockIcon.displayName = 'DockIcon';
+
+/* ─── Dock ─── */
+const FloatingDock = () => {
+  const mouseX = useMotionValue(Infinity);
+  const allItems = useMemo(() => [...navItems, ...socialItems], []);
+
+  const handleMouseMove = useCallback((e) => {
+    mouseX.set(e.pageX);
+  }, [mouseX]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(Infinity);
+  }, [mouseX]);
+
+  return (
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden lg:block pointer-events-none">
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5, ease: 'easeOut' }}
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
-        className="flex items-end gap-3 px-4 py-2.5"
+        transition={{ delay: 0.5, duration: 0.4, ease: 'easeOut' }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="flex items-end gap-3 px-4 py-2.5 pointer-events-auto"
         style={{
-          // Crystal-clear glassmorphism
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)',
+          backdropFilter: 'blur(20px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(150%)',
           borderRadius: '20px',
-          border: '1px solid rgba(255,255,255,0.15)',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(255,255,255,0.05)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
+          willChange: 'filter',
+          transform: 'translateZ(0)',
         }}
       >
         {navItems.map((item) => (
@@ -56,97 +181,6 @@ const FloatingDock = () => {
         ))}
       </motion.div>
     </div>
-  );
-};
-
-/* ─── Dock Icon ─── */
-const DockIcon = ({ icon: Icon, label, href, isExternal, mouseX }) => {
-  const ref = useRef(null);
-
-  // Distance from mouse to this icon's center
-  const distance = useTransform(mouseX, (val) => {
-    const el = ref.current;
-    if (!el) return Infinity;
-    const bounds = el.getBoundingClientRect();
-    return val - (bounds.x + bounds.width / 2);
-  });
-
-  // Map distance → size: center = magnified, edges = base
-  const sizeTransform = useTransform(
-    distance,
-    [-MAGNIFY_DISTANCE, 0, MAGNIFY_DISTANCE],
-    [DEFAULT_SIZE, MAGNIFIED_SIZE, DEFAULT_SIZE]
-  );
-
-  // Smooth spring animation
-  const size = useSpring(sizeTransform, {
-    mass: 0.1,
-    stiffness: 200,
-    damping: 15,
-  });
-
-  // Icon inner size scales proportionally
-  const iconSize = useTransform(size, (s) => s * 0.45);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (isExternal) {
-      window.open(href, '_blank', 'noopener,noreferrer');
-    } else {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <motion.button
-      ref={ref}
-      type="button"
-      onClick={handleClick}
-      style={{ width: size, height: size }}
-      whileTap={{ scale: 0.85 }}
-      className="relative flex items-center justify-center rounded-xl transition-colors group"
-      aria-label={label}
-    >
-      {/* Glass icon background */}
-      <div
-        className="absolute inset-0 rounded-xl transition-all duration-200"
-        style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08)',
-        }}
-      />
-
-      {/* Hover glow */}
-      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(255,255,255,0.12) 0%, transparent 70%)',
-        }}
-      />
-
-      {/* Icon */}
-      <motion.div
-        className="relative z-10 text-white/80 group-hover:text-white transition-colors duration-150"
-        style={{ width: iconSize, height: iconSize }}
-      >
-        <Icon className="w-full h-full" />
-      </motion.div>
-
-      {/* Tooltip */}
-      <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md text-[11px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:-translate-y-1 select-none"
-        style={{
-          background: 'rgba(0,0,0,0.75)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          color: 'rgba(255,255,255,0.9)',
-        }}
-      >
-        {label}
-      </span>
-    </motion.button>
   );
 };
 
