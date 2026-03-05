@@ -167,7 +167,7 @@ const Hero = () => {
                       />
                       <img
                         src="/hero-profile-624w.jpg"
-                        alt="Harshith Kumar professional headshot"
+                        alt="Harshith Kumar (Harshith) - Full Stack Developer professional headshot"
                         fetchPriority="high"
                         width={624}
                         height={855}

@@ -1,6 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { AnimatePresence } from 'framer-motion';
 
 import LoadingAnimation from './components/LoadingAnimation';
@@ -22,10 +21,10 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Reduced loading time for faster initial display
+    // Instant loading for better SEO and Core Web Vitals
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1200);
+    }, 0);
 
     // Handle back/forward cache restoration
     const handlePageShow = (event) => {
@@ -45,23 +44,6 @@ function HomePage() {
 
   return (
     <>
-      <Helmet>
-        <title>Harshith Kumar | AI-First Full Stack Engineer</title>
-        <meta
-          name="description"
-          content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
-        />
-        <link rel="canonical" href="https://harshithkumar.in/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://harshithkumar.in/" />
-        <meta property="og:title" content="Harshith Kumar | AI-First Full Stack Engineer" />
-        <meta property="og:description" content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." />
-        <meta property="og:image" content="https://harshithkumar.in/preview.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Harshith Kumar | AI-First Full Stack Engineer" />
-        <meta name="twitter:description" content="Portfolio of Harshith Kumar Mannepally - AI/ML Student, Full Stack Developer, and Innovation Enthusiast." />
-        <meta name="twitter:image" content="https://harshithkumar.in/preview.png" />
-      </Helmet>
 
       <AnimatePresence mode="wait">
         {isLoading && <LoadingAnimation />}
