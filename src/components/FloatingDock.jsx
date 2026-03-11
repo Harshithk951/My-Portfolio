@@ -1,11 +1,11 @@
-import { useRef, useMemo, memo, useCallback } from 'react';
+import { useRef, useMemo, memo, useCallback, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 
 /* ─── Config ─── */
 const DEFAULT_SIZE = 40;
 const MAGNIFIED_SIZE = 64;
-const MAGNIFY_DISTANCE = 140;
+const MAGNIFY_DISTANCE = 150;
 
 const navItems = [
   { icon: Home, label: 'Home', href: '#home' },
@@ -23,12 +23,28 @@ const socialItems = [
 /* ─── Memoized Dock Icon ─── */
 const DockIcon = memo(({ icon: Icon, label, href, isExternal, mouseX }) => {
   const ref = useRef(null);
+  const boundsRef = useRef({ x: 0, width: 0 });
+
+  // Cache bounds on mount and resize to avoid layout thrashing during animation
+  useEffect(() => {
+    const updateBounds = () => {
+      if (ref.current) {
+        const { x, width } = ref.current.getBoundingClientRect();
+        boundsRef.current = { x, width };
+      }
+    };
+    updateBounds();
+    window.addEventListener('resize', updateBounds);
+    window.addEventListener('scroll', updateBounds);
+    return () => {
+      window.removeEventListener('resize', updateBounds);
+      window.removeEventListener('scroll', updateBounds);
+    };
+  }, []);
 
   // Optimized distance calculation with debounced bounds caching
   const distance = useTransform(mouseX, (val) => {
-    const el = ref.current;
-    if (!el) return Infinity;
-    const bounds = el.getBoundingClientRect();
+    const bounds = boundsRef.current;
     return val - (bounds.x + bounds.width / 2);
   });
 
@@ -36,14 +52,17 @@ const DockIcon = memo(({ icon: Icon, label, href, isExternal, mouseX }) => {
   const size = useSpring(
     useTransform(
       distance,
-      [-MAGNIFY_DISTANCE, 0, MAGNIFY_DISTANCE],
-      [DEFAULT_SIZE, MAGNIFIED_SIZE, DEFAULT_SIZE]
+      (val) => {
+        const bounds = MAGNIFY_DISTANCE;
+        if (val < -bounds || val > bounds) return DEFAULT_SIZE;
+        const percent = Math.cos((val / bounds) * (Math.PI / 2));
+        return DEFAULT_SIZE + (MAGNIFIED_SIZE - DEFAULT_SIZE) * percent;
+      }
     ),
     {
       mass: 0.1,
-      stiffness: 180,
-      damping: 20,
-      velocity: 0,
+      stiffness: 150,
+      damping: 12,
     }
   );
 
@@ -142,7 +161,7 @@ const FloatingDock = () => {
   const allItems = useMemo(() => [...navItems, ...socialItems], []);
 
   const handleMouseMove = useCallback((e) => {
-    mouseX.set(e.pageX);
+    mouseX.set(e.clientX);
   }, [mouseX]);
 
   const handleMouseLeave = useCallback(() => {
