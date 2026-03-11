@@ -21,10 +21,10 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Instant loading for better SEO and Core Web Vitals
+    // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 0);
+    }, 2300);
 
     // Handle back/forward cache restoration
     const handlePageShow = (event) => {
