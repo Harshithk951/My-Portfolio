@@ -25,7 +25,7 @@ export function TubeLightNavbar({ items, className }) {
   return (
     <div
       className={cn(
-        'fixed bottom-6 sm:top-6 left-1/2 -translate-x-1/2 z-[200] h-max pointer-events-none',
+        'fixed bottom-6 md:top-6 md:bottom-auto left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none',
         className
       )}
     >

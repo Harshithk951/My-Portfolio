@@ -28,7 +28,7 @@ const FloatingDock = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden lg:flex pointer-events-none">
+    <div className="fixed bottom-6 sm:bottom-6 md:bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex pointer-events-none">
       <div className="pointer-events-auto">
         <MacOSDock 
           apps={dockItems}
