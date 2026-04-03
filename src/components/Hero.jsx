@@ -61,8 +61,8 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f] px-4 sm:px-6 lg:px-8">
-      {/* Starfield Background */}
-      <StarfieldBackground className="pointer-events-none" count={400} speed={0.5} twinkle />
+      {/* Starfield Background - starts loading during loading animation */}
+      <StarfieldBackground className="pointer-events-none" count={400} speed={0.5} twinkle startDelay={50} initialStarMultiplier={0.5} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">
