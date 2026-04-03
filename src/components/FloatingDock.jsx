@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Home, User, Briefcase, Brain, Mail, Github, Linkedin } from 'lucide-react';
+import { Home, User, Briefcase, Brain, Code, Mail, Github, Linkedin } from 'lucide-react';
 import MacOSDock from './ui/mac-os-dock';
 
 const FloatingDock = () => {
@@ -7,7 +7,7 @@ const FloatingDock = () => {
     { id: 'home', name: 'Home', icon: Home, href: '#home' },
     { id: 'about', name: 'About', icon: User, href: '#about' },
     { id: 'projects', name: 'Projects', icon: Briefcase, href: '#projects' },
-    { id: 'skills', name: 'Skills', icon: Brain, href: '#skills' },
+    { id: 'skills', name: 'Skills', icon: Code, href: '#skills' },
     { id: 'contact', name: 'Contact', icon: Mail, href: '#contact' },
     { id: 'github', name: 'GitHub', icon: Github, href: 'https://github.com/Harshithk951', isExternal: true },
     { id: 'linkedin', name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/harshith-kumar-dev', isExternal: true },
