@@ -162,7 +162,7 @@ const ProjectsShowcase = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden bg-[#0b0b0b]">
+    <section id="projects" className="py-20 relative overflow-hidden bg-black/50 backdrop-blur-xl">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <motion.div

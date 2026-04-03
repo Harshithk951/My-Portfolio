@@ -36,7 +36,7 @@ const CTASection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 relative bg-[#0b0b0b]">
+    <section id="contact" className="py-20 relative bg-black/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
