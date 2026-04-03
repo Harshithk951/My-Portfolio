@@ -59,15 +59,11 @@ const CTASection = () => {
             {contactItems.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.a
+                <a
                   key={index}
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
                   onClick={() => sendAnalyticsEvent(
                     item.label === 'GitHub' ? 'github_click' : 'contact_click',
                     { label: item.label, value: item.value }
@@ -81,7 +77,7 @@ const CTASection = () => {
                     <p className="text-xs text-white/50 uppercase tracking-wider">{item.label}</p>
                     <p className="font-medium text-white/90 group-hover:text-white transition-colors">{item.value}</p>
                   </div>
-                </motion.a>
+                </a>
               );
             })}
           </div>
