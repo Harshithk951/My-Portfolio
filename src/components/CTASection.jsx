@@ -38,20 +38,14 @@ const CTASection = () => {
   return (
     <section id="contact" className="py-20 relative bg-black/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 leading-tight text-white">
             Let&apos;s Build Something<br className="hidden sm:block" />Awesome Together 🚀
           </h2>
           <p className="text-xl text-white/60 font-light max-w-2xl mx-auto">
             I&apos;m open for freelance projects, collaborations, and startup partnerships.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Contact Info Grid */}
@@ -83,15 +77,10 @@ const CTASection = () => {
           </div>
 
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-2 lg:col-span-2 glow-card glow-blue p-6 sm:p-8 md:p-10 lg:p-12"
-          >
+          <div className="md:col-span-2 lg:col-span-2 glow-card glow-blue p-6 sm:p-8 md:p-10 lg:p-12">
             <h3 className="text-2xl font-bold mb-8 text-white">Get in Touch</h3>
             <ContactForm />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

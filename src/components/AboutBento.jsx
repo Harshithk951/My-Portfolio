@@ -53,29 +53,19 @@ const AboutBento = () => {
   return (
     <section id="about" ref={sectionRef} className="py-20 relative bg-black/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center">
           <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             The Story Behind Me
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto rounded-full" />
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {cards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className={`glow-card ${card.color} p-6 sm:p-7 md:p-8 flex flex-col justify-start group hover:shadow-2xl h-full hover:-translate-y-2 transition-transform duration-300`}
               >
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors">
@@ -85,7 +75,7 @@ const AboutBento = () => {
                 <p className="text-white/70 font-light leading-relaxed">
                   {card.description}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>

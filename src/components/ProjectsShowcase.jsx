@@ -165,18 +165,12 @@ const ProjectsShowcase = () => {
     <section id="projects" className="py-20 relative overflow-hidden bg-black/50 backdrop-blur-xl">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
+        <div className="text-center mb-14">
           <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             My Creations
           </h2>
           <p className="text-xl text-white/60 font-light">Built with Code & Passion</p>
-        </motion.div>
+        </div>
       </div>
 
       {/* Two-row Marquee */}
