@@ -6,6 +6,7 @@ import LoadingAnimation from './components/LoadingAnimation';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FloatingDock from './components/FloatingDock';
+import MobileMenu from './components/MobileMenu';
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -52,6 +53,7 @@ function HomePage() {
       {!isLoading && (
         <main className="smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b]">
           <Navbar />
+          <MobileMenu />
           <Hero />
           <Suspense fallback={<div>Loading...</div>}>
             <div className="flex flex-col space-y-0">

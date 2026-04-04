@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Home, User, Briefcase, Brain, Code, Mail, Github, Linkedin } from 'lucide-react';
+import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 import MacOSDock from './ui/mac-os-dock';
 
 const FloatingDock = () => {
@@ -28,7 +28,14 @@ const FloatingDock = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 sm:bottom-6 md:bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex pointer-events-none">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none" style={{ display: 'none' }} data-dock>
+      <style>{`
+        @media (min-width: 768px) {
+          [data-dock] {
+            display: flex !important;
+          }
+        }
+      `}</style>
       <div className="pointer-events-auto">
         <MacOSDock 
           apps={dockItems}
