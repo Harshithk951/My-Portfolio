@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { smoothScrollTo } from '@/lib/utils';
+import { useScrollDetection } from '@/hooks/useScrollDetection';
 
 export function TubeLightNavbar({ items, className }) {
   const [activeTab, setActiveTab] = useState(items[0]?.name || '');
   const [isMobile, setIsMobile] = useState(false);
+  const isHeroVisible = useScrollDetection();
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,7 +27,8 @@ export function TubeLightNavbar({ items, className }) {
   return (
     <div
       className={cn(
-        'fixed bottom-6 md:top-6 md:bottom-auto left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none',
+        'fixed bottom-6 md:top-6 md:bottom-auto left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none transition-opacity duration-500',
+        isHeroVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
         className
       )}
     >
