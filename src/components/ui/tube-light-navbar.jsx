@@ -27,7 +27,7 @@ export function TubeLightNavbar({ items, className }) {
   return (
     <div
       className={cn(
-        'fixed bottom-6 md:top-6 md:bottom-auto left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none transition-opacity duration-500',
+        'hidden md:flex fixed md:top-6 left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none transition-opacity duration-500',
         isHeroVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
         className
       )}
