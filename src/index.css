@@ -17,7 +17,7 @@
 
 body {
   font-family: 'Roboto Flex', sans-serif;
-  background-color: #000000;
+  background-color: #0b0b0b;  /* ← New color */
   color: #ffffff;
   overflow-x: hidden;
   position: relative;
@@ -74,7 +74,7 @@ body::after {
 
 .glow-card {
   position: relative;
-  background: rgba(20, 20, 20, 0.6);
+  background: #0b0b0b;  /* ← New color (matches body) */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   backdrop-filter: blur(12px);

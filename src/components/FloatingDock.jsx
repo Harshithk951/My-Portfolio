@@ -28,14 +28,7 @@ const FloatingDock = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none" style={{ display: 'none' }} data-dock>
-      <style>{`
-        @media (min-width: 768px) {
-          [data-dock] {
-            display: flex !important;
-          }
-        }
-      `}</style>
+    <div className="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
       <div className="pointer-events-auto">
         <MacOSDock 
           apps={dockItems}
