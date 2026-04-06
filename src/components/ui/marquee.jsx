@@ -1,37 +1,131 @@
+import React from "react";
 import { cn } from "@/lib/utils";
 
 export function Marquee({
-  className,
-  reverse = false,
-  pauseOnHover = false,
   children,
-  vertical = false,
-  repeat = 4,
+  className,
+  duration = 20,
+  pauseOnHover = false,
+  direction = "left",
+  fade = true,
+  fadeAmount = 10,
   ...props
 }) {
+  const containerRef = React.useRef(null);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  const items = React.Children.toArray(children);
+  const isVertical = direction === "up" || direction === "down";
+
   return (
-    <div
-      {...props}
-      className={cn(
-        "group flex overflow-hidden [--duration:40s] [--gap:1.5rem]",
-        vertical ? "flex-col" : "flex-row",
-        className
-      )}
-    >
-      {Array.from({ length: repeat }).map((_, i) => (
+    <>
+      <style>
+        {`
+        @keyframes scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes scroll-reverse {
+          from {
+            transform: translateX(-50%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes scroll-y {
+          from {
+            transform: translateY(0);
+          }
+          to {
+            transform: translateY(-50%);
+          }
+        }
+
+        @keyframes scroll-y-reverse {
+          from {
+            transform: translateY(-50%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+
+        .marquee-scroller {
+          display: flex;
+          animation: ${
+          isVertical
+            ? (direction === "up" ? "scroll-y" : "scroll-y-reverse")
+            : (direction === "left" ? "scroll" : "scroll-reverse")
+        } ${duration}s linear infinite;
+        }
+
+        .marquee-scroller.paused {
+          animation-play-state: paused;
+        }
+      `}
+      </style>
+      <div
+        ref={containerRef}
+        className={cn(
+          "flex w-full overflow-hidden",
+          isVertical && "flex-col",
+          className,
+        )}
+        style={{
+          ...(fade && {
+            maskImage: isVertical
+              ? `linear-gradient(to bottom, transparent 0%, black ${fadeAmount}%, black ${
+                100 - fadeAmount
+              }%, transparent 100%)`
+              : `linear-gradient(to right, transparent 0%, black ${fadeAmount}%, black ${
+                100 - fadeAmount
+              }%, transparent 100%)`,
+            WebkitMaskImage: isVertical
+              ? `linear-gradient(to bottom, transparent 0%, black ${fadeAmount}%, black ${
+                100 - fadeAmount
+              }%, transparent 100%)`
+              : `linear-gradient(to right, transparent 0%, black ${fadeAmount}%, black ${
+                100 - fadeAmount
+              }%, transparent 100%)`,
+          }),
+        }}
+        onMouseEnter={() => pauseOnHover && setIsPaused(true)}
+        onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+        {...props}
+      >
         <div
-          key={i}
           className={cn(
-            "flex shrink-0 justify-around [gap:var(--gap)]",
-            vertical ? "flex-col animate-marquee-vertical" : "animate-marquee",
-            pauseOnHover && "group-hover:[animation-play-state:paused]",
-            reverse && "[animation-direction:reverse]"
+            "marquee-scroller flex shrink-0",
+            isVertical && "flex-col",
+            isPaused && "paused",
           )}
         >
-          {children}
+          {items.map((item, index) => (
+            <div
+              key={`first-${index}`}
+              className={cn("flex shrink-0", isVertical && "w-full")}
+            >
+              {item}
+            </div>
+          ))}
+          {items.map((item, index) => (
+            <div
+              key={`second-${index}`}
+              className={cn("flex shrink-0", isVertical && "w-full")}
+            >
+              {item}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 }
 
