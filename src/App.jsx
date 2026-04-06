@@ -12,7 +12,7 @@ import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load below-the-fold components
 const AboutBento = lazy(() => import('./components/AboutBento'));
-const SkillUniverse = lazy(() => import('./components/SkillUniverse'));
+const SkillsMarquee = lazy(() => import('./components/SkillsMarquee'));
 const ProjectsShowcase = lazy(() => import('./components/ProjectsShowcase'));
 const ServicesSection = lazy(() => import('./components/ServicesSection'));
 const CTASection = lazy(() => import('./components/CTASection'));
@@ -58,7 +58,7 @@ function HomePage() {
           <Suspense fallback={<div>Loading...</div>}>
             <div className="flex flex-col space-y-0">
               <AboutBento />
-              <SkillUniverse />
+              <SkillsMarquee />
               <ProjectsShowcase />
               <ServicesSection />
               <CTASection />
