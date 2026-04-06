@@ -24,6 +24,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Roboto Flex', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
