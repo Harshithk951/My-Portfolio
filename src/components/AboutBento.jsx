@@ -16,7 +16,7 @@ const AboutBento = () => {
     {
       icon: MapPin,
       title: 'My Roots',
-      description: "Growing up in Hyderabad and adapting to new environments shaped my resilience. It taught me to embrace change and find opportunity in every challenge.",
+      description: "Growing up in Hyderabad and adapting to new environments shaped my resilience. It taught me to embrace change and find opportunity in every .",
       color: 'glow-yellow',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
