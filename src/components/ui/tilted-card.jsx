@@ -26,6 +26,8 @@ export default function TiltedCard({
   const ref = useRef(null);
   const rafRef = useRef(null);
   const lastCallRef = useRef(0);
+  const rectCacheRef = useRef(null);
+  const rectCacheTimeRef = useRef(0);
 
   const x = useMotionValue();
   const y = useMotionValue();
@@ -34,19 +36,26 @@ export default function TiltedCard({
   const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
 
-  // Throttle mouse events to 16ms (60fps)
+  // Throttle mouse events to 32ms (better for smooth interactions)
   const handleMouse = useCallback((e) => {
     if (!ref.current) return;
 
     const now = Date.now();
-    if (now - lastCallRef.current < 16) return;
+    if (now - lastCallRef.current < 32) return;
     lastCallRef.current = now;
 
     // Cancel any pending RAF
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
     rafRef.current = requestAnimationFrame(() => {
-      const rect = ref.current.getBoundingClientRect();
+      // Cache rect to avoid multiple layout queries
+      let rect = rectCacheRef.current;
+      if (!rect || now - rectCacheTimeRef.current > 100) {
+        rect = ref.current.getBoundingClientRect();
+        rectCacheRef.current = rect;
+        rectCacheTimeRef.current = now;
+      }
+
       const offsetX = e.clientX - rect.left - rect.width / 2;
       const offsetY = e.clientY - rect.top - rect.height / 2;
 
