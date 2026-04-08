@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import './tilted-card.css';
 
 const springValues = {
-  damping: 30,
-  stiffness: 100,
-  mass: 2
+  damping: 40,
+  stiffness: 80,
+  mass: 2.5
 };
 
 export default function TiltedCard({
@@ -24,6 +24,8 @@ export default function TiltedCard({
   displayOverlayContent = false
 }) {
   const ref = useRef(null);
+  const rafRef = useRef(null);
+  const lastCallRef = useRef(0);
 
   const x = useMotionValue();
   const y = useMotionValue();
@@ -31,34 +33,36 @@ export default function TiltedCard({
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
-  const rotateFigcaption = useSpring(0, {
-    stiffness: 350,
-    damping: 30,
-    mass: 1
-  });
 
-  const [lastY, setLastY] = useState(0);
-
-  function handleMouse(e) {
+  // Throttle mouse events to 16ms (60fps)
+  const handleMouse = useCallback((e) => {
     if (!ref.current) return;
 
-    const rect = ref.current.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left - rect.width / 2;
-    const offsetY = e.clientY - rect.top - rect.height / 2;
+    const now = Date.now();
+    if (now - lastCallRef.current < 16) return;
+    lastCallRef.current = now;
 
-    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
-    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
+    // Cancel any pending RAF
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
-    rotateX.set(rotationX);
-    rotateY.set(rotationY);
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = ref.current.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left - rect.width / 2;
+      const offsetY = e.clientY - rect.top - rect.height / 2;
 
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
+      const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
+      const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
 
-    const velocityY = offsetY - lastY;
-    rotateFigcaption.set(-velocityY * 0.6);
-    setLastY(offsetY);
-  }
+      rotateX.set(rotationX);
+      rotateY.set(rotationY);
+
+      // Only update caption position if tooltip is enabled
+      if (showTooltip) {
+        x.set(e.clientX - rect.left);
+        y.set(e.clientY - rect.top);
+      }
+    });
+  }, [rotateAmplitude, rotateX, rotateY, showTooltip, x, y]);
 
   function handleMouseEnter() {
     scale.set(scaleOnHover);
@@ -66,11 +70,11 @@ export default function TiltedCard({
   }
 
   function handleMouseLeave() {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     opacity.set(0);
     scale.set(1);
     rotateX.set(0);
     rotateY.set(0);
-    rotateFigcaption.set(0);
   }
 
   return (
@@ -120,8 +124,7 @@ export default function TiltedCard({
           style={{
             x,
             y,
-            opacity,
-            rotate: rotateFigcaption
+            opacity
           }}
         >
           {captionText}

@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .tilted-card-mobile-alert {
@@ -46,6 +48,11 @@
   filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.1));
   border-radius: 15px;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .tilted-card-inner:hover {
@@ -61,6 +68,12 @@
   will-change: transform;
   transform: translateZ(0);
   transition: brightness 0.3s ease-out;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.tilted-card-img {
+  image-rendering: crisp-edges;
 }
 
 .tilted-card-inner:hover .tilted-card-img {
@@ -72,9 +85,12 @@
   top: 0;
   left: 0;
   z-index: 2;
-  will-change: transform;
+  will-change: opacity;
   transform: translateZ(30px);
   transition: opacity 0.3s ease-out;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style;
 }
 
 .tilted-card-caption {
@@ -90,7 +106,12 @@
   color: #1f2937;
   opacity: 0;
   z-index: 3;
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: layout style;
 }

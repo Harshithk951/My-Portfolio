@@ -153,10 +153,10 @@ const Hero = () => {
               containerWidth="340px"
               imageHeight="520px"
               imageWidth="340px"
-              rotateAmplitude={12}
-              scaleOnHover={1.05}
+              rotateAmplitude={20}
+              scaleOnHover={1.3}
               showMobileWarning={true}
-              showTooltip={true}
+              showTooltip={false}
               displayOverlayContent={true}
               overlayContent={
                 <div className="w-full h-full flex flex-col justify-end p-5 sm:p-6">
