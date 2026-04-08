@@ -9,13 +9,23 @@ export function Marquee({
   direction = "left",
   fade = true,
   fadeAmount = 10,
+  reverse = false,
   ...props
 }) {
   const containerRef = React.useRef(null);
   const [isPaused, setIsPaused] = React.useState(false);
 
+  // Apply reverse prop by flipping direction
+  const finalDirection = reverse
+    ? direction === "left"
+      ? "right"
+      : direction === "up"
+      ? "down"
+      : direction
+    : direction;
+
   const items = React.Children.toArray(children);
-  const isVertical = direction === "up" || direction === "down";
+  const isVertical = finalDirection === "up" || finalDirection === "down";
 
   return (
     <>
@@ -26,16 +36,7 @@ export function Marquee({
             transform: translateX(0);
           }
           to {
-            transform: translateX(-50%);
-          }
-        }
-
-        @keyframes scroll-reverse {
-          from {
-            transform: translateX(-50%);
-          }
-          to {
-            transform: translateX(0);
+            transform: translateX(calc(-100% / 3));
           }
         }
 
@@ -44,26 +45,19 @@ export function Marquee({
             transform: translateY(0);
           }
           to {
-            transform: translateY(-50%);
-          }
-        }
-
-        @keyframes scroll-y-reverse {
-          from {
-            transform: translateY(-50%);
-          }
-          to {
-            transform: translateY(0);
+            transform: translateY(calc(-100% / 3));
           }
         }
 
         .marquee-scroller {
           display: flex;
           animation: ${
-          isVertical
-            ? (direction === "up" ? "scroll-y" : "scroll-y-reverse")
-            : (direction === "left" ? "scroll" : "scroll-reverse")
+          isVertical ? "scroll-y" : "scroll"
         } ${duration}s linear infinite;
+        }
+
+        .marquee-scroller.reverse {
+          animation-direction: reverse;
         }
 
         .marquee-scroller.paused {
@@ -104,6 +98,7 @@ export function Marquee({
           className={cn(
             "marquee-scroller flex shrink-0",
             isVertical && "flex-col",
+            reverse && "reverse",
             isPaused && "paused",
           )}
         >
@@ -118,6 +113,14 @@ export function Marquee({
           {items.map((item, index) => (
             <div
               key={`second-${index}`}
+              className={cn("flex shrink-0", isVertical && "w-full")}
+            >
+              {item}
+            </div>
+          ))}
+          {items.map((item, index) => (
+            <div
+              key={`third-${index}`}
               className={cn("flex shrink-0", isVertical && "w-full")}
             >
               {item}
