@@ -154,7 +154,7 @@ const Hero = () => {
               imageHeight="520px"
               imageWidth="340px"
               rotateAmplitude={20}
-              scaleOnHover={1.3}
+              scaleOnHover={1.2}
               showMobileWarning={true}
               showTooltip={false}
               displayOverlayContent={true}
