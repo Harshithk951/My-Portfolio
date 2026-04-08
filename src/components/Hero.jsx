@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
-import { CometCard } from '@/components/ui/comet-card';
+import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import StarfieldBackground from '@/components/StarfieldBackground';
 
@@ -82,7 +82,7 @@ const Hero = () => {
             >
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-violet-500 to-amber-500 animate-pulse" />
               <span className="text-[10px] sm:text-sm font-medium tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 uppercase">
-                AI-First Full Stack Engineer
+                AI-First Full Stack Developer
               </span>
             </motion.div>
 
@@ -138,63 +138,32 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Comet Card Profile */}
+          {/* Right Content - Tilted Card Profile */}
           <motion.div
             initial={{ opacity: 1, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <CometCard>
-              <div
-                className="flex w-[260px] xs:w-[300px] sm:w-[360px] lg:w-[340px] xl:w-[380px] cursor-pointer flex-col items-stretch rounded-[16px] border-0 bg-[#1F2121] p-1.5 sm:p-2 md:p-4"
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                <div className="mx-2 flex-1">
-                  <div className="relative mt-2 aspect-[3/4] w-full">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcSet="/hero-profile-420w.webp 420w, /hero-profile-624w.webp 624w, /hero-profile.webp 864w"
-                        sizes="(max-width: 480px) 260px, (max-width: 640px) 300px, (max-width: 1024px) 340px, 380px"
-                      />
-                      <source
-                        type="image/jpeg"
-                        srcSet="/hero-profile-420w.jpg 420w, /hero-profile-624w.jpg 624w, /hero-profile.jpg 864w"
-                        sizes="(max-width: 480px) 260px, (max-width: 640px) 300px, (max-width: 1024px) 340px, 380px"
-                      />
-                      <img
-                        src="/hero-profile-624w.jpg"
-                        alt="Harshith Kumar (Harshith) - Full Stack Developer professional headshot"
-                        fetchPriority="high"
-                        width={624}
-                        height={855}
-                        className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
-                        draggable={false}
-                        style={{
-                          boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
-                        }}
-                      />
-                    </picture>
-                  </div>
+            <TiltedCard
+              imageSrc="/hero-profile-624w.jpg"
+              altText="Harshith Kumar - Full Stack Developer professional headshot"
+              captionText="Harshith Kumar - Full Stack Developer"
+              containerHeight="520px"
+              containerWidth="340px"
+              imageHeight="520px"
+              imageWidth="340px"
+              rotateAmplitude={12}
+              scaleOnHover={1.05}
+              showMobileWarning={true}
+              showTooltip={true}
+              displayOverlayContent={true}
+              overlayContent={
+                <div className="w-full h-full flex flex-col justify-end p-5 sm:p-6">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">Harshith Kumar</h2>
                 </div>
-                <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 text-white">
-                  <div>
-                    <h2 className="text-xl font-bold">Harshith Kumar</h2>
-                    <p className="text-sm text-white/60">Full Stack Developer</p>
-                  </div>
-                  <button
-                    onClick={scrollToContact}
-                    className="p-2.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white transition-colors backdrop-blur-sm"
-                    aria-label="Contact Me"
-                  >
-                    <Mail size={18} />
-                  </button>
-                </div>
-              </div>
-            </CometCard>
+              }
+            />
           </motion.div>
 
         </div>
