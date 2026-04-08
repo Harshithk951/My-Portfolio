@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import './tilted-card.css';
 
