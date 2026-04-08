@@ -114,7 +114,12 @@ export default function TiltedCard({
         />
 
         {displayOverlayContent && overlayContent && (
-          <motion.div className="tilted-card-overlay">{overlayContent}</motion.div>
+          <motion.div 
+            className="tilted-card-overlay"
+            style={{ opacity }}
+          >
+            {overlayContent}
+          </motion.div>
         )}
       </motion.div>
 

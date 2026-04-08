@@ -156,7 +156,7 @@ const Hero = () => {
               rotateAmplitude={20}
               scaleOnHover={1.2}
               showMobileWarning={true}
-              showTooltip={false}
+              showTooltip={true}
               displayOverlayContent={true}
               overlayContent={
                 <div className="w-full h-full flex flex-col justify-end p-5 sm:p-6">
