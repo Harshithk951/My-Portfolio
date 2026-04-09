@@ -5,7 +5,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
-import StarfieldBackground from '@/components/StarfieldBackground';
+import Galaxy from '@/components/Galaxy';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
@@ -61,8 +61,23 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f] px-4 sm:px-6 lg:px-8">
-      {/* Starfield Background - starts loading during loading animation */}
-      <StarfieldBackground className="pointer-events-none" count={400} speed={0.5} twinkle startDelay={50} initialStarMultiplier={0.5} />
+      {/* Galaxy Background - WebGL-based starfield animation */}
+      <Galaxy
+        className="absolute inset-0 pointer-events-none z-0"
+        mouseInteraction={false}
+        mouseRepulsion={false}
+        density={0.6}
+        glowIntensity={0.2}
+        saturation={0}
+        hueShift={140}
+        twinkleIntensity={0.15}
+        rotationSpeed={0.05}
+        repulsionStrength={2}
+        autoCenterRepulsion={0}
+        starSpeed={0.3}
+        speed={0.4}
+        transparent={true}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">
