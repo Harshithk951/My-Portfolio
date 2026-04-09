@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { smoothScrollTo } from '@/lib/utils';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
 export function TubeLightNavbar({ items, className }) {
-  const [activeTab, setActiveTab] = useState(items[0]?.name || '');
   const [isMobile, setIsMobile] = useState(false);
   const isHeroVisible = useScrollDetection();
+  const activeTab = useActiveSection(['home', 'about', 'projects', 'skills', 'contact']);
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,17 +21,19 @@ export function TubeLightNavbar({ items, className }) {
   }, []);
 
   const handleItemClick = (item) => {
-    setActiveTab(item.name);
     smoothScrollTo(item.href);
   };
 
   return (
-    <div
+    <motion.div
       className={cn(
-        'hidden md:flex fixed md:top-6 left-1/2 -translate-x-1/2 z-[210] h-max pointer-events-none transition-opacity duration-500',
-        isHeroVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
+        'hidden md:flex fixed md:top-6 inset-x-0 z-[210] h-max pointer-events-none justify-center',
         className
       )}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: isHeroVisible ? 1 : 0, y: isHeroVisible ? 0 : -20 }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
+      pointerEvents={isHeroVisible ? 'auto' : 'none'}
     >
       <div className="pointer-events-auto flex items-center gap-2 bg-white/5 border border-white/15 backdrop-blur-xl py-1 px-2 rounded-full shadow-lg">
         {items.map((item) => {
@@ -84,7 +87,7 @@ export function TubeLightNavbar({ items, className }) {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
