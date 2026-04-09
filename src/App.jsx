@@ -20,11 +20,14 @@ const Footer = lazy(() => import('./components/Footer'));
 
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [heroReady, setHeroReady] = useState(false);
 
   useEffect(() => {
     // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
+      // Delay Hero render to ensure smooth transition
+      setTimeout(() => setHeroReady(true), 100);
     }, 2300);
 
     // Handle back/forward cache restoration
@@ -54,8 +57,8 @@ function HomePage() {
         <main className="smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b]">
           <Navbar />
           <MobileMenu />
-          <Hero />
-          <Suspense fallback={<div>Loading...</div>}>
+          {heroReady && <Hero />}
+          <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/30">Loading...</div></div>}>
             <div className="flex flex-col space-y-0">
               <AboutBento />
               <SkillsMarquee />
