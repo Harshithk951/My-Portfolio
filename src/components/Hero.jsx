@@ -12,6 +12,7 @@ const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 const Hero = () => {
   const { toast } = useToast();
   const [currentWord, setCurrentWord] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
     const interval = setInterval(() => {
