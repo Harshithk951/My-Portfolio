@@ -161,7 +161,7 @@ const Hero = () => {
             className="relative flex items-center justify-center lg:justify-end"
           >
             {/* Responsive container for profile image */}
-            <div className="w-[240px] h-[360px] sm:w-[260px] sm:h-[390px] md:w-[320px] md:h-[480px] lg:w-[380px] lg:h-[580px]">
+            <div className="mobile-bounce-image w-[240px] h-[360px] sm:w-[260px] sm:h-[390px] md:w-[320px] md:h-[480px] lg:w-[380px] lg:h-[580px]">
               <TiltedCard
                 imageSrc="/hero-profile-624w.jpg"
                 altText="Harshith Kumar - Full Stack Developer professional headshot"

@@ -125,3 +125,20 @@
   transform: translateZ(0);
   contain: layout style;
 }
+
+/* Mobile-only bouncing animation for image grid */
+@keyframes softBounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Apply bounce animation only on mobile (screens < 640px) */
+@media (max-width: 639px) {
+  .mobile-bounce-image {
+    animation: softBounce 2.5s ease-in-out infinite;
+  }
+}
