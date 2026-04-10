@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isInLoadProtectionWindow } from '@/lib/utils';
 
 export const useActiveSection = (sectionIds = ['home', 'about', 'projects', 'skills', 'contact']) => {
   const [activeSection, setActiveSection] = useState('Home');
@@ -37,6 +38,9 @@ export const useActiveSection = (sectionIds = ['home', 'about', 'projects', 'ski
 
       const observer = new IntersectionObserver(
         ([entry]) => {
+          // Don't update section tracking during load protection window
+          if (isInLoadProtectionWindow()) return;
+          
           intersectionRatios[id] = entry.intersectionRatio;
 
           // Find the section with the highest intersection ratio (most visible)
