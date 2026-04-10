@@ -9,8 +9,8 @@ const MobileMenu = () => {
   const menuItems = [
     { id: 'home', name: 'Home', icon: Home, href: '#home' },
     { id: 'about', name: 'About', icon: User, href: '#about' },
-    { id: 'projects', name: 'Projects', icon: Briefcase, href: '#projects' },
     { id: 'skills', name: 'Skills', icon: Code, href: '#skills' },
+    { id: 'projects', name: 'Projects', icon: Briefcase, href: '#projects' },
     { id: 'contact', name: 'Contact', icon: Mail, href: '#contact' },
   ];
 

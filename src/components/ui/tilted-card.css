@@ -1,3 +1,13 @@
+/* Disable tilt effects on mobile for better UX */
+@media (max-width: 1023px) {
+  .tilted-card-figure {
+    pointer-events: none !important;
+  }
+  .tilted-card-img {
+    cursor: default !important;
+  }
+}
+
 .tilted-card-figure {
   position: relative;
   width: 100%;

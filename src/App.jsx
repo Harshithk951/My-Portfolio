@@ -23,9 +23,18 @@ function HomePage() {
   const [heroReady, setHeroReady] = useState(false);
 
   useEffect(() => {
+    // Lock scroll at top during loading to prevent race conditions with lazy components
+    const lockScrollInterval = setInterval(() => {
+      if (isLoading && window.scrollY > 0) {
+        window.scrollTo(0, 0);
+      }
+    }, 50);
+
     // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
+      // Stop locking scroll once loading ends
+      clearInterval(lockScrollInterval);
       // Delay Hero render to ensure smooth transition
       setTimeout(() => setHeroReady(true), 100);
     }, 2300);
@@ -35,6 +44,8 @@ function HomePage() {
       if (event.persisted) {
         // Page was restored from bfcache, reset loading if needed
         setIsLoading(false);
+        clearInterval(lockScrollInterval);
+        window.scrollTo(0, 0);
       }
     };
 
@@ -42,9 +53,10 @@ function HomePage() {
 
     return () => {
       clearTimeout(timer);
+      clearInterval(lockScrollInterval);
       window.removeEventListener('pageshow', handlePageShow);
     };
-  }, []);
+  }, [isLoading]);
 
   return (
     <>

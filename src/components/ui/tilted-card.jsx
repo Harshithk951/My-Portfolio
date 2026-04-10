@@ -34,7 +34,8 @@ export default function TiltedCard({
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
-  const opacity = useSpring(0);
+  // Initialize overlay opacity to 1 if no tilt effects (rotateAmplitude = 0)
+  const opacity = useSpring(rotateAmplitude === 0 ? 1 : 0);
 
   // Throttle mouse events to 32ms (better for smooth interactions)
   const handleMouse = useCallback((e) => {
