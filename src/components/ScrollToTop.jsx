@@ -7,16 +7,16 @@ const ScrollToTop = () => {
     // Aggressive initial reset on mount
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
-        // Also lock scroll for first 3 seconds as extra safety
+        // Lock scroll for 4 seconds (matching App.jsx lock duration) as extra safety
         const safetyInterval = setInterval(() => {
             if (window.scrollY > 0) {
                 window.scrollTo(0, 0);
             }
-        }, 50);
+        }, 30);
         
         const safetyTimer = setTimeout(() => {
             clearInterval(safetyInterval);
-        }, 3000);
+        }, 4000);
         
         return () => {
             clearInterval(safetyInterval);
