@@ -33,14 +33,15 @@ function HomePage() {
     // Store loading start time for 4-second protection window
     const loadStartTime = Date.now();
     const LOCK_DURATION = 4000; // Extended to 4 seconds for production safety
+    const EXTRA_BUFFER = 500; // Additional 500ms buffer after main lock expires
     
     // Lock scroll at top during loading to prevent race conditions with lazy components
     const lockScrollInterval = setInterval(() => {
       const elapsed = Date.now() - loadStartTime;
-      // Keep locking scroll for full 4 seconds regardless of isLoading state
-      if (elapsed < LOCK_DURATION && window.scrollY > 0) {
+      // Keep locking scroll for full 4 seconds + 500ms buffer for lazy components to stabilize
+      if (elapsed < (LOCK_DURATION + EXTRA_BUFFER) && window.scrollY > 0) {
         window.scrollTo(0, 0);
-      } else if (elapsed >= LOCK_DURATION) {
+      } else if (elapsed >= (LOCK_DURATION + EXTRA_BUFFER)) {
         clearInterval(lockScrollInterval);
       }
     }, 30);
@@ -65,8 +66,8 @@ function HomePage() {
     // Additional safety: re-lock if scroll detected after main lock expires
     const handleUnexpectedScroll = () => {
       const elapsed = Date.now() - loadStartTime;
-      // If scroll happens within the protection window, immediately reset
-      if (elapsed < LOCK_DURATION && window.scrollY > 0) {
+      // If scroll happens within the protection window + buffer, immediately reset
+      if (elapsed < (LOCK_DURATION + EXTRA_BUFFER) && window.scrollY > 0) {
         window.scrollTo(0, 0);
       }
     };
