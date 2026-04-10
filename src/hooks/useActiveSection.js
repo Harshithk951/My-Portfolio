@@ -2,8 +2,19 @@ import { useState, useEffect } from 'react';
 
 export const useActiveSection = (sectionIds = ['home', 'about', 'projects', 'skills', 'contact']) => {
   const [activeSection, setActiveSection] = useState('Home');
+  const [canTrack, setCanTrack] = useState(false);
+
+  // Delay observer setup by 4 seconds to avoid interference with scroll locking during load
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setCanTrack(true);
+    }, 4000);
+    return () => clearTimeout(delay);
+  }, []);
 
   useEffect(() => {
+    // Skip observer setup during loading phase
+    if (!canTrack) return;
     // Map section IDs to names
     const sectionMap = {
       home: 'Home',
@@ -61,7 +72,7 @@ export const useActiveSection = (sectionIds = ['home', 'about', 'projects', 'ski
         }
       });
     };
-  }, [sectionIds]);
+  }, [sectionIds, canTrack]);
 
   return activeSection;
 };
