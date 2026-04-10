@@ -1,6 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { initializePageLoadTimer } from '@/lib/utils';
 
 import LoadingAnimation from './components/LoadingAnimation';
 import Navbar from './components/Navbar';
@@ -25,6 +26,9 @@ function HomePage() {
   useEffect(() => {
     // Aggressive scroll lock: reset immediately when component mounts
     window.scrollTo(0, 0);
+    
+    // Initialize page load timer for all protection mechanisms
+    initializePageLoadTimer();
     
     // Store loading start time for 4-second protection window
     const loadStartTime = Date.now();

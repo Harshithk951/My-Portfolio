@@ -6,8 +6,25 @@ export function cn(...inputs) {
 }
 
 // Global loading flag to prevent scroll during initial load window
-let pageLoadStartTime = Date.now();
+let pageLoadStartTime = null; // Initialize as null, will be set on page load
 const LOAD_PROTECTION_WINDOW = 4000; // 4 seconds
+
+/**
+ * Initialize/reset page load timer on every page load
+ * Must be called from App.jsx when component mounts
+ */
+export function initializePageLoadTimer() {
+  pageLoadStartTime = Date.now();
+}
+
+/**
+ * Check if we're within the protection window
+ */
+export function isInLoadProtectionWindow() {
+  if (!pageLoadStartTime) return true; // Default to protected if not initialized
+  const elapsed = Date.now() - pageLoadStartTime;
+  return elapsed < LOAD_PROTECTION_WINDOW;
+}
 
 /**
  * Smoothly scrolls to a specific element by ID.
@@ -17,8 +34,7 @@ const LOAD_PROTECTION_WINDOW = 4000; // 4 seconds
  */
 export function smoothScrollTo(id) {
   // Don't allow scrolling during initial page load window
-  const elapsed = Date.now() - pageLoadStartTime;
-  if (elapsed < LOAD_PROTECTION_WINDOW) {
+  if (isInLoadProtectionWindow()) {
     return; // Silently ignore scroll requests during loading
   }
 
