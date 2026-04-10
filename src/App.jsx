@@ -23,18 +23,23 @@ function HomePage() {
   const [heroReady, setHeroReady] = useState(false);
 
   useEffect(() => {
+    // Aggressive scroll lock: reset immediately when component mounts
+    window.scrollTo(0, 0);
+    
     // Lock scroll at top during loading to prevent race conditions with lazy components
     const lockScrollInterval = setInterval(() => {
-      if (isLoading && window.scrollY > 0) {
+      if (window.scrollY > 0) {
         window.scrollTo(0, 0);
       }
-    }, 50);
+    }, 30);
 
     // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Stop locking scroll once loading ends
-      clearInterval(lockScrollInterval);
+      // Continue locking scroll for 500ms AFTER loading ends to catch delayed scrolls
+      setTimeout(() => {
+        clearInterval(lockScrollInterval);
+      }, 500);
       // Delay Hero render to ensure smooth transition
       setTimeout(() => setHeroReady(true), 100);
     }, 2300);
