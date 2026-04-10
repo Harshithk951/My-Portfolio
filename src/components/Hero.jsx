@@ -179,7 +179,7 @@ const Hero = () => {
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
-                rotateAmplitude={0}
+                rotateAmplitude={isDesktop ? 14 : 0}
                 scaleOnHover={1}
                 showMobileWarning={false}
                 showTooltip={true}
