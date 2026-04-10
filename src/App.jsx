@@ -58,12 +58,23 @@ function HomePage() {
       }
     };
 
+    // Additional safety: re-lock if scroll detected after main lock expires
+    const handleUnexpectedScroll = () => {
+      const elapsed = Date.now() - loadStartTime;
+      // If scroll happens within the protection window, immediately reset
+      if (elapsed < LOCK_DURATION && window.scrollY > 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+
     window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('scroll', handleUnexpectedScroll, true);
 
     return () => {
       clearTimeout(timer);
       clearInterval(lockScrollInterval);
       window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('scroll', handleUnexpectedScroll, true);
     };
   }, [isLoading]);
 
