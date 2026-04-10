@@ -98,7 +98,7 @@ const ContactForm = () => {
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all text-white placeholder:text-white/20"
-          placeholder="+1 (555) 000-0000"
+          placeholder="+91 (98765) 43210"
         />
       </div>
 
