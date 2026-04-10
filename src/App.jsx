@@ -26,20 +26,24 @@ function HomePage() {
     // Aggressive scroll lock: reset immediately when component mounts
     window.scrollTo(0, 0);
     
+    // Store loading start time for 4-second protection window
+    const loadStartTime = Date.now();
+    const LOCK_DURATION = 4000; // Extended to 4 seconds for production safety
+    
     // Lock scroll at top during loading to prevent race conditions with lazy components
     const lockScrollInterval = setInterval(() => {
-      if (window.scrollY > 0) {
+      const elapsed = Date.now() - loadStartTime;
+      // Keep locking scroll for full 4 seconds regardless of isLoading state
+      if (elapsed < LOCK_DURATION && window.scrollY > 0) {
         window.scrollTo(0, 0);
+      } else if (elapsed >= LOCK_DURATION) {
+        clearInterval(lockScrollInterval);
       }
     }, 30);
 
     // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Continue locking scroll for 500ms AFTER loading ends to catch delayed scrolls
-      setTimeout(() => {
-        clearInterval(lockScrollInterval);
-      }, 500);
       // Delay Hero render to ensure smooth transition
       setTimeout(() => setHeroReady(true), 100);
     }, 2300);
