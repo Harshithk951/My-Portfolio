@@ -34,8 +34,10 @@ export default function TiltedCard({
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
-  // Initialize overlay opacity to 1 if no tilt effects (rotateAmplitude = 0)
-  const opacity = useSpring(rotateAmplitude === 0 ? 1 : 0);
+  // Overlay opacity: always visible (independent of tilt effects)
+  const overlayOpacity = useSpring(1);
+  // Caption opacity: only visible on hover
+  const captionOpacity = useSpring(0);
 
   // Throttle mouse events to 32ms (better for smooth interactions)
   const handleMouse = useCallback((e) => {
@@ -76,12 +78,12 @@ export default function TiltedCard({
 
   function handleMouseEnter() {
     scale.set(scaleOnHover);
-    opacity.set(1);
+    captionOpacity.set(1);
   }
 
   function handleMouseLeave() {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    opacity.set(0);
+    captionOpacity.set(0);
     scale.set(1);
     rotateX.set(0);
     rotateY.set(0);
@@ -126,7 +128,7 @@ export default function TiltedCard({
         {displayOverlayContent && overlayContent && (
           <motion.div 
             className="tilted-card-overlay"
-            style={{ opacity }}
+            style={{ opacity: overlayOpacity }}
           >
             {overlayContent}
           </motion.div>
@@ -139,7 +141,7 @@ export default function TiltedCard({
           style={{
             x,
             y,
-            opacity
+            opacity: captionOpacity
           }}
         >
           {captionText}
