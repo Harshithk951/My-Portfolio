@@ -180,7 +180,7 @@ const Hero = () => {
                 imageHeight="100%"
                 imageWidth="100%"
                 rotateAmplitude={isDesktop ? 14 : 0}
-                scaleOnHover={1}
+                scaleOnHover={isDesktop ? 1.1 : 1}
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
