@@ -163,6 +163,23 @@ const ProjectsShowcase = () => {
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden bg-black/50 backdrop-blur-xl">
+      {/* Schema.org JSON-LD for Projects */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": PROJECTS.map((project, index) => ({
+            "@type": "CreativeWork",
+            "position": index + 1,
+            "name": project.title,
+            "description": project.description,
+            "url": project.liveUrl || project.repoUrl,
+            "codeRepository": project.repoUrl,
+            "keywords": project.tech.join(", ")
+          }))
+        })}
+      </script>
+      
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <div className="text-center mb-14">
