@@ -93,6 +93,7 @@ export function LogoLoop({
               className="logo-loop-item"
               style={{ height: `${logoHeight}px`, width: `${logoHeight}px` }}
               title={logo.title}
+              aria-label={logo.title || `Logo ${index + 1}`}
             >
               {logo.node ? (
                 <span
@@ -121,6 +122,8 @@ export function LogoLoop({
               className="logo-loop-item"
               style={{ height: `${logoHeight}px`, width: `${logoHeight}px` }}
               title={logo.title}
+              aria-label={logo.title || `Logo ${index + 1}`}
+              aria-hidden="true"
             >
               {logo.node ? (
                 <span
