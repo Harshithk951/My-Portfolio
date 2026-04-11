@@ -1,5 +1,5 @@
 import { useRef, useCallback } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './tilted-card.css';
 
 const springValues = {

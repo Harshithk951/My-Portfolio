@@ -14,18 +14,26 @@ export default defineConfig({
     // Optimize chunk size and splitting
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Split libraries into separate chunks
-          'ogl-renderer': ['ogl'],
-          'framer-motion': ['framer-motion'],
-          'radix-ui': ['@radix-ui/react-dropdown-menu'],
-          'icons': ['react-icons', 'lucide-react'],
+        manualChunks(id) {
+          // Split libraries into separate chunks (Vite 8 function format)
+          if (id.includes('node_modules/ogl')) {
+            return 'ogl-renderer';
+          }
+          if (id.includes('node_modules/framer-motion')) {
+            return 'framer-motion';
+          }
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'radix-ui';
+          }
+          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-icons')) {
+            return 'icons';
+          }
         },
       },
     },
     // Lower chunk size warning threshold to 250KB (from 400KB)
     chunkSizeWarningLimit: 250,
-    // Enable minification
+    // Enable minification with Rolldown (Vite 8 now uses rolldown instead of esbuild)
     minify: 'terser',
     terserOptions: {
       compress: {
