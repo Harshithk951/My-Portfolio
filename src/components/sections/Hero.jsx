@@ -99,7 +99,6 @@ const Hero = () => {
         starSpeed={galaxyConfig.starSpeed}
         speed={galaxyConfig.speed}
         transparent={true}
-        pauseOnScroll={isMobile}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">

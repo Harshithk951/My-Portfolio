@@ -85,18 +85,6 @@ body::after {
   backface-visibility: hidden;
 }
 
-/* Mobile scroll performance optimization for Hero section */
-@media (max-width: 768px) {
-  #home {
-    will-change: transform;
-    contain: layout style;
-  }
-
-  #home > div[class*="absolute inset-0"] {
-    contain: paint style;
-  }
-}
-
 .glow-card::before {
   content: '';
   position: absolute;
