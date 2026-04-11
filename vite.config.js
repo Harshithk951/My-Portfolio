@@ -18,19 +18,25 @@ export default defineConfig({
           // Split libraries into separate chunks
           'ogl-renderer': ['ogl'],
           'framer-motion': ['framer-motion'],
-          'radix-ui': ['@radix-ui/react-dropdown-menu', '@radix-ui/react-popover'],
+          'radix-ui': ['@radix-ui/react-dropdown-menu'],
           'icons': ['react-icons', 'lucide-react'],
         },
       },
     },
-    // Lower chunk size warning threshold to 400KB
-    chunkSizeWarningLimit: 400,
+    // Lower chunk size warning threshold to 250KB (from 400KB)
+    chunkSizeWarningLimit: 250,
     // Enable minification
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        drop_console: true,    // Strip console.log, console.warn
+        drop_debugger: true,   // Strip debugger statements
+        // Important: drop_console also removes console.error and console.info
+        pure_funcs: null,      // Don't treat any functions as side-effect free
+      },
+      mangle: true,            // Mangle variable names for smaller output
+      format: {
+        comments: false,       // Remove all comments
       },
     },
   },
