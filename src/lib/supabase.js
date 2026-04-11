@@ -3,16 +3,51 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase environment variables are not set. Contact form will use localStorage fallback.');
+/**
+ * Validate Supabase configuration
+ * Returns config object with valid flag and reason for debug
+ */
+function validateSupabaseConfig() {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return {
+      valid: false,
+      reason: 'Missing environment variables (VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY)'
+    };
+  }
+
+  // Validate URL format
+  if (typeof supabaseUrl !== 'string' || !supabaseUrl.startsWith('https://')) {
+    return {
+      valid: false,
+      reason: 'Invalid Supabase URL format (must start with https://)'
+    };
+  }
+
+  // Validate key format (should be a reasonably long string)
+  if (typeof supabaseAnonKey !== 'string' || supabaseAnonKey.length < 20) {
+    return {
+      valid: false,
+      reason: 'Invalid Supabase anonymous key format'
+    };
+  }
+
+  return { valid: true, reason: null };
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
+const config = validateSupabaseConfig();
+
+// Only create client if config is valid; otherwise null
+export const supabase = config.valid ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+// Log warnings during development
+if (!config.valid && import.meta.env.DEV) {
+  console.warn(`[Supabase] ${config.reason} — Contact form will use localStorage fallback.`);
+}
 
 export const submitContactForm = async (formData) => {
   try {
-    if (!supabaseUrl || !supabaseAnonKey) {
-      // Fallback to localStorage if Supabase is not configured
+    // If Supabase not configured, use localStorage fallback
+    if (!supabase || !config.valid) {
       const newSubmission = {
         id: crypto.randomUUID(),
         ...formData,
