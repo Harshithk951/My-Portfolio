@@ -3,12 +3,10 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { smoothScrollTo } from '@/lib/utils';
 import { useScrollDetection } from '@/hooks/useScrollDetection';
-import { useActiveSection } from '@/hooks/useActiveSection';
 
 export function TubeLightNavbar({ items, className }) {
   const [isMobile, setIsMobile] = useState(false);
   const isHeroVisible = useScrollDetection();
-  const activeTab = useActiveSection(['home', 'about', 'projects', 'skills', 'contact']);
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,7 +36,6 @@ export function TubeLightNavbar({ items, className }) {
       <div className="pointer-events-auto flex items-center gap-2 bg-white/5 border border-white/15 backdrop-blur-xl py-1 px-2 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon;
-          const isActive = activeTab === item.name;
 
           return (
             <button
@@ -46,8 +43,7 @@ export function TubeLightNavbar({ items, className }) {
               onClick={() => handleItemClick(item)}
               className={cn(
                 'relative cursor-pointer text-sm font-medium px-4 sm:px-6 py-2 rounded-full transition-colors',
-                'text-white/70 hover:text-white focus:outline-none',
-                isActive && 'text-white'
+                'text-white/70 hover:text-white focus:outline-none'
               )}
               title={item.name}
             >
@@ -59,8 +55,8 @@ export function TubeLightNavbar({ items, className }) {
                 <Icon size={20} strokeWidth={2} />
               </span>
 
-              {/* Tube Light Effect */}
-              {isActive && (
+              {/* Tube Light Effect - removed for performance */}
+              {false && (
                 <motion.div
                   layoutId="tube-light"
                   className="absolute inset-0 w-full bg-white/5 rounded-full -z-10"
