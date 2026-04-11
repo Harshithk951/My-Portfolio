@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 
 /**
  * IconCloud – interactive 3D tag-cloud rendered on <canvas>.
@@ -33,6 +34,7 @@ function isMobile() {
 // ── Component ────────────────────────────────────────────────────────
 
 export function IconCloud({ images = [], className }) {
+  const { isLowEnd } = useDeviceDetection();
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const imgsRef = useRef([]);
@@ -43,6 +45,13 @@ export function IconCloud({ images = [], className }) {
   const lastMouse = useRef({ x: 0, y: 0 });
   const animRef = useRef(null);
   const isVisible = useRef(true);
+
+  // Adaptive settings for low-end devices (preserve quality for others)
+  const animationConfig = useMemo(() => ({
+    skipGlowFrequency: isLowEnd ? 1 : 0,  // Skip glow rendering on low-end
+    reduceIconCount: isLowEnd ? 0.7 : 1,  // Render 70% of icons on low-end
+    lowerAlpha: isLowEnd ? 0.5 : 1,       // Reduce alpha intensity on low-end
+  }), [isLowEnd]);
 
   const points = useMemo(() => fibonacciSphere(images.length), [images.length]);
 
@@ -181,7 +190,7 @@ export function IconCloud({ images = [], className }) {
     // Responsive icon size
     const getIconSize = (w) => (w <= 480 ? 32 : w <= 768 ? 38 : 46);
     const getRadiusMul = (w) => (w <= 480 ? 0.65 : w <= 768 ? 0.7 : 0.75);
-    const showGlow = !mobile; // skip glow on mobile for perf
+    const showGlow = !mobile && !isLowEnd; // skip glow on mobile or low-end devices for perf
 
     const TWO_PI = Math.PI * 2;
 
@@ -227,10 +236,16 @@ export function IconCloud({ images = [], className }) {
       projected.sort((a, b) => a.z - b.z);
 
       for (const { idx, x, y, z } of projected) {
+        // Skip rendering some icons on low-end for performance
+        if (isLowEnd && Math.random() > animationConfig.reduceIconCount) {
+          continue;
+        }
+
         const img = imgsRef.current[idx];
         const scale = (z + 1.3) / 2.3;
         const size = iconSize * (0.5 + scale * 0.6);
-        const alpha = 0.2 + scale * 0.8;
+        const baseAlpha = 0.2 + scale * 0.8;
+        const alpha = isLowEnd ? baseAlpha * animationConfig.lowerAlpha : baseAlpha;
 
         ctx.globalAlpha = alpha;
 
@@ -257,7 +272,15 @@ export function IconCloud({ images = [], className }) {
       }
 
       ctx.globalAlpha = 1;
-      animRef.current = requestAnimationFrame(animate);
+      
+      // Throttle animation on low-end devices (target 30fps instead of 60fps)
+      if (isLowEnd) {
+        setTimeout(() => {
+          animRef.current = requestAnimationFrame(animate);
+        }, 33); // ~30fps throttle
+      } else {
+        animRef.current = requestAnimationFrame(animate);
+      }
     };
 
     animRef.current = requestAnimationFrame(animate);
@@ -268,7 +291,7 @@ export function IconCloud({ images = [], className }) {
       ro.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [loaded, points]);
+  }, [loaded, points, isLowEnd, animationConfig]);
 
   return (
     <div
@@ -279,6 +302,8 @@ export function IconCloud({ images = [], className }) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
+      role="region"
+      aria-label="Interactive 3D skill cloud visualization"
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full cursor-grab active:cursor-grabbing" />
     </div>
