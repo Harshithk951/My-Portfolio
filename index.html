@@ -40,7 +40,10 @@
 	<meta property="og:title" content="Harshith Kumar | AI-First Full Stack Developer" />
 	<meta property="og:description"
 		content="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." />
-	<meta property="og:image" content="https://harshithkumar.in/preview.png" />
+	<meta property="og:image" content="https://harshithkumar.in/hero-profile.webp" />
+	<meta property="og:image:width" content="800" />
+	<meta property="og:image:height" content="800" />
+	<meta property="og:image:alt" content="Harshith Kumar .M — AI-First Full Stack Developer" />
 	<meta property="og:site_name" content="Harshith Kumar Portfolio" />
 
 	<!-- Twitter Card -->
@@ -51,8 +54,7 @@
 		content="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions." />
 	<meta name="twitter:image" content="https://harshithkumar.in/preview.png" />
 	<meta name="twitter:creator" content="@harshithk951" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+
 
 	<!-- Preconnect to critical origins -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -70,24 +72,6 @@
 	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap"></noscript>
 
 	<!-- Structured Data (JSON-LD) -->
-	<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "Person",
-		"name": "Harshith Kumar Mannepally",
-		"alternateName": ["Harshith Kumar", "Harshith"],
-		"url": "https://harshithkumar.in",
-		"jobTitle": "AI-First Full Stack Developer",
-		"description": "AI/ML Student, Full Stack Developer, and Innovation Enthusiast",
-		"knowsAbout": ["React", "Full Stack Development", "Artificial Intelligence", "Machine Learning", "JavaScript", "Node.js"],
-		"alumniOf": "Uttaranchal University",
-		"image": "https://harshithkumar.in/hero-profile.jpg",
-		"sameAs": [
-			"https://github.com/Harshithk951",
-			"https://www.linkedin.com/in/harshith-kumar-dev"
-		]
-	}
-	</script>
 
 	<!-- Website Schema -->
 	<script type="application/ld+json">
@@ -119,6 +103,43 @@
 	<!-- End Google Tag Manager (noscript) -->
 
 	<div id="root"></div>
+	
+	<!-- Enhanced Person Schema for Google disambiguation -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Harshith Kumar .M",
+		"alternateName": ["Harshith Kumar", "Harshith"],
+		"url": "https://harshithkumar.in",
+		"image": "https://harshithkumar.in/hero-profile.webp",
+		"jobTitle": "AI-First Full Stack Developer",
+		"description": "B.Tech AI & ML student at Uttaranchal University, Dehradun. Open source contributor at Cal.com, freeCodeCamp, VS Code and Excalidraw.",
+		"sameAs": [
+			"https://www.linkedin.com/in/harshithkumar951",
+			"https://github.com/Harshithk951"
+		],
+		"alumniOf": {
+			"@type": "CollegeOrUniversity",
+			"name": "Uttaranchal University",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Dehradun",
+				"addressRegion": "Uttarakhand",
+				"addressCountry": "IN"
+			}
+		},
+		"knowsAbout": [
+			"Artificial Intelligence",
+			"Machine Learning",
+			"Full Stack Development",
+			"React",
+			"TypeScript",
+			"Open Source"
+		]
+	}
+	</script>
+	
 	<script type="module" src="/src/main.jsx"></script>
 </body>
 
