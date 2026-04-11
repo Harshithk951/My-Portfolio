@@ -28,8 +28,9 @@ const MobileMenu = () => {
       {/* Hamburger Button */}
       <button
         onClick={toggleMenu}
-        className="relative p-2 text-white/70 hover:text-white focus:outline-none transition-colors bg-white/5 backdrop-blur-xl rounded-lg"
-        aria-label="Toggle menu"
+        className="relative p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/70 hover:text-white focus:outline-none transition-colors bg-white/5 backdrop-blur-xl rounded-lg"
+        aria-label="Toggle navigation menu"
+        type="button"
       >
         {isOpen ? (
           <X size={24} strokeWidth={2} />
