@@ -200,6 +200,7 @@ export default function Galaxy({
   rotationSpeed = 0.1,
   autoCenterRepulsion = 0,
   transparent = true,
+  pauseOnScroll = false,
   ...rest
 }) {
   const ctnDom = useRef(null);
@@ -207,6 +208,10 @@ export default function Galaxy({
   const smoothMousePos = useRef({ x: 0.5, y: 0.5 });
   const targetMouseActive = useRef(0.0);
   const smoothMouseActive = useRef(0.0);
+  const scrollTimeoutRef = useRef(null);
+  const isScrollingRef = useRef(false);
+  const isAnimationPausedRef = useRef(false);
+  const animateIdRef = useRef(null);
 
   useEffect(() => {
     if (!ctnDom.current) return;
@@ -284,19 +289,18 @@ export default function Galaxy({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId;
     let lastFrameTime = 0;
     const frameInterval = isLowEnd ? 1000 / 30 : 1000 / 60; // 30fps for low-end, 60fps for others
 
     function update(t) {
       // Throttle frame rate for low-end devices
       if (isLowEnd && t - lastFrameTime < frameInterval) {
-        animateId = requestAnimationFrame(update);
+        animateIdRef.current = requestAnimationFrame(update);
         return;
       }
       lastFrameTime = t;
 
-      animateId = requestAnimationFrame(update);
+      animateIdRef.current = requestAnimationFrame(update);
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
         program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
@@ -314,8 +318,35 @@ export default function Galaxy({
 
       renderer.render({ scene: mesh });
     }
-    animateId = requestAnimationFrame(update);
+
+    // Mobile scroll pause handler
+    function handleScroll() {
+      if (!isAnimationPausedRef.current) {
+        isAnimationPausedRef.current = true;
+        if (animateIdRef.current) {
+          cancelAnimationFrame(animateIdRef.current);
+        }
+      }
+      isScrollingRef.current = true;
+
+      // Debounce resume animation
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isScrollingRef.current = false;
+        if (isAnimationPausedRef.current) {
+          isAnimationPausedRef.current = false;
+          animateIdRef.current = requestAnimationFrame(update);
+        }
+      }, 600);
+    }
+
+    animateIdRef.current = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
+
+    // Add scroll listener only on mobile with pauseOnScroll enabled
+    if (pauseOnScroll && isMobile) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
 
     function handleMouseMove(e) {
       const rect = ctn.getBoundingClientRect();
@@ -335,8 +366,16 @@ export default function Galaxy({
     }
 
     return () => {
-      cancelAnimationFrame(animateId);
+      if (animateIdRef.current) {
+        cancelAnimationFrame(animateIdRef.current);
+      }
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
       window.removeEventListener('resize', resize);
+      if (pauseOnScroll && isMobile) {
+        window.removeEventListener('scroll', handleScroll);
+      }
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);
@@ -370,7 +409,8 @@ export default function Galaxy({
     rotationSpeed,
     repulsionStrength,
     autoCenterRepulsion,
-    transparent
+    transparent,
+    pauseOnScroll
   ]);
 
   return (
