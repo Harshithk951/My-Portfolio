@@ -3,7 +3,10 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/layout/*": ["./src/components/layout/*"],
+      "@/sections/*": ["./src/components/sections/*"],
+      "@/shared/*": ["./src/components/shared/*"]
     },
     "jsx": "react-jsx",
     "allowJs": true

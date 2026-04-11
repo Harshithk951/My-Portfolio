@@ -6,7 +6,7 @@ import { smoothScrollTo } from '@/lib/utils';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { useDeviceDetection } from '@/hooks/useDeviceDetection';
-import Galaxy from '@/components/Galaxy';
+import Galaxy from '@/components/shared/Galaxy';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 

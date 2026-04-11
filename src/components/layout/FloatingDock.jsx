@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
-import MacOSDock from './ui/mac-os-dock';
+import MacOSDock from '@/components/ui/mac-os-dock';
 
 const FloatingDock = () => {
   const dockItems = [

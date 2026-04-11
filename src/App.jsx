@@ -2,22 +2,22 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { initializePageLoadTimer } from '@/lib/utils';
 
-import LoadingAnimation from './components/LoadingAnimation';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import FloatingDock from './components/FloatingDock';
-import MobileMenu from './components/MobileMenu';
-import ScrollToTop from './components/ScrollToTop';
-import ErrorBoundary from './components/ErrorBoundary';
+import LoadingAnimation from '@/components/shared/LoadingAnimation';
+import Navbar from '@/components/layout/Navbar';
+import Hero from '@/components/sections/Hero';
+import FloatingDock from '@/components/layout/FloatingDock';
+import MobileMenu from '@/components/layout/MobileMenu';
+import ScrollToTop from '@/components/layout/ScrollToTop';
+import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load below-the-fold components
-const AboutBento = lazy(() => import('./components/AboutBento'));
-const SkillsMarquee = lazy(() => import('./components/SkillsMarquee'));
-const ProjectsShowcase = lazy(() => import('./components/ProjectsShowcase'));
-const ServicesSection = lazy(() => import('./components/ServicesSection'));
-const CTASection = lazy(() => import('./components/CTASection'));
-const Footer = lazy(() => import('./components/Footer'));
+const AboutBento = lazy(() => import('@/components/sections/AboutBento'));
+const SkillsMarquee = lazy(() => import('@/components/sections/SkillsMarquee'));
+const ProjectsShowcase = lazy(() => import('@/components/sections/ProjectsShowcase'));
+const ServicesSection = lazy(() => import('@/components/sections/ServicesSection'));
+const CTASection = lazy(() => import('@/components/sections/CTASection'));
+const Footer = lazy(() => import('@/components/layout/Footer'));
 
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
-import ContactForm from './ContactForm';
+import ContactForm from '@/components/shared/ContactForm';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const CTASection = () => {

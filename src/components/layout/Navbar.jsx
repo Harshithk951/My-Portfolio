@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Home, User, Briefcase, Brain, Mail } from 'lucide-react';
-import { TubeLightNavbar } from './ui/tube-light-navbar';
+import { TubeLightNavbar } from '@/components/ui/tube-light-navbar';
 
 const Navbar = () => {
   const navItems = [
