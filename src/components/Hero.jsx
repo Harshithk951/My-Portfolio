@@ -5,14 +5,27 @@ import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
+import { useDeviceDetection } from '@/hooks/useDeviceDetection';
 import Galaxy from '@/components/Galaxy';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
 const Hero = () => {
   const { toast } = useToast();
+  const { isMobile, isLowEnd } = useDeviceDetection();
   const [currentWord, setCurrentWord] = useState(0);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+  // Adaptive Galaxy settings (optimize ONLY for low-end devices, preserve quality for all others)
+  const galaxyConfig = {
+    density: isLowEnd ? 0.3 : 0.6,              // Low-end: 0.3 | All others: 0.6 (desktop quality)
+    glowIntensity: isLowEnd ? 0.05 : 0.2,      // Low-end: 0.05 | All others: 0.2
+    twinkleIntensity: isLowEnd ? 0.05 : 0.15,  // Low-end: 0.05 | All others: 0.15
+    saturation: 0,                              // 0 = White stars on black background (ALL DEVICES)
+    rotationSpeed: isLowEnd ? 0.02 : 0.05,     // Low-end: 0.02 | All others: 0.05
+    starSpeed: isLowEnd ? 0.1 : 0.3,           // Low-end: 0.1 | All others: 0.3
+    speed: isLowEnd ? 0.2 : 0.4,               // Low-end: 0.2 | All others: 0.4
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,21 +83,21 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f] px-4 sm:px-6 lg:px-8">
-      {/* Galaxy Background - WebGL-based starfield animation */}
+      {/* Galaxy Background - WebGL-based starfield animation (adaptive for device) */}
       <Galaxy
         className="absolute inset-0 pointer-events-none z-0"
         mouseInteraction={false}
         mouseRepulsion={false}
-        density={0.6}
-        glowIntensity={0.2}
-        saturation={0}
+        density={galaxyConfig.density}
+        glowIntensity={galaxyConfig.glowIntensity}
+        saturation={galaxyConfig.saturation}
         hueShift={140}
-        twinkleIntensity={0.15}
-        rotationSpeed={0.05}
+        twinkleIntensity={galaxyConfig.twinkleIntensity}
+        rotationSpeed={galaxyConfig.rotationSpeed}
         repulsionStrength={2}
         autoCenterRepulsion={0}
-        starSpeed={0.3}
-        speed={0.4}
+        starSpeed={galaxyConfig.starSpeed}
+        speed={galaxyConfig.speed}
         transparent={true}
       />
 
