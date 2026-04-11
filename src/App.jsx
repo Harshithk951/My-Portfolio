@@ -81,7 +81,7 @@ function HomePage() {
       window.removeEventListener('pageshow', handlePageShow);
       window.removeEventListener('scroll', handleUnexpectedScroll, true);
     };
-  }, [isLoading]);
+  }, []);
 
   return (
     <>
