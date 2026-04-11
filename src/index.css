@@ -200,3 +200,16 @@ body::after {
     transform: translate3d(0, 0, 0) !important;
   }
 }
+
+/* Mobile Touch Target Optimization (WCAG 2.5 compliance) */
+@media (max-width: 768px) {
+  button, a, input[type="button"], input[type="submit"], label {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ensure touch-friendly spacing around interactive elements */
+  button, a[role="button"] {
+    padding: clamp(0.75rem, 2.5vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+  }
+}
