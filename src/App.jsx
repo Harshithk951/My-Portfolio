@@ -1,5 +1,4 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { initializePageLoadTimer } from '@/lib/utils';
 
@@ -9,6 +8,7 @@ import Hero from './components/Hero';
 import FloatingDock from './components/FloatingDock';
 import MobileMenu from './components/MobileMenu';
 import ScrollToTop from './components/ScrollToTop';
+import ErrorBoundary from './components/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load below-the-fold components
@@ -51,7 +51,7 @@ function HomePage() {
       setIsLoading(false);
       // Delay Hero render to ensure smooth transition
       setTimeout(() => setHeroReady(true), 100);
-    }, 2300);
+    }, 300);
 
     // Handle back/forward cache restoration
     const handlePageShow = (event) => {
@@ -95,16 +95,18 @@ function HomePage() {
           <Navbar />
           <MobileMenu />
           {heroReady && <Hero />}
-          <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/30">Loading...</div></div>}>
-            <div className="flex flex-col space-y-0">
-              <AboutBento />
-              <SkillsMarquee />
-              <ProjectsShowcase />
-              <ServicesSection />
-              <CTASection />
-            </div>
-            <Footer />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/70">Loading...</div></div>}>
+              <div className="flex flex-col space-y-0">
+                <AboutBento />
+                <SkillsMarquee />
+                <ProjectsShowcase />
+                <ServicesSection />
+                <CTASection />
+              </div>
+              <Footer />
+            </Suspense>
+          </ErrorBoundary>
           <FloatingDock />
         </main>
       )}
@@ -114,13 +116,11 @@ function HomePage() {
 
 function App() {
   return (
-    <Router>
+    <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+      <HomePage />
       <Toaster />
-    </Router>
+    </>
   );
 }
 
