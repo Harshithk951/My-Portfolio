@@ -47,7 +47,7 @@ const CTASection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="cta-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Contact Info Grid */}
           <div className="md:col-span-2 lg:col-span-1 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-1 gap-4">
             {contactItems.map((item, index) => {
