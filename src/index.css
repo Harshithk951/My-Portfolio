@@ -170,6 +170,14 @@ body::after {
   border-radius: inherit;
 }
 
+/* Tablet optimization (768px - 1024px) - reduce blur */
+@media (max-width: 1024px) {
+  .journey-grid .glow-card {
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+  }
+}
+
 /* Scoped glassmorphism for Services section */
 .services-grid .glow-card {
   background: linear-gradient(
@@ -205,6 +213,14 @@ body::after {
   border-radius: inherit;
 }
 
+/* Tablet optimization (768px - 1024px) */
+@media (max-width: 1024px) {
+  .services-grid .glow-card {
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+  }
+}
+
 /* Scoped glassmorphism for CTA section */
 .cta-grid .glow-card {
   background: linear-gradient(
@@ -238,6 +254,14 @@ body::after {
   );
   pointer-events: none;
   border-radius: inherit;
+}
+
+/* Tablet optimization (768px - 1024px) */
+@media (max-width: 1024px) {
+  .cta-grid .glow-card {
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
+  }
 }
 
 .perspective-1000 {
