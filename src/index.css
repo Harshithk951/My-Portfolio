@@ -189,6 +189,15 @@ body::after {
   }
 }
 
+/* Small devices optimization (under 480px) - minimal blur */
+@media (max-width: 480px) {
+  .journey-grid .glow-card {
+    backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
 /* Scoped glassmorphism for Services section */
 .services-grid .glow-card {
   background: linear-gradient(
@@ -240,6 +249,15 @@ body::after {
     box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.3),
       inset 0 0.5px 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Small devices optimization (under 480px) */
+@media (max-width: 480px) {
+  .services-grid .glow-card {
+    backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 }
 
