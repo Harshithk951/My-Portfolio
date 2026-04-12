@@ -122,6 +122,19 @@ body::after {
   --glow-color: var(--glow-blue);
 }
 
+/* 
+  Glassmorphism Pattern for macOS Sonoma Aesthetic
+  Applied via scoped selectors (.journey-grid, .services-grid, .cta-grid)
+  to prevent style leakage to other components like Projects section.
+  
+  Key features:
+  - Gradient background with subtle white opacity (6% → 2% → 5%)
+  - 60px blur + 180% saturation + 1.15 brightness for depth
+  - Multi-layer shadow: ambient shadow + inset highlights
+  - Specular highlight gradient in ::before pseudo-element
+  - Each section grid has isolated CSS rules for maintainability
+*/
+
 /* Scoped glassmorphism styles for My Journey section */
 .journey-grid .glow-card {
   background: linear-gradient(
