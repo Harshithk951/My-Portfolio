@@ -7,12 +7,15 @@ const MacOSDock = ({
   className = ''
 }) => {
   const [mouseX, setMouseX] = useState(null);
+  const [touchX, setTouchX] = useState(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [currentScales, setCurrentScales] = useState(apps.map(() => 1));
   const [currentPositions, setCurrentPositions] = useState([]);
   const dockRef = useRef(null);
   const iconRefs = useRef([]);
   const animationFrameRef = useRef(undefined);
   const lastMouseMoveTime = useRef(0);
+  const lastTouchTime = useRef(0);
 
   const getResponsiveConfig = useCallback(() => {
     if (typeof window === 'undefined') {
@@ -62,6 +65,20 @@ const MacOSDock = ({
     return () => window.removeEventListener('resize', handleResize);
   }, [getResponsiveConfig]);
 
+  // Detect touch device capability
+  useEffect(() => {
+    const touchCapable = () => {
+      return (
+        typeof window !== 'undefined' && (
+          'ontouchstart' in window ||
+          navigator.maxTouchPoints > 0 ||
+          navigator.msMaxTouchPoints > 0
+        )
+      );
+    };
+    setIsTouchDevice(touchCapable());
+  }, []);
+
   const calculateTargetMagnification = useCallback((mousePosition) => {
     if (mousePosition === null) {
       return apps.map(() => minScale);
@@ -103,9 +120,11 @@ const MacOSDock = ({
   }, [apps, calculatePositions, minScale, config]);
 
   const animateToTarget = useCallback(() => {
-    const targetScales = calculateTargetMagnification(mouseX);
+    // Use touchX on touch devices, mouseX on desktop
+    const activeX = isTouchDevice ? touchX : mouseX;
+    const targetScales = calculateTargetMagnification(activeX);
     const targetPositions = calculatePositions(targetScales);
-    const lerpFactor = mouseX !== null ? 0.2 : 0.12;
+    const lerpFactor = activeX !== null ? 0.2 : 0.12;
 
     setCurrentScales(prevScales => {
       return prevScales.map((currentScale, index) => {
@@ -128,10 +147,10 @@ const MacOSDock = ({
       Math.abs(pos - targetPositions[index]) > 0.1
     );
     
-    if (scalesNeedUpdate || positionsNeedUpdate || mouseX !== null) {
+    if (scalesNeedUpdate || positionsNeedUpdate || activeX !== null) {
       animationFrameRef.current = requestAnimationFrame(animateToTarget);
     }
-  }, [mouseX, calculateTargetMagnification, calculatePositions, currentScales, currentPositions]);
+  }, [mouseX, touchX, calculateTargetMagnification, calculatePositions, currentScales, currentPositions, isTouchDevice]);
 
   useEffect(() => {
     if (animationFrameRef.current) {
@@ -164,6 +183,36 @@ const MacOSDock = ({
 
   const handleMouseLeave = useCallback(() => {
     setMouseX(null);
+  }, []);
+
+  const handleTouchStart = useCallback((e) => {
+    if (dockRef.current && e.touches.length > 0) {
+      const rect = dockRef.current.getBoundingClientRect();
+      const padding = Math.max(8, baseIconSize * 0.12);
+      setTouchX(e.touches[0].clientX - rect.left - padding);
+      lastTouchTime.current = performance.now();
+    }
+  }, [baseIconSize]);
+
+  const handleTouchMove = useCallback((e) => {
+    if (!isTouchDevice || e.touches.length === 0) return;
+    
+    const now = performance.now();
+    if (now - lastTouchTime.current < 16) {
+      return;
+    }
+    
+    lastTouchTime.current = now;
+    
+    if (dockRef.current) {
+      const rect = dockRef.current.getBoundingClientRect();
+      const padding = Math.max(8, baseIconSize * 0.12);
+      setTouchX(e.touches[0].clientX - rect.left - padding);
+    }
+  }, [baseIconSize, isTouchDevice]);
+
+  const handleTouchEnd = useCallback(() => {
+    setTouchX(null);
   }, []);
 
   const createBounceAnimation = (element) => {
