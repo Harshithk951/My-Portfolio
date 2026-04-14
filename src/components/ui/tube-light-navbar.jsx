@@ -25,7 +25,7 @@ export function TubeLightNavbar({ items, className }) {
   return (
     <motion.div
       className={cn(
-        'hidden md:flex fixed md:top-6 inset-x-0 z-[210] h-max pointer-events-none justify-center',
+        'hidden lg:flex fixed lg:top-6 inset-x-0 z-[210] h-max pointer-events-none justify-center',
         className
       )}
       initial={{ opacity: 0, y: -20 }}
