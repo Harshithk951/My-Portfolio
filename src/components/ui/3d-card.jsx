@@ -6,6 +6,7 @@ import React, {
   useContext,
   useRef,
   useCallback,
+  useEffect,
 } from "react";
 
 const MouseEnterContext = createContext([false, () => {}]);
@@ -14,27 +15,44 @@ const MouseEnterContext = createContext([false, () => {}]);
 export const CardContainer = ({ children, className = "", containerClassName = "" }) => {
   const containerRef = useRef(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
+  const [supportsHover, setSupportsHover] = useState(true);
+
+  // Detect if device supports hover (for tablets with touch + mouse capability)
+  useEffect(() => {
+    const checkHoverSupport = () => {
+      if (typeof window === 'undefined') return true;
+      // Check if device supports hover via media query simulation
+      const hasMouse = window.matchMedia('(hover: hover)').matches;
+      setSupportsHover(hasMouse);
+    };
+    
+    checkHoverSupport();
+    window.addEventListener('resize', checkHoverSupport);
+    return () => window.removeEventListener('resize', checkHoverSupport);
+  }, []);
 
   const handleMouseMove = useCallback((e) => {
-    if (!containerRef.current) return;
+    if (!supportsHover || !containerRef.current) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) / 25;
     const y = (e.clientY - top - height / 2) / 25;
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-  }, []);
+  }, [supportsHover]);
 
   const handleMouseEnter = useCallback(() => {
+    if (!supportsHover) return;
     setIsMouseEntered(true);
-  }, []);
+  }, [supportsHover]);
 
   const handleMouseLeave = useCallback(() => {
+    if (!supportsHover) return;
     setIsMouseEntered(false);
     if (containerRef.current) {
       containerRef.current.style.transform =
         "rotateY(0deg) rotateX(0deg)";
     }
-  }, []);
+  }, [supportsHover]);
 
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
