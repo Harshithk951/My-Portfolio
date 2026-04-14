@@ -1,5 +1,5 @@
-/* Disable tilt effects on mobile for better UX */
-@media (max-width: 1023px) {
+/* Disable tilt effects on touch-only devices (no hover capability) */
+@media (hover: none) {
   .tilted-card-figure {
     pointer-events: none !important;
   }
