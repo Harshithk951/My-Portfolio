@@ -13,7 +13,8 @@ const MacOSDock = ({
   const [currentPositions, setCurrentPositions] = useState([]);
   const dockRef = useRef(null);
   const iconRefs = useRef([]);
-  const animationFrameRef = useRef(undefined);
+  const animationFrameRef = useRef(null);
+  const iconCenters = useRef([]);
   const lastMouseMoveTime = useRef(0);
   const lastTouchTime = useRef(0);
 
@@ -85,7 +86,7 @@ const MacOSDock = ({
     }
 
     return apps.map((_, index) => {
-      const normalIconCenter = (index * (baseIconSize + baseSpacing)) + (baseIconSize / 2);
+      const normalIconCenter = iconCenters.current[index] || 0;
       const minX = mousePosition - (effectWidth / 2);
       const maxX = mousePosition + (effectWidth / 2);
       
@@ -117,7 +118,12 @@ const MacOSDock = ({
     const initialPositions = calculatePositions(initialScales);
     setCurrentScales(initialScales);
     setCurrentPositions(initialPositions);
-  }, [apps, calculatePositions, minScale, config]);
+    
+    // Pre-calculate centers for magnification logic
+    iconCenters.current = apps.map((_, index) => 
+      (index * (baseIconSize + baseSpacing)) + (baseIconSize / 2)
+    );
+  }, [apps, calculatePositions, minScale, config, baseIconSize, baseSpacing]);
 
   const animateToTarget = useCallback(() => {
     // Use touchX on touch devices, mouseX on desktop
