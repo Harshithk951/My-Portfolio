@@ -7,7 +7,7 @@ export function cn(...inputs) {
 
 // Global loading flag to prevent scroll during initial load window
 let pageLoadStartTime = null; // Initialize as null, will be set on page load
-const LOAD_PROTECTION_WINDOW = 4000; // 4 seconds
+const LOAD_PROTECTION_WINDOW = 800; // 0.8 seconds (Reduced for better UX)
 
 /**
  * Initialize/reset page load timer on every page load
