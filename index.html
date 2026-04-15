@@ -74,23 +74,39 @@
 
 	<!-- Structured Data (JSON-LD) -->
 
-	<!-- Website Schema -->
+	<!-- Composite Schema (WebSite & Person) -->
 	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org",
-		"@type": "WebSite",
-		"name": "Harshith Kumar Portfolio",
-		"alternateName": "Harshith Portfolio",
-		"url": "https://harshithkumar.in",
-		"author": {
-			"@type": "Person",
-			"name": "Harshith Kumar"
-		},
-		"potentialAction": {
-			"@type": "SearchAction",
-			"target": "https://harshithkumar.in/?q={search_term_string}",
-			"query-input": "required name=search_term_string"
-		}
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": "https://harshithkumar.in/#website",
+				"url": "https://harshithkumar.in",
+				"name": "Harshith Kumar Portfolio",
+				"description": "Portfolio of Harshith Kumar Mannepally — AI/ML Student and Full Stack Developer.",
+				"publisher": { "@id": "https://harshithkumar.in/#person" }
+			},
+			{
+				"@type": "Person",
+				"@id": "https://harshithkumar.in/#person",
+				"name": "Harshith Kumar Mannepally",
+				"alternateName": ["Harshith Kumar", "Harshith", "Harshith Kumar .M"],
+				"url": "https://harshithkumar.in",
+				"image": "https://harshithkumar.in/hero-profile.webp",
+				"jobTitle": "AI-First Full Stack Developer",
+				"description": "B.Tech AI & ML student at Uttaranchal University. Open source contributor at Cal.com, freeCodeCamp, VS Code and Excalidraw.",
+				"sameAs": [
+					"https://www.linkedin.com/in/harshithkumar951",
+					"https://github.com/Harshithk951"
+				],
+				"alumniOf": {
+					"@type": "CollegeOrUniversity",
+					"name": "Uttaranchal University"
+				},
+				"knowsAbout": ["Artificial Intelligence", "Machine Learning", "Full Stack Development", "React", "TypeScript"]
+			}
+		]
 	}
 	</script>
 
@@ -105,41 +121,7 @@
 
 	<div id="root"></div>
 	
-	<!-- Enhanced Person Schema for Google disambiguation -->
-	<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "Person",
-		"name": "Harshith Kumar .M",
-		"alternateName": ["Harshith Kumar", "Harshith"],
-		"url": "https://harshithkumar.in",
-		"image": "https://harshithkumar.in/hero-profile.webp",
-		"jobTitle": "AI-First Full Stack Developer",
-		"description": "B.Tech AI & ML student at Uttaranchal University, Dehradun. Open source contributor at Cal.com, freeCodeCamp, VS Code and Excalidraw.",
-		"sameAs": [
-			"https://www.linkedin.com/in/harshithkumar951",
-			"https://github.com/Harshithk951"
-		],
-		"alumniOf": {
-			"@type": "CollegeOrUniversity",
-			"name": "Uttaranchal University",
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Dehradun",
-				"addressRegion": "Uttarakhand",
-				"addressCountry": "IN"
-			}
-		},
-		"knowsAbout": [
-			"Artificial Intelligence",
-			"Machine Learning",
-			"Full Stack Development",
-			"React",
-			"TypeScript",
-			"Open Source"
-		]
-	}
-	</script>
+
 	
 	<script type="module" src="/src/main.jsx"></script>
 </body>
