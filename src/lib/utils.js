@@ -45,7 +45,7 @@ export function smoothScrollTo(id) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       // Fallback for older browsers (though minimal in modern envs)
-      const top = element.getBoundingClientRect().top + window.pageYOffset;
+      const top = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   }
