@@ -235,7 +235,9 @@ const MacOSDock = ({
     if (iconRefs.current[index]) {
       createBounceAnimation(iconRefs.current[index]);
     }
-    onAppClick(appId);
+    if (onAppClick) {
+      onAppClick(appId);
+    }
   };
 
   const contentWidth = currentPositions.length > 0 
