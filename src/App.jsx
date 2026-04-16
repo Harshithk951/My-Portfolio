@@ -63,7 +63,7 @@ function HomePage() {
       document.body.style.overflow = 'unset';
       window.removeEventListener('pageshow', handlePageShow);
     };
-  }, [isLoading]);
+  }, []);
 
   return (
     <>
