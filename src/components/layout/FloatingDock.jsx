@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { smoothScrollTo } from '@/lib/utils';
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 import MacOSDock from '@/components/ui/mac-os-dock';
 
@@ -20,10 +21,7 @@ const FloatingDock = () => {
     if (app.isExternal) {
       window.open(app.href, '_blank', 'noopener,noreferrer');
     } else {
-      const element = document.querySelector(app.href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      smoothScrollTo(app.href);
     }
   }, []);
 
