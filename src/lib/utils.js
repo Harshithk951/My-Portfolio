@@ -29,7 +29,7 @@ export function isInLoadProtectionWindow() {
 /**
  * Smoothly scrolls to a specific element by ID.
  * Uses native smooth scrolling for best performance.
- * Respects page load window - won't scroll during initial 4 seconds.
+ * Respects page load window - won't scroll during initial 0.8 seconds.
  * @param {string} id - The ID of the element to scroll to (e.g., '#contact').
  */
 export function smoothScrollTo(id) {
