@@ -14,17 +14,16 @@ const Hero = () => {
   const { toast } = useToast();
   const { isMobile, isLowEnd } = useDeviceDetection();
   const [currentWord, setCurrentWord] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   // Adaptive Galaxy settings (optimize ONLY for low-end devices, preserve quality for all others)
   const galaxyConfig = {
-    density: isLowEnd ? 0.3 : 0.6,              // Low-end: 0.3 | All others: 0.6 (desktop quality)
-    glowIntensity: isLowEnd ? 0.05 : 0.2,      // Low-end: 0.05 | All others: 0.2
-    twinkleIntensity: isLowEnd ? 0.05 : 0.15,  // Low-end: 0.05 | All others: 0.15
-    saturation: 0,                              // 0 = White stars on black background (ALL DEVICES)
-    rotationSpeed: isLowEnd ? 0.02 : 0.05,     // Low-end: 0.02 | All others: 0.05
-    starSpeed: isLowEnd ? 0.1 : 0.3,           // Low-end: 0.1 | All others: 0.3
-    speed: isLowEnd ? 0.2 : 0.4,               // Low-end: 0.2 | All others: 0.4
+    density: isLowEnd ? 0.3 : 0.6,
+    glowIntensity: isLowEnd ? 0.05 : 0.2,
+    twinkleIntensity: isLowEnd ? 0.05 : 0.15,
+    saturation: 0,
+    rotationSpeed: isLowEnd ? 0.02 : 0.05,
+    starSpeed: isLowEnd ? 0.1 : 0.3,
+    speed: isLowEnd ? 0.2 : 0.4,
   };
 
   useEffect(() => {
@@ -34,18 +33,9 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const handleDownloadCV = async () => {
     sendAnalyticsEvent('resume_download');
     try {
-      // Verify file exists before attempting download
       const res = await fetch('/cv.pdf', { method: 'HEAD' });
       if (!res.ok) {
         toast({
@@ -82,7 +72,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f] px-4 sm:px-6 lg:px-8">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b0b0b] px-4 sm:px-6 lg:px-8">
       {/* Galaxy Background - WebGL-based starfield animation (adaptive for device) */}
       <Galaxy
         className="absolute inset-0 pointer-events-none z-0"
@@ -185,15 +175,15 @@ const Hero = () => {
             {/* Responsive container for profile image */}
             <div className="mobile-bounce-image w-[240px] h-[360px] sm:w-[260px] sm:h-[390px] md:w-[320px] md:h-[480px] lg:w-[380px] lg:h-[580px]">
               <TiltedCard
-                imageSrc="/hero-profile-624w.jpg"
+                imageSrc="/hero-profile-624w.webp"
                 altText="Harshith Kumar - Full Stack Developer professional headshot"
                 captionText="Harshith Kumar - Full Stack Developer"
                 containerHeight="100%"
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
-                rotateAmplitude={isDesktop ? 14 : 0}
-                scaleOnHover={isDesktop ? 1.1 : 1}
+                rotateAmplitude={!isMobile ? 14 : 0}
+                scaleOnHover={!isMobile ? 1.1 : 1}
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
