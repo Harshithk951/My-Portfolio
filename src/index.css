@@ -17,7 +17,7 @@
 
 body {
   font-family: 'Roboto Flex', sans-serif;
-  background-color: #0b0b0b;  /* ← New color */
+  background-color: #0b0b0b;
   color: #ffffff;
   overflow-x: hidden;
   position: relative;
@@ -120,23 +120,15 @@ body::after {
 
 .glow-card.glow-blue {
   --glow-color: var(--glow-blue);
-}
-
-/* 
+}/* 
   Glassmorphism Pattern for macOS Sonoma Aesthetic
-  Applied via scoped selectors (.journey-grid, .services-grid, .cta-grid)
-  to prevent style leakage to other components like Projects section.
-  
   Key features:
   - Gradient background with subtle white opacity (6% → 2% → 5%)
-  - 60px blur + 180% saturation + 1.15 brightness for depth
-  - Multi-layer shadow: ambient shadow + inset highlights
-  - Specular highlight gradient in ::before pseudo-element
-  - Each section grid has isolated CSS rules for maintainability
+  - Multi-layer blur + saturation for depth
+  - Ambient shadow + inset highlights
 */
 
-/* Scoped glassmorphism styles for My Journey section */
-.journey-grid .glow-card {
+.glass-card-premium {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.06) 0%,
@@ -155,9 +147,10 @@ body::after {
   will-change: background-color, border-color;
   backface-visibility: hidden;
   contain: layout style paint;
+  position: relative;
 }
 
-.journey-grid .glow-card::before {
+.glass-card-premium::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -170,72 +163,18 @@ body::after {
   border-radius: inherit;
 }
 
-/* Tablet optimization (768px - 1024px) - reduce blur */
-@media (max-width: 1024px) {
-  .journey-grid .glow-card {
-    backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
-    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
-  }
-}
-
-/* Mobile optimization (under 768px) - further reduce blur and shadows */
-@media (max-width: 768px) {
-  .journey-grid .glow-card {
-    backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      inset 0 0.5px 0 rgba(255, 255, 255, 0.1);
-  }
-}
-
-/* Small devices optimization (under 480px) - minimal blur */
-@media (max-width: 480px) {
-  .journey-grid .glow-card {
-    backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
-    -webkit-backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* Scoped glassmorphism for Services section */
-.services-grid .glow-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
-  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
-  /* GPU acceleration and performance optimization */
-  transform: translateZ(0);
-  will-change: background-color, border-color;
-  backface-visibility: hidden;
-  contain: layout style paint;
-}
-
-.services-grid .glow-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-  border-radius: inherit;
+/* Scoped inclusion for specific grids */
+.journey-grid .glow-card,
+.services-grid .glow-card,
+.cta-grid .glow-card {
+  @apply glass-card-premium;
 }
 
 /* Tablet optimization (768px - 1024px) */
 @media (max-width: 1024px) {
-  .services-grid .glow-card {
+  .journey-grid .glow-card,
+  .services-grid .glow-card,
+  .cta-grid .glow-card {
     backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
     -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
   }
@@ -243,7 +182,9 @@ body::after {
 
 /* Mobile optimization (under 768px) */
 @media (max-width: 768px) {
-  .services-grid .glow-card {
+  .journey-grid .glow-card,
+  .services-grid .glow-card,
+  .cta-grid .glow-card {
     backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
     -webkit-backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
     box-shadow:
@@ -254,64 +195,12 @@ body::after {
 
 /* Small devices optimization (under 480px) */
 @media (max-width: 480px) {
-  .services-grid .glow-card {
+  .journey-grid .glow-card,
+  .services-grid .glow-card,
+  .cta-grid .glow-card {
     backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
     -webkit-backdrop-filter: blur(12px) saturate(150%) brightness(1.05);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* Scoped glassmorphism for CTA section */
-.cta-grid .glow-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
-  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
-  /* GPU acceleration and performance optimization */
-  transform: translateZ(0);
-  will-change: background-color, border-color;
-  backface-visibility: hidden;
-  contain: layout style paint;
-}
-
-.cta-grid .glow-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-/* Tablet optimization (768px - 1024px) */
-@media (max-width: 1024px) {
-  .cta-grid .glow-card {
-    backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
-    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.15);
-  }
-}
-
-/* Mobile optimization (under 768px) */
-@media (max-width: 768px) {
-  .cta-grid .glow-card {
-    backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(160%) brightness(1.1);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.3),
-      inset 0 0.5px 0 rgba(255, 255, 255, 0.1);
   }
 }
 
