@@ -127,6 +127,15 @@ Open `http://localhost:3000` in your browser.
 
 ---
 
+## 🚀 Recent Optimizations (April 2026)
+
+*   **SEO Refinement**: Optimized meta tags and automated sitemap updates.
+*   **Performance**: Migrated hero assets to WebP and optimized WebGL Galaxy background.
+*   **Code Quality**: Refactored glassmorphism styles into a centralized global utility class.
+*   **Accessibility**: Enhanced ARIA coverage for navigation components.
+
+---
+
 ## 🔧 Customization Guide
 
 * **Content** → `src/components/Hero.jsx`, `AboutBento.jsx`
