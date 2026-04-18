@@ -102,7 +102,8 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
           <button
             onClick={() => handleGitHub(project.repoUrl)}
             className="p-2.5 hover:bg-white/10 rounded-full transition-colors text-white"
-            aria-label={`View ${project.title} on GitHub`}
+            aria-label={`View ${project.title} source code on GitHub`}
+            title={`View ${project.title} on GitHub`}
           >
             <Github size={18} />
           </button>
@@ -133,7 +134,7 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
         {project.description}
       </p>
 
-      <div className="flex flex-wrap gap-2 mt-auto">
+      <div className="flex flex-wrap gap-2 mt-auto" aria-label="Technologies used">
         {project.tech.map((tag, i) => (
           <span
             key={i}
