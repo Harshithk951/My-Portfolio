@@ -51,6 +51,12 @@ const Footer = () => {
             Back to Top <ArrowUp size={16} />
           </button>
         </div>
+
+        <div className="mt-8 pt-8 border-t border-white/5 text-center">
+          <p className="text-white/40 text-[10px] sm:text-xs tracking-widest uppercase font-medium">
+            © {new Date().getFullYear()} Harshith Kumar Mannepally • Built with Passion & Code
+          </p>
+        </div>
       </div>
     </footer>
   );
