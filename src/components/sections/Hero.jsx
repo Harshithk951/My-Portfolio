@@ -113,7 +113,7 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-[2.75rem] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter text-white leading-[0.95] sm:leading-[0.9]">
               Hey, I'm <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500">
                 Harshith
