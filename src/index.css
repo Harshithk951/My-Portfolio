@@ -323,3 +323,43 @@ img.loaded {
     opacity: 1;
   }
 }
+
+/* Global Reduced Motion Support */
+body.reduce-motion,
+main.reduce-motion {
+  scroll-behavior: auto;
+}
+
+/* Disable all animations and transitions when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure interactive elements remain functional */
+  button, a, input, select, textarea {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Keep opacity changes instant */
+  [style*="opacity"] {
+    transition: opacity 0.01ms !important;
+  }
+
+  /* Disable transform animations (rotate, scale, translate, etc.) */
+  .glow-card,
+  .glass-card-premium,
+  [class*="card"],
+  [class*="hover"],
+  .project-carousel-track,
+  .marquee {
+    transform: none !important;
+    animation: none !important;
+  }
+}

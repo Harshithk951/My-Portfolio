@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { initializePageLoadTimer } from '@/lib/utils';
+import { initializePageLoadTimer, prefersReducedMotion } from '@/lib/utils';
 
 import LoadingAnimation from '@/components/shared/LoadingAnimation';
 import Navbar from '@/components/layout/Navbar';
@@ -22,6 +22,19 @@ const Footer = lazy(() => import('@/components/layout/Footer'));
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [heroReady, setHeroReady] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    // Detect if user prefers reduced motion
+    setReduceMotion(prefersReducedMotion());
+
+    // Listen for changes to prefers-reduced-motion
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (e) => setReduceMotion(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   useEffect(() => {
     // Reset scroll to top on mount
@@ -37,6 +50,10 @@ function HomePage() {
       document.body.style.overflow = 'unset';
     }
 
+    // Adjust loading time based on motion preference
+    const loadDuration = reduceMotion ? 300 : 600;
+    const heroDelay = reduceMotion ? 0 : 150;
+
     // Simulate loading time to show the initial animation
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -44,8 +61,12 @@ function HomePage() {
       document.body.style.overflow = 'unset';
       
       // Delay Hero render to ensure smooth transition
-      setTimeout(() => setHeroReady(true), 150);
-    }, 600); // 600ms is a nice balance for the start animation
+      if (!reduceMotion) {
+        setTimeout(() => setHeroReady(true), heroDelay);
+      } else {
+        setHeroReady(true);
+      }
+    }, loadDuration);
 
     // Handle back/forward cache restoration
     const handlePageShow = (event) => {
@@ -53,6 +74,7 @@ function HomePage() {
         setIsLoading(false);
         document.body.style.overflow = 'unset';
         window.scrollTo(0, 0);
+        setHeroReady(true);
       }
     };
 
@@ -63,7 +85,7 @@ function HomePage() {
       document.body.style.overflow = 'unset';
       window.removeEventListener('pageshow', handlePageShow);
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <>
@@ -73,7 +95,7 @@ function HomePage() {
       </AnimatePresence>
 
       {!isLoading && (
-        <main className="smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b]">
+        <main className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
           <Navbar />
           <MobileMenu />
           {heroReady && <Hero />}

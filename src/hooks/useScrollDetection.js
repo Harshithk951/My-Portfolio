@@ -1,9 +1,28 @@
 import { useState, useEffect } from 'react';
+import { prefersReducedMotion } from '@/lib/utils';
 
+/**
+ * useScrollDetection Hook
+ * 
+ * Detects if Hero section is in viewport
+ * Respects prefers-reduced-motion user preference
+ * 
+ * @returns {boolean} True if Hero section is visible in viewport
+ * 
+ * @example
+ * const isHeroVisible = useScrollDetection();
+ */
 export const useScrollDetection = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
+  const [reduceMotion] = useState(() => prefersReducedMotion());
 
   useEffect(() => {
+    // If user prefers reduced motion, skip intersection observation
+    if (reduceMotion) {
+      setIsHeroVisible(true);
+      return;
+    }
+
     let observer = null;
     let timeoutId = null;
 
@@ -43,7 +62,7 @@ export const useScrollDetection = () => {
         observer.disconnect();
       }
     };
-  }, []);
+  }, [reduceMotion]);
 
   return isHeroVisible;
 };
