@@ -45,6 +45,3 @@ export const useDeviceDetection = () => {
 
   return deviceInfo;
 };
-
-  return deviceInfo;
-};
