@@ -89,13 +89,19 @@ function HomePage() {
 
   return (
     <>
+      <a 
+        href="#main-content" 
+        className="fixed top-0 left-0 -translate-y-full focus:translate-y-0 z-[999] bg-white text-black px-4 py-2 font-medium transition-transform duration-200"
+      >
+        Skip to main content
+      </a>
 
       <AnimatePresence mode="wait">
         {isLoading && <LoadingAnimation />}
       </AnimatePresence>
 
       {!isLoading && (
-        <main className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
+        <main id="main-content" className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
           <Navbar />
           <MobileMenu />
           {heroReady && <Hero />}
