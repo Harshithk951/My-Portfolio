@@ -1,5 +1,6 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { useEffect, useRef } from 'react';
+import { detectDeviceCapabilities } from '@/lib/utils';
 
 const vertexShader = `
 attribute vec2 uv;
@@ -170,17 +171,8 @@ void main() {
 `;
 
 // Detect device capabilities for performance optimization
-const detectDeviceCapabilities = () => {
-  if (typeof window === 'undefined') {
-    return { isLowEnd: false, isMobile: false, deviceMemory: 4 };
-  }
-
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const deviceMemory = navigator.deviceMemory || 4;
-  const isSlow = navigator.connection?.effectiveType === '3g' || navigator.connection?.effectiveType === '4g';
-  const isLowEnd = isMobile && (deviceMemory <= 2 || isSlow);
-
-  return { isLowEnd, isMobile, deviceMemory };
+const detectDeviceCapabilitiesLocal = () => {
+  return detectDeviceCapabilities();
 };
 
 export default function Galaxy({
@@ -213,7 +205,7 @@ export default function Galaxy({
     const ctn = ctnDom.current;
 
     // Detect device capabilities
-    const { isLowEnd, isMobile } = detectDeviceCapabilities();
+    const { isLowEnd, isMobile } = detectDeviceCapabilitiesLocal();
 
     // Skip Galaxy initialization on mobile to prevent scroll jank/bounce
     if (isMobile) {

@@ -1,13 +1,97 @@
 import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+// ─────────────────────────────────────────────────────────────────────
+// Class Name Utilities
+// ─────────────────────────────────────────────────────────────────────
+
 export function cn(...inputs) {
   return twMerge(clsx(inputs))
 }
 
-// Global loading flag to prevent scroll during initial load window
-let pageLoadStartTime = null; // Initialize as null, will be set on page load
-const LOAD_PROTECTION_WINDOW = 800; // 0.8 seconds (Reduced for better UX)
+// ─────────────────────────────────────────────────────────────────────
+// Device Detection Utilities (Centralized)
+// ─────────────────────────────────────────────────────────────────────
+
+/**
+ * Detect device capabilities for performance optimization
+ * Called once on app mount; memoize result in components
+ * 
+ * @returns {Object} Device info object with properties:
+ *   - isMobile: boolean
+ *   - isTablet: boolean
+ *   - isLowEnd: boolean (mobile with ≤2GB RAM or slow connection)
+ *   - hasTouch: boolean
+ *   - pixelRatio: number (1-2, capped for performance)
+ *   - networkType: string ('4g', '3g', 'slow-2g', 'unknown')
+ */
+export function detectDeviceCapabilities() {
+  if (typeof window === 'undefined') {
+    return {
+      isMobile: false,
+      isTablet: false,
+      isLowEnd: false,
+      hasTouch: false,
+      pixelRatio: 1,
+      networkType: 'unknown',
+    };
+  }
+
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+  const isTablet = /iPad|Android|Windows Phone/.test(navigator.userAgent);
+  
+  const hasTouch = () => {
+    return (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  };
+
+  const deviceMemory = navigator.deviceMemory || 4;
+  const networkType = navigator.connection?.effectiveType || 'unknown';
+  const isSlow = networkType === '3g' || networkType === '4g';
+  const isLowEnd = isMobile && (deviceMemory <= 2 || isSlow);
+
+  return {
+    isMobile,
+    isTablet,
+    isLowEnd,
+    hasTouch: hasTouch(),
+    pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+    networkType,
+  };
+}
+
+/**
+ * Check if browser prefers reduced motion
+ * Used for respecting user's motion preferences
+ * 
+ * @returns {boolean} True if prefers-reduced-motion is set
+ */
+export function prefersReducedMotion() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Check if device supports hover (excludes touch-only devices)
+ * 
+ * @returns {boolean} True if device can hover
+ */
+export function supportsHover() {
+  if (typeof window === 'undefined') return true;
+  return window.matchMedia('(hover: hover)').matches;
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Page Load Protection Window
+// ─────────────────────────────────────────────────────────────────────
+
+let pageLoadStartTime = null;
+const LOAD_PROTECTION_WINDOW = 800; // 0.8 seconds
 
 /**
  * Initialize/reset page load timer on every page load
@@ -21,10 +105,14 @@ export function initializePageLoadTimer() {
  * Check if we're within the protection window
  */
 export function isInLoadProtectionWindow() {
-  if (!pageLoadStartTime) return true; // Default to protected if not initialized
+  if (!pageLoadStartTime) return true;
   const elapsed = Date.now() - pageLoadStartTime;
   return elapsed < LOAD_PROTECTION_WINDOW;
 }
+
+// ─────────────────────────────────────────────────────────────────────
+// Scroll Utilities
+// ─────────────────────────────────────────────────────────────────────
 
 /**
  * Smoothly scrolls to a specific element by ID.
@@ -44,7 +132,7 @@ export function smoothScrollTo(id) {
     if ('scrollBehavior' in document.documentElement.style) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      // Fallback for older browsers (though minimal in modern envs)
+      // Fallback for older browsers
       const top = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top, behavior: 'smooth' });
     }

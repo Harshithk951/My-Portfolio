@@ -1,12 +1,9 @@
 import { useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { SPRING_SMOOTH } from '@/lib/animationConfig';
 import './tilted-card.css';
 
-const springValues = {
-  damping: 40,
-  stiffness: 80,
-  mass: 2.5
-};
+const springValues = SPRING_SMOOTH;
 
 export default function TiltedCard({
   imageSrc,

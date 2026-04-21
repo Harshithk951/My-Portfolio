@@ -1,4 +1,28 @@
 import { useState, useEffect } from 'react';
+import { detectDeviceCapabilities } from '@/lib/utils';
+
+/**
+ * useDeviceDetection Hook
+ * 
+ * Detects device capabilities and caches result for performance.
+ * Device detection is expensive, so result is cached on first call.
+ * 
+ * @returns {Object} Device info with properties:
+ *   - isMobile: boolean
+ *   - isTablet: boolean
+ *   - isLowEnd: boolean (mobile with ≤2GB RAM or slow connection)
+ *   - hasTouch: boolean
+ *   - pixelRatio: number (1-2)
+ *   - networkType: string ('4g', '3g', 'slow-2g', 'unknown')
+ * 
+ * @example
+ * const { isMobile, isLowEnd } = useDeviceDetection();
+ * 
+ * if (isLowEnd) {
+ *   // Reduce animations and effects
+ * }
+ */
+let deviceCapabilitiesCache = null;
 
 export const useDeviceDetection = () => {
   const [deviceInfo, setDeviceInfo] = useState({
@@ -11,32 +35,16 @@ export const useDeviceDetection = () => {
   });
 
   useEffect(() => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-    const isTablet = /iPad|Android|Windows Phone/.test(navigator.userAgent);
-    const hasTouch = () => {
-      return (
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      );
-    };
-
-    const deviceMemory = navigator.deviceMemory || 4;
-    const networkType = navigator.connection?.effectiveType || 'unknown';
-    const isSlow = networkType === '3g' || networkType === '4g';
-    const isLowEnd = isMobile && (deviceMemory <= 2 || isSlow);
-
-    setDeviceInfo({
-      isMobile,
-      isTablet,
-      isLowEnd,
-      hasTouch: hasTouch(),
-      pixelRatio: Math.min(window.devicePixelRatio, 2),
-      networkType,
-    });
+    // Use cached result if available (avoid recomputing)
+    if (deviceCapabilitiesCache === null) {
+      deviceCapabilitiesCache = detectDeviceCapabilities();
+    }
+    
+    setDeviceInfo(deviceCapabilitiesCache);
   }, []);
+
+  return deviceInfo;
+};
 
   return deviceInfo;
 };
