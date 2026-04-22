@@ -11,7 +11,8 @@ export function sendAnalyticsEvent(eventName, payload = {}) {
 }
 
 /**
- * Send Web Vitals to analytics
+ * Send Web Vitals to analytics and store in performance dashboard
+ * Also dispatches custom event for real-time dashboard updates
  */
 export function sendToAnalytics({ id, name, value, delta }) {
   sendAnalyticsEvent('web_vitals', {
@@ -21,6 +22,33 @@ export function sendToAnalytics({ id, name, value, delta }) {
     event_label: id,
     non_interaction: true,
   });
+
+  // Store metrics for performance dashboard
+  if (typeof window !== 'undefined') {
+    window.__PERF_METRICS__ = window.__PERF_METRICS__ || {};
+    
+    // Determine unit based on metric type
+    let unit = 'ms';
+    if (name === 'CLS') unit = '';
+    
+    window.__PERF_METRICS__[name] = {
+      value: typeof value === 'number' ? value : delta || value,
+      unit,
+      timestamp: Date.now(),
+      id,
+    };
+
+    // Dispatch custom event for dashboard real-time updates
+    const event = new CustomEvent('perf-metric-update', {
+      detail: window.__PERF_METRICS__,
+    });
+    window.dispatchEvent(event);
+
+    // Log to console in dev mode
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Web Vitals] ${name}: ${value.toFixed(2)}${unit}`, { id, delta });
+    }
+  }
 }
 
 /**

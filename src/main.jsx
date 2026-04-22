@@ -10,11 +10,20 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
+// Initialize performance monitoring
+reportWebVitals(sendToAnalytics);
+
+// Store performance start mark for later calculations
+if (window.performance && window.performance.mark) {
+  window.performance.mark('app-init-start');
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <App />
+  <App />
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(sendToAnalytics);
+// Mark when React finishes rendering
+if (window.performance && window.performance.mark) {
+  window.performance.mark('app-init-end');
+  window.performance.measure('app-init', 'app-init-start', 'app-init-end');
+}

@@ -9,6 +9,7 @@ import FloatingDock from '@/components/layout/FloatingDock';
 import MobileMenu from '@/components/layout/MobileMenu';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
+import PerformanceDashboard from '@/components/shared/PerformanceDashboard';
 import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load below-the-fold components
@@ -23,6 +24,24 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [heroReady, setHeroReady] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [showPerformance, setShowPerformance] = useState(false);
+
+  // Check for perf=1 URL parameter on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('perf') === '1') {
+      setShowPerformance(true);
+    }
+
+    // Listen for URL changes
+    const handlePopState = () => {
+      const newParams = new URLSearchParams(window.location.search);
+      setShowPerformance(newParams.get('perf') === '1');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     // Detect if user prefers reduced motion
@@ -120,6 +139,13 @@ function HomePage() {
           <FloatingDock />
         </main>
       )}
+
+      {/* Performance Dashboard */}
+      <AnimatePresence>
+        {showPerformance && (
+          <PerformanceDashboard onClose={() => setShowPerformance(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
