@@ -61,14 +61,19 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
+	<!-- Preload critical fonts with font-display: swap for fast text rendering -->
+	<!-- Geist Variable Font (primary font) -->
+	<link rel="preload" as="font" href="/fonts/geist-variable.woff2" type="font/woff2" crossorigin>
+	
+	<!-- Google Fonts with display=swap strategy (non-blocking) -->
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap" media="print">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap" media="(prefers-color-scheme: dark)">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap" media="(prefers-color-scheme: light)" onload="this.media='all'">
+	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap"></noscript>
+
 	<!-- Preload LCP hero image (WebP with JPEG fallback) -->
 	<link rel="preload" as="image" href="/hero-profile-624w.webp" type="image/webp" fetchpriority="high">
 	<link rel="preload" as="image" href="/preview.png" fetchpriority="high">
-
-	<!-- Google Fonts — loaded non-render-blocking -->
-	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap" media="print" onload="this.media='all'">
-	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap"></noscript>
 
 	<!-- Structured Data (JSON-LD) -->
 

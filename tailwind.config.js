@@ -4,6 +4,26 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx}',
   ],
+  safelist: [
+    // Dynamic color classes that might not be caught by content scanner
+    'bg-white/5',
+    'bg-white/10',
+    'border-white/10',
+    'border-white/15',
+    'text-white/50',
+    'text-white/60',
+    'text-white/70',
+    'hover:bg-white/10',
+    'hover:text-white',
+    // Animation timing classes
+    'duration-200',
+    'duration-300',
+    'duration-500',
+    'duration-1000',
+    'delay-0',
+    'delay-100',
+    'delay-200',
+  ],
   theme: {
     container: {
       center: true,

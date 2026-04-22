@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────
+   FONT OPTIMIZATION
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Import Geist Variable Font with swap strategy */
+@font-face {
+  font-family: 'Geist Variable';
+  src: url('/fonts/geist-variable.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ROOT & CRITICAL STYLES
+   ───────────────────────────────────────────────────────────────────── */
+
 :root {
   --glow-pink: #FF1493;
   --glow-yellow: #FFD700;
@@ -21,10 +38,12 @@ body {
   color: #ffffff;
   overflow-x: hidden;
   position: relative;
-  /* Performance optimizations for 120fps */
+  /* Performance optimizations for 120fps rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* CSS containment for paint optimization */
+  contain: layout style paint;
 }
 
 body::before {
