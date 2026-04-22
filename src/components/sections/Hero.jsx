@@ -114,7 +114,11 @@ const Hero = memo(() => {
               </span>
             </h1>
 
-            <div className="text-base xs:text-lg sm:text-2xl md:text-3xl text-white/60 font-light flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <div 
+              className="text-base xs:text-lg sm:text-2xl md:text-3xl text-white/60 font-light flex flex-wrap items-center justify-center lg:justify-start gap-2"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               <span>I am a guy who</span>
               <span className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white text-black font-bold text-base sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                 <motion.span

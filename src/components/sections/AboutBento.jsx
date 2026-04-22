@@ -51,31 +51,31 @@ const AboutBento = () => {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 relative bg-black/50 backdrop-blur-xl">
+    <section id="about" ref={sectionRef} className="py-20 relative bg-black/50 backdrop-blur-xl" aria-labelledby="about-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
+          <h2 id="about-title" className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             My Journey
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto rounded-full" aria-hidden="true" />
         </div>
 
         <div className="journey-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {cards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <div
+              <article
                 key={index}
                 className={`glow-card ${card.color} p-6 sm:p-7 md:p-8 flex flex-col justify-start group h-full hover:-translate-y-2 transition-transform duration-300`}
               >
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors" aria-hidden="true">
                   <Icon size={24} className="text-white" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 text-white">{card.title}</h3>
                 <p className="text-white/70 font-light leading-relaxed">
                   {card.description}
                 </p>
-              </div>
+              </article>
             );
           })}
         </div>

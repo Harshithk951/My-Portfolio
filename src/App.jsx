@@ -10,6 +10,7 @@ import MobileMenu from '@/components/layout/MobileMenu';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import PerformanceDashboard from '@/components/shared/PerformanceDashboard';
+import SEOHead from '@/components/shared/SEOHead';
 import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load below-the-fold components
@@ -108,6 +109,15 @@ function HomePage() {
 
   return (
     <>
+      <SEOHead 
+        title="Harshith Kumar | AI-First Full Stack Developer"
+        description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
+        keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation"
+        ogImage="https://harshithkumar.in/preview.png"
+        ogUrl="https://harshithkumar.in/"
+        twitterHandle="@harshithk951"
+        canonical="https://harshithkumar.in/"
+      />
       <a 
         href="#main-content" 
         className="fixed top-0 left-0 -translate-y-full focus:translate-y-0 z-[999] bg-white text-black px-4 py-2 font-medium transition-transform duration-200"

@@ -46,10 +46,10 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-20 relative bg-black/50 backdrop-blur-xl">
+    <section id="services" className="py-20 relative bg-black/50 backdrop-blur-xl" aria-labelledby="services-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
+          <h2 id="services-title" className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
             What I Build
           </h2>
           <p className="text-xl text-white/60 font-light">
@@ -61,19 +61,20 @@ const ServicesSection = () => {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
+              <article
                 key={index}
                 className={`glow-card ${service.color} p-6 sm:p-7 md:p-8 group hover:-translate-y-1 transition-transform duration-300`}
               >
                 <div className="flex items-start justify-between mb-6">
-                  <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
                     <Icon size={32} className="text-white" />
                   </div>
                   <button
                     onClick={handleLearnMore}
                     className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors"
+                    aria-label={`Learn more about ${service.title}`}
                   >
-                    Learn more <ArrowRight size={16} />
+                    Learn more <ArrowRight size={16} aria-hidden="true" />
                   </button>
                 </div>
 
@@ -82,17 +83,18 @@ const ServicesSection = () => {
                   {service.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" role="list">
                   {service.tags.map((tag, i) => (
                     <span
                       key={i}
                       className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80"
+                      role="listitem"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

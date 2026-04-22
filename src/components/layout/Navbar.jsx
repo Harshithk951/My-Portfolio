@@ -11,7 +11,11 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact', icon: Mail },
   ];
 
-  return <TubeLightNavbar items={navItems} />;
+  return (
+    <nav aria-label="Main Navigation">
+      <TubeLightNavbar items={navItems} />
+    </nav>
+  );
 };
 
 export default Navbar;

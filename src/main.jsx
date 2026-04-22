@@ -25,5 +25,21 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // Mark when React finishes rendering
 if (window.performance && window.performance.mark) {
   window.performance.mark('app-init-end');
+}
+
+// Register service worker for offline support and faster loads
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered: ', registration);
+      })
+      .catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
+if (window.performance && window.performance.mark) {
+  window.performance.mark('app-init-end');
   window.performance.measure('app-init', 'app-init-start', 'app-init-end');
 }
