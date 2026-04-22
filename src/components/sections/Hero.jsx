@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
@@ -6,17 +6,18 @@ import { smoothScrollTo } from '@/lib/utils';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { useDeviceDetection } from '@/hooks/useDeviceDetection';
+import { useWordCycle } from '@/hooks/useWordCycle';
 import Galaxy from '@/components/shared/Galaxy';
 
 const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
-const Hero = () => {
+const Hero = memo(() => {
   const { toast } = useToast();
   const { isMobile, isLowEnd } = useDeviceDetection();
-  const [currentWord, setCurrentWord] = useState(0);
+  const currentWord = useWordCycle(WORDS, 2000);
 
-  // Adaptive Galaxy settings (optimize ONLY for low-end devices, preserve quality for all others)
-  const galaxyConfig = {
+  // Memoize Galaxy settings to prevent recalculation on every render
+  const galaxyConfig = useMemo(() => ({
     density: isLowEnd ? 0.3 : 0.6,
     glowIntensity: isLowEnd ? 0.05 : 0.2,
     twinkleIntensity: isLowEnd ? 0.05 : 0.15,
@@ -24,14 +25,7 @@ const Hero = () => {
     rotationSpeed: isLowEnd ? 0.02 : 0.05,
     starSpeed: isLowEnd ? 0.1 : 0.3,
     speed: isLowEnd ? 0.2 : 0.4,
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % WORDS.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+  }), [isLowEnd]);
 
   const handleDownloadCV = async () => {
     sendAnalyticsEvent('resume_download');
@@ -202,6 +196,8 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

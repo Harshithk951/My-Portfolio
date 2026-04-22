@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { Menu, X, Home, User, Briefcase, Code, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { smoothScrollTo } from '@/lib/utils';
 
-const MobileMenu = () => {
+const MobileMenu = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
@@ -20,8 +20,8 @@ const MobileMenu = () => {
   }, []);
 
   const toggleMenu = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+    setIsOpen(prev => !prev);
+  }, []);
 
   return (
     <div className="fixed top-6 right-6 z-40 md:hidden">
@@ -90,6 +90,8 @@ const MobileMenu = () => {
       </AnimatePresence>
     </div>
   );
-};
+});
+
+MobileMenu.displayName = 'MobileMenu';
 
 export default MobileMenu;

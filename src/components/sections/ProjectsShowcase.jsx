@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
 import { sendAnalyticsEvent } from '@/lib/analytics';
@@ -151,7 +151,7 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
 ProjectCard.displayName = 'ProjectCard';
 
 // ── Main Component ────────────────────────────────────────────────────
-const ProjectsShowcase = () => {
+const ProjectsShowcase = memo(() => {
   const handleGitHub = useCallback((repoUrl) => {
     sendAnalyticsEvent('github_click', { url: repoUrl });
     window.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
@@ -224,6 +224,8 @@ const ProjectsShowcase = () => {
       </div>
     </section>
   );
-};
+});
+
+ProjectsShowcase.displayName = 'ProjectsShowcase';
 
 export default ProjectsShowcase;

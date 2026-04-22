@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { smoothScrollTo } from '@/lib/utils';
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 import MacOSDock from '@/components/ui/mac-os-dock';
 
-const FloatingDock = () => {
+const FloatingDock = memo(() => {
   const dockItems = [
     { id: 'home', name: 'Home', icon: Home, href: '#home' },
     { id: 'about', name: 'About', icon: User, href: '#about' },
@@ -36,6 +36,8 @@ const FloatingDock = () => {
       </div>
     </div>
   );
-};
+});
+
+FloatingDock.displayName = 'FloatingDock';
 
 export default FloatingDock;
