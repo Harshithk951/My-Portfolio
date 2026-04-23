@@ -26,7 +26,7 @@ const FloatingDock = memo(() => {
   }, []);
 
   return (
-    <div className="hidden lg:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+    <nav aria-label="Quick Navigation Dock" className="hidden lg:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
       <div className="pointer-events-auto">
         <MacOSDock 
           apps={dockItems}
@@ -34,7 +34,7 @@ const FloatingDock = memo(() => {
           openApps={[]}
         />
       </div>
-    </div>
+    </nav>
   );
 });
 

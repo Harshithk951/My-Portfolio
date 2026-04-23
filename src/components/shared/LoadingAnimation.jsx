@@ -55,6 +55,11 @@ const LoadingAnimation = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.3 }}
         className="mt-8 flex flex-col items-center gap-4"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={percent}
+        aria-label="Loading portfolio"
       >
         {/* Progress bar */}
         <div className="w-48 sm:w-64 h-[3px] bg-white/10 rounded-full overflow-hidden">
