@@ -76,15 +76,7 @@ export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/**
- * Check if device supports hover (excludes touch-only devices)
- * 
- * @returns {boolean} True if device can hover
- */
-export function supportsHover() {
-  if (typeof window === 'undefined') return true;
-  return window.matchMedia('(hover: hover)').matches;
-}
+
 
 // ─────────────────────────────────────────────────────────────────────
 // Page Load Protection Window
@@ -104,7 +96,7 @@ export function initializePageLoadTimer() {
 /**
  * Check if we're within the protection window
  */
-export function isInLoadProtectionWindow() {
+function isInLoadProtectionWindow() {
   if (!pageLoadStartTime) return true;
   const elapsed = Date.now() - pageLoadStartTime;
   return elapsed < LOAD_PROTECTION_WINDOW;
