@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
+import { useDeviceInfo } from "@/hooks/useDeviceContext";
 
 /**
  * IconCloud – interactive 3D tag-cloud rendered on <canvas>.
@@ -34,7 +34,7 @@ function isMobile() {
 // ── Component ────────────────────────────────────────────────────────
 
 export function IconCloud({ images = [], className }) {
-  const { isLowEnd } = useDeviceDetection();
+  const { isLowEnd } = useDeviceInfo();
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const imgsRef = useRef([]);

@@ -4,9 +4,9 @@ import { ArrowRight, Download } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
 import { ANIMATION_PRESETS } from '@/lib/animationConfig';
+import { useDeviceInfo } from '@/hooks/useDeviceContext';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
-import { useDeviceDetection } from '@/hooks/useDeviceDetection';
 import { useWordCycle } from '@/hooks/useWordCycle';
 import Galaxy from '@/components/shared/Galaxy';
 
@@ -14,7 +14,7 @@ const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
 
 const Hero = memo(() => {
   const { toast } = useToast();
-  const { isMobile, isLowEnd } = useDeviceDetection();
+  const { isMobile, isLowEnd } = useDeviceInfo();
   const currentWord = useWordCycle(WORDS, 2000);
 
   // Memoize Galaxy settings to prevent recalculation on every render

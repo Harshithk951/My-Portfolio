@@ -1,6 +1,7 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { initializePageLoadTimer, prefersReducedMotion } from '@/lib/utils';
+import { initializePageLoadTimer, prefersReducedMotion, detectDeviceCapabilities } from '@/lib/utils';
+import { DeviceContext } from '@/hooks/useDeviceContext';
 
 import LoadingAnimation from '@/components/shared/LoadingAnimation';
 import Navbar from '@/components/layout/Navbar';
@@ -28,6 +29,10 @@ function HomePage() {
   const [heroReady, setHeroReady] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [showPerformance, setShowPerformance] = useState(false);
+
+  // Memoize device detection to avoid recomputation
+  // Shared via context to all child components
+  const deviceInfo = useMemo(() => detectDeviceCapabilities(), []);
 
   // Check for perf=1 URL parameter on mount
   useEffect(() => {
@@ -110,44 +115,45 @@ function HomePage() {
   }, [reduceMotion]);
 
   return (
-    <>
-      <SEOHead 
-        title="Harshith Kumar | AI-First Full Stack Developer"
-        description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
-        keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation"
-        ogImage="https://harshithkumar.in/preview.png"
-        ogUrl="https://harshithkumar.in/"
-        twitterHandle="@harshithk951"
-        canonical="https://harshithkumar.in/"
-      />
-      <a 
-        href="#main-content" 
-        className="fixed top-0 left-0 -translate-y-full focus:translate-y-0 z-[999] bg-white text-black px-4 py-2 font-medium transition-transform duration-200"
-      >
-        Skip to main content
-      </a>
+    <DeviceContext.Provider value={deviceInfo}>
+      <>
+        <SEOHead 
+          title="Harshith Kumar | AI-First Full Stack Developer"
+          description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
+          keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation"
+          ogImage="https://harshithkumar.in/preview.png"
+          ogUrl="https://harshithkumar.in/"
+          twitterHandle="@harshithk951"
+          canonical="https://harshithkumar.in/"
+        />
+        <a 
+          href="#main-content" 
+          className="fixed top-0 left-0 -translate-y-full focus:translate-y-0 z-[999] bg-white text-black px-4 py-2 font-medium transition-transform duration-200"
+        >
+          Skip to main content
+        </a>
 
-      <AnimatePresence mode="wait">
-        {isLoading && <LoadingAnimation />}
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingAnimation />}
+        </AnimatePresence>
 
-      {!isLoading && (
-        <main id="main-content" className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
-          <Navbar />
-          <MobileMenu />
-          {heroReady && <Hero />}
-          <ErrorBoundary>
-            <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/70">Loading...</div></div>}>
-              <div className="flex flex-col space-y-0">
-                <AboutBento />
-                <SkillsMarquee />
-                <ProjectsShowcase />
-                <ServicesSection />
-                <CTASection />
-              </div>
-              <Footer />
-            </Suspense>
-          </ErrorBoundary>
+        {!isLoading && (
+          <main id="main-content" className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
+            <Navbar />
+            <MobileMenu />
+            {heroReady && <Hero />}
+            <ErrorBoundary>
+              <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/70">Loading...</div></div>}>
+                <div className="flex flex-col space-y-0">
+                  <AboutBento />
+                  <SkillsMarquee />
+                  <ProjectsShowcase />
+                  <ServicesSection />
+                  <CTASection />
+                </div>
+                <Footer />
+              </Suspense>
+            </ErrorBoundary>
           <FloatingDock />
         </main>
       )}
@@ -160,7 +166,8 @@ function HomePage() {
           </Suspense>
         )}
       </AnimatePresence>
-    </>
+      </>
+    </DeviceContext.Provider>
   );
 }
 
