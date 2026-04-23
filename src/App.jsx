@@ -9,7 +9,6 @@ import FloatingDock from '@/components/layout/FloatingDock';
 import MobileMenu from '@/components/layout/MobileMenu';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
-import PerformanceDashboard from '@/components/shared/PerformanceDashboard';
 import SEOHead from '@/components/shared/SEOHead';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -20,6 +19,9 @@ const ProjectsShowcase = lazy(() => import('@/components/sections/ProjectsShowca
 const ServicesSection = lazy(() => import('@/components/sections/ServicesSection'));
 const CTASection = lazy(() => import('@/components/sections/CTASection'));
 const Footer = lazy(() => import('@/components/layout/Footer'));
+
+// Lazy load dev-only performance dashboard
+const PerformanceDashboard = lazy(() => import('@/components/shared/PerformanceDashboard'));
 
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -153,7 +155,9 @@ function HomePage() {
       {/* Performance Dashboard */}
       <AnimatePresence>
         {showPerformance && (
-          <PerformanceDashboard onClose={() => setShowPerformance(false)} />
+          <Suspense fallback={null}>
+            <PerformanceDashboard onClose={() => setShowPerformance(false)} />
+          </Suspense>
         )}
       </AnimatePresence>
     </>
