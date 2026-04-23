@@ -2,6 +2,7 @@ import { useState, useCallback, memo } from 'react';
 import { Menu, X, Home, User, Briefcase, Code, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { smoothScrollTo } from '@/lib/utils';
+import { ANIMATION_PRESETS } from '@/lib/animationConfig';
 
 const MobileMenu = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,10 +44,7 @@ const MobileMenu = memo(() => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.2 }}
+            {...ANIMATION_PRESETS.MODAL_ENTER}
             className="absolute top-full right-0 mt-2 bg-white/5 border border-white/15 backdrop-blur-xl rounded-xl shadow-lg overflow-hidden"
             style={{
               width: 'max(160px, calc(100vw - 100px))',

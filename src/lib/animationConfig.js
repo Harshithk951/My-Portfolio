@@ -156,6 +156,26 @@ export const ANIMATION_PRESETS = {
   },
 
   /**
+   * Slide in from right for notifications/panels
+   */
+  SLIDE_RIGHT: {
+    hidden: { opacity: 0, x: 400 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: TRANSITION_TIMINGS.FAST,
+        ...SPRING_SMOOTH,
+      },
+    },
+    exit: { 
+      opacity: 0, 
+      x: 400, 
+      transition: { duration: TRANSITION_TIMINGS.QUICK } 
+    },
+  },
+
+  /**
    * Staggered list items
    */
   STAGGER_CONTAINER: {

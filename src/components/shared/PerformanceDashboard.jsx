@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, Activity, Zap, AlertCircle } from 'lucide-react';
+import { ANIMATION_PRESETS } from '@/lib/animationConfig';
 
 /**
  * PerformanceDashboard Component
@@ -81,15 +82,9 @@ const PerformanceDashboard = ({ onClose }) => {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0, x: 400 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0, x: 400, transition: { duration: 0.2 } },
-  };
-
   return (
     <motion.div
-      variants={containerVariants}
+      variants={ANIMATION_PRESETS.SLIDE_RIGHT}
       initial="hidden"
       animate="visible"
       exit="exit"

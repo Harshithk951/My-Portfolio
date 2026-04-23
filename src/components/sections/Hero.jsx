@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { smoothScrollTo } from '@/lib/utils';
+import { ANIMATION_PRESETS } from '@/lib/animationConfig';
 import TiltedCard from '@/components/ui/tilted-card';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { useDeviceDetection } from '@/hooks/useDeviceDetection';
@@ -123,8 +124,7 @@ const Hero = memo(() => {
               <span className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white text-black font-bold text-base sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                 <motion.span
                   key={currentWord}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  {...ANIMATION_PRESETS.FADE_IN}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.5 }}
                   className="inline-block"
