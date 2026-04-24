@@ -67,7 +67,7 @@ const Hero = memo(() => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b0b0b] px-4 sm:px-6 lg:px-8">
+    <section id="home" className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#0b0b0b] pt-24 pb-16 px-4 sm:px-6 lg:px-8">
       {/* Galaxy Background - WebGL-based starfield animation (adaptive for device) */}
       <Galaxy
         className="absolute inset-0 pointer-events-none z-0"
@@ -86,8 +86,8 @@ const Hero = memo(() => {
         transparent={true}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20 pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-center">
 
           {/* Left Content */}
           <motion.div
