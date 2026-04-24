@@ -139,7 +139,50 @@ body::after {
 
 .glow-card.glow-blue {
   --glow-color: var(--glow-blue);
-}/* 
+}
+
+/* 
+  Glassmorphism Base Utilities
+  Reusable glass effect classes for consistent styling
+*/
+
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  transform: translateZ(0);
+  will-change: background-color, border-color;
+  backface-visibility: hidden;
+  contain: layout style paint;
+  position: relative;
+}
+
+.glass-light {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.01) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(20px) saturate(150%) brightness(1.05);
+  -webkit-backdrop-filter: blur(20px) saturate(150%) brightness(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 
   Glassmorphism Pattern for macOS Sonoma Aesthetic
   Key features:
   - Gradient background with subtle white opacity (6% → 2% → 5%)
