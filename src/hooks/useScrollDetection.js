@@ -4,13 +4,30 @@ import { prefersReducedMotion } from '@/lib/utils';
 /**
  * useScrollDetection Hook
  * 
- * Detects if Hero section is in viewport
- * Respects prefers-reduced-motion user preference
+ * Detects whether the Hero section is currently visible in the viewport.
+ * Uses IntersectionObserver API for efficient scroll detection.
+ * Automatically respects prefers-reduced-motion user preference.
  * 
- * @returns {boolean} True if Hero section is visible in viewport
+ * @returns {boolean} True if Hero section is visible (>20% intersecting) in viewport, false otherwise
  * 
  * @example
- * const isHeroVisible = useScrollDetection();
+ * // In a component:
+ * import { useScrollDetection } from '@/hooks/useScrollDetection';
+ * 
+ * function AnimatedComponent() {
+ *   const isHeroVisible = useScrollDetection();
+ *   
+ *   return (
+ *     <motion.div
+ *       animate={isHeroVisible ? { opacity: 1 } : { opacity: 0 }}
+ *     >
+ *       Content that changes based on Hero visibility
+ *     </motion.div>
+ *   );
+ * }
+ * 
+ * @note Respects prefers-reduced-motion: if user has this preference,
+ *       the hook will always return true (animations disabled)
  */
 export const useScrollDetection = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
