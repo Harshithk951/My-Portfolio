@@ -125,23 +125,7 @@ export const LazyImage = ({
       alt={alt}
       className={`${isLoaded ? 'loaded' : 'loading'} ${className}`.trim()}
       loading="lazy"
-      {...props}
-    />
-  );
-};    return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
-      }
-    };
-  }, [src]);
-
-  return (
-    <img
-      ref={imgRef}
-      src={imageSrc}
-      alt={alt}
-      className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-75'} ${className}`}
-      loading="lazy"
+      decoding="async"
       {...props}
     />
   );

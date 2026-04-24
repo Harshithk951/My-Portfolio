@@ -41,17 +41,6 @@ export function StarBorder({
       <div className="relative rounded-lg bg-black z-10">
         {children}
       </div>
-
-      <style jsx>{`
-        @keyframes border-spin {
-          0% {
-            filter: hue-rotate(0deg);
-          }
-          100% {
-            filter: hue-rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }

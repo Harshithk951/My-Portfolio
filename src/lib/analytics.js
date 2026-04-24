@@ -45,7 +45,7 @@ export function sendToAnalytics({ id, name, value, delta }) {
     window.dispatchEvent(event);
 
     // Log to console in dev mode
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env && import.meta.env.MODE === 'development') {
       console.log(`[Web Vitals] ${name}: ${value.toFixed(2)}${unit}`, { id, delta });
     }
   }

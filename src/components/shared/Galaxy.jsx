@@ -252,7 +252,7 @@ export default function Galaxy({
 
       let program;
 
-      function resize() {
+      const resize = () => {
         const dpr = isLowEnd ? 1 : Math.min(window.devicePixelRatio, 2);
         renderer.setSize(ctn.offsetWidth * dpr, ctn.offsetHeight * dpr);
         if (program) {
@@ -301,7 +301,7 @@ export default function Galaxy({
     let lastFrameTime = 0;
     const frameInterval = isLowEnd ? 1000 / 30 : 1000 / 60; // 30fps for low-end, 60fps for others
 
-    function update(t) {
+    const update = (t) => {
       // Throttle frame rate for low-end devices
       if (isLowEnd && t - lastFrameTime < frameInterval) {
         animateId = requestAnimationFrame(update);
@@ -330,17 +330,17 @@ export default function Galaxy({
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
-    function handleMouseMove(e) {
+    const handleMouseMove = (e) => {
       const rect = ctn.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
       targetMousePos.current = { x, y };
       targetMouseActive.current = 1.0;
-    }
+    };
 
-    function handleMouseLeave() {
+    const handleMouseLeave = () => {
       targetMouseActive.current = 0.0;
-    }
+    };
 
     if (mouseInteraction) {
       ctn.addEventListener('mousemove', handleMouseMove);
