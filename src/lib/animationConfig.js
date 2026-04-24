@@ -229,6 +229,43 @@ export const ANIMATION_PRESETS = {
       ease: 'easeInOut',
     },
   },
+
+  /**
+   * Scale and fade for component entrance
+   */
+  SCALE_FADE: {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.9 },
+    transition: {
+      duration: TRANSITION_TIMINGS.NORMAL,
+      ...SPRING_BOUNCY,
+    },
+  },
+
+  /**
+   * Rotate entrance animation
+   */
+  ROTATE_IN: {
+    initial: { opacity: 0, rotate: -10, scale: 0.9 },
+    animate: { opacity: 1, rotate: 0, scale: 1 },
+    transition: {
+      duration: TRANSITION_TIMINGS.NORMAL,
+      ...SPRING_SMOOTH,
+    },
+  },
+
+  /**
+   * Pulse/breath animation for attention
+   */
+  PULSE: {
+    animate: { scale: [1, 1.05, 1] },
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType: 'loop',
+    },
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────
