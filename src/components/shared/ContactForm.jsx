@@ -17,24 +17,55 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Prevent double-submit
+    if (isSubmitting) return;
+    
+    // Trim whitespace from all inputs
+    const trimmedData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      message: formData.message.trim()
+    };
+    
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
+    // Basic validation - check all required fields are filled
+    if (!trimmedData.name || !trimmedData.email || !trimmedData.message) {
       toast({
         title: "Validation Error",
-        description: "Please fill in all required fields.",
+        description: "Please fill in all required fields (Name, Email, Message).",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate minimum name length
+    if (trimmedData.name.length < 2) {
+      toast({
+        title: "Invalid Name",
+        description: "Name must be at least 2 characters long.",
         variant: "destructive"
       });
       return;
     }
     
     // Email format validation
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(trimmedData.email)) {
       toast({
         title: "Invalid Email",
-        description: "Please enter a valid email address.",
+        description: "Please enter a valid email address (e.g., user@example.com).",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate minimum message length
+    if (trimmedData.message.length < 10) {
+      toast({
+        title: "Message Too Short",
+        description: "Please provide a message with at least 10 characters.",
         variant: "destructive"
       });
       return;
@@ -45,7 +76,7 @@ const ContactForm = () => {
 
     try {
       // Submit to Supabase
-      const result = await submitContactForm(formData);
+      const result = await submitContactForm(trimmedData);
 
       if (result.success) {
         toast({
@@ -54,13 +85,26 @@ const ContactForm = () => {
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
-        throw new Error(result.error);
+        throw new Error(result.error || 'Failed to submit form');
       }
       
     } catch (error) {
+      // Provide specific error messages based on error type
+      let errorMessage = 'Something went wrong. Please try again later.';
+      
+      if (error.message.includes('network')) {
+        errorMessage = 'Network error. Please check your internet connection and try again.';
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timed out. Please try again.';
+      } else if (error.message.includes('rate')) {
+        errorMessage = 'Too many requests. Please wait a moment before trying again.';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
-        title: "Error",
-        description: error.message || "Something went wrong. Please try again later.",
+        title: "Submission Error",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
