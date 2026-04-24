@@ -286,12 +286,14 @@ const MacOSDock = ({
           const Icon = app.icon;
           
           return (
-            <div
+            <button
               key={app.id}
               ref={(el) => { iconRefs.current[index] = el; }}
-              className="absolute cursor-pointer flex flex-col items-center justify-center group"
+              className="absolute cursor-pointer flex flex-col items-center justify-center group bg-transparent border-0 p-0"
+              aria-label={app.name}
               title={app.name}
               onClick={() => handleAppClick(app.id, index)}
+              type="button"
               style={{
                 left: `${position - scaledSize / 2}px`,
                 bottom: '0px',
@@ -328,7 +330,7 @@ const MacOSDock = ({
                   }}
                 />
               )}
-            </div>
+            </button>
           );
         })}
       </div>
