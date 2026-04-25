@@ -1,8 +1,9 @@
 {
-	"name": "web-app",
+	"name": "harshith-portfolio",
 	"type": "module",
-	"version": "0.0.0",
-	"private": true,
+	"version": "0.1.0",
+	"description": "Premium AI-First Full Stack Developer Portfolio",
+	"author": "Harshith Kumar Mannepally",
 	"scripts": {
 		"dev": "vite --host :: --port 3000",
 		"build": "vite build",
