@@ -120,13 +120,13 @@ export function smoothScrollTo(id) {
 
   const element = document.querySelector(id);
   if (element) {
-    // Check if the browser supports native smooth scrolling
-    if ('scrollBehavior' in document.documentElement.style) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      // Fallback for older browsers
-      const top = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
+    const navbarOffset = 40; // Pixels to offset from top
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.scrollY - navbarOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
   }
 }
