@@ -1,8 +1,12 @@
-# robots.txt for Harshith Kumar Portfolio
-# Allow all crawlers full access
-
+# Allow all crawlers full access to primary content
 User-agent: *
 Allow: /
+Disallow: /private/
+Disallow: /config/
+Disallow: /admin/
 
 # Sitemap location
 Sitemap: https://harshithkumar.in/sitemap.xml
+
+# Performance
+Crawl-delay: 1
