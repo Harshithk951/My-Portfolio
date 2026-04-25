@@ -120,7 +120,7 @@ function HomePage() {
         <SEOHead 
           title="Harshith Kumar | AI-First Full Stack Developer"
           description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
-          keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation"
+          keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation, ResumeOptima, Crew Wellness AI, Software Engineering"
           ogImage="https://harshithkumar.in/preview.png"
           ogUrl="https://harshithkumar.in/"
           twitterHandle="@harshithk951"
