@@ -311,6 +311,15 @@ body::after {
   }
 }
 
+@keyframes border-spin {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
 .project-carousel-track {
   animation: project-carousel-marquee var(--carousel-duration, 45s) linear infinite;
   will-change: transform;
