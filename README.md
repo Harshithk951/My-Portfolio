@@ -44,6 +44,12 @@ It features a **Skill Universe visualization**, **bento-style layouts**, and a *
 * ♿ **Inclusive Design**
   ARIA labels and semantic HTML for accessibility and screen readers.
 
+* 📊 **Performance Monitoring**
+  Built-in developer dashboard to monitor core web vitals and interaction metrics in real-time.
+
+* 🛡️ **Graceful Handling**
+  Integrated Error Boundaries and device capability detection to ensure a smooth experience even on low-end hardware.
+
 ---
 
 ## 🛠️ Technical Ecosystem
@@ -129,10 +135,10 @@ Open `http://localhost:3000` in your browser.
 
 ## 🚀 Recent Optimizations (April 2026)
 
-*   **SEO Refinement**: Optimized meta tags and automated sitemap updates.
-*   **Performance**: Migrated hero assets to WebP and optimized WebGL Galaxy background.
-*   **Code Quality**: Refactored glassmorphism styles into a centralized global utility class.
-*   **Accessibility**: Enhanced ARIA coverage for navigation components.
+*   **SEO Refinement**: Optimized meta tags, automated sitemap updates, and robots.txt guidance.
+*   **Performance**: Improved asset delivery with optimized cache headers and WebP migration.
+*   **UI/UX**: Polished glassmorphism styles and refined interactive elements (ProjectCards/Navbar).
+*   **Maintenance**: Standardized technical stack documentation and configuration metadata.
 
 ---
 
