@@ -92,30 +92,30 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
   const Icon = project.icon;
   return (
     <div
-      className={`glow-card ${project.color} p-6 sm:p-7 md:p-8 flex flex-col w-[320px] sm:w-[380px] md:w-[420px] h-[320px] sm:h-[350px] md:h-[370px] shrink-0 cursor-default select-none`}
+      className={`glow-card ${project.color} p-6 sm:p-7 md:p-8 flex flex-col w-[320px] sm:w-[380px] md:w-[420px] h-[320px] sm:h-[350px] md:h-[370px] shrink-0 cursor-default select-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]`}
     >
       <div className="flex justify-between items-start mb-5">
         <div className="p-3 bg-white/10 rounded-xl">
           {project.badge ? <Trophy size={22} className="text-yellow-400" /> : <Icon size={22} className="text-white" />}
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           <button
             onClick={() => handleGitHub(project.repoUrl)}
-            className="p-2.5 hover:bg-white/10 rounded-full transition-colors text-white"
+            className="p-3 hover:bg-white/10 rounded-full transition-colors text-white flex items-center justify-center min-w-[44px] min-h-[44px]"
             aria-label={`View ${project.title} source code on GitHub`}
             title={`View ${project.title} on GitHub`}
           >
-            <Github size={18} />
+            <Github size={20} />
           </button>
           {project.liveUrl && (
             <button
               onClick={() => handleLive(project.liveUrl)}
-              className="px-2.5 py-2.5 hover:bg-white/10 rounded-full transition-colors text-green-400 hover:text-green-300 flex items-center gap-1.5"
+              className="px-4 py-2.5 hover:bg-white/10 rounded-full transition-all text-green-400 hover:text-green-300 flex items-center gap-2 min-w-[44px] min-h-[44px] bg-white/5 active:scale-95"
               aria-label={`View ${project.title} live site`}
               title={`Open ${project.title} live site`}
             >
               <ExternalLink size={18} />
-              <span className="text-xs font-semibold tracking-wide uppercase">Live</span>
+              <span className="text-xs font-bold tracking-wider uppercase">Live</span>
             </button>
           )}
         </div>
