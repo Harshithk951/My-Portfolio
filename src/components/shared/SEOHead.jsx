@@ -63,6 +63,10 @@ const SEOHead = ({
       updateMetaTag('og:type', ogType);
     }
 
+    // Add default site name and locale
+    updateMetaTag('og:site_name', 'Harshith Kumar Portfolio');
+    updateMetaTag('og:locale', 'en_US');
+
     // Update Twitter tags
     if (twitterHandle) {
       updateMetaTag('twitter:creator', twitterHandle);
