@@ -14,7 +14,7 @@
 	"dependencies": {
 		"@fontsource-variable/geist": "^5.2.8",
 		"@radix-ui/react-dropdown-menu": "^2.1.4",
-		"@radix-ui/react-slot": "^1.1.1",
+		"@radix-ui/react-slot": "^1.2.4",
 		"@radix-ui/react-toast": "^1.2.4",
 		"@supabase/supabase-js": "^2.104.1",
 		"class-variance-authority": "^0.7.1",
