@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { initializePageLoadTimer, prefersReducedMotion, detectDeviceCapabilities } from '@/lib/utils';
 import { DeviceContext } from '@/hooks/useDeviceContext';
 
@@ -178,6 +179,7 @@ function App() {
       <ScrollToTop />
       <HomePage />
       <Toaster />
+      <Analytics />
     </>
   );
 }
