@@ -93,6 +93,7 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
   return (
     <div
       className={`glow-card ${project.color} p-6 sm:p-7 md:p-8 flex flex-col w-[320px] sm:w-[380px] md:w-[420px] h-[320px] sm:h-[350px] md:h-[370px] shrink-0 cursor-default select-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]`}
+      aria-describedby={`project-desc-${project.title.replace(/\s+/g, '-').toLowerCase()}`}
     >
       <div className="flex justify-between items-start mb-5">
         <div className="p-3 bg-white/10 rounded-xl">
@@ -130,7 +131,10 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
         )}
       </div>
 
-      <p className="text-white/65 text-sm sm:text-[15px] mb-5 flex-grow leading-[1.7] line-clamp-3">
+      <p 
+        id={`project-desc-${project.title.replace(/\s+/g, '-').toLowerCase()}`}
+        className="text-white/65 text-sm sm:text-[15px] mb-5 flex-grow leading-[1.7] line-clamp-3"
+      >
         {project.description}
       </p>
 
