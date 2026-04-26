@@ -4,9 +4,19 @@ Allow: /
 Disallow: /private/
 Disallow: /config/
 Disallow: /admin/
+Disallow: /tmp/
+
+# Specific rules for Googlebot
+User-agent: Googlebot
+Allow: /
+Allow: /src/assets/
+
+# Specific rules for Bing
+User-agent: Bingbot
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://harshithkumar.in/sitemap.xml
 
-# Performance
+# Performance & Crawl Efficiency
 Crawl-delay: 1
