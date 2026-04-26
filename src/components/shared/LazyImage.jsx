@@ -54,7 +54,7 @@ export const LazyImage = ({
   };
 
   // Load image with proper format and srcset
-  const loadImage = async (immediately = false) => {
+  const loadImage = async (_immediately = false) => {
     if (!src) return;
 
     // Determine supported format
@@ -105,15 +105,18 @@ export const LazyImage = ({
       }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    const currentImg = imgRef.current;
+
+    if (currentImg) {
+      observer.observe(currentImg);
     }
 
     return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
+      if (currentImg) {
+        observer.unobserve(currentImg);
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src, srcSet]);
 
   return (

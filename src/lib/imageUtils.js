@@ -18,9 +18,7 @@
  * // Returns: { jpeg: "...", webp: "...", avif: "..." }
  */
 export const generateResponsiveSrcset = (imageUrl, widths = [640, 1024, 1280, 1920]) => {
-  const urlParts = imageUrl.split('.');
-  const ext = urlParts[urlParts.length - 1];
-  const basePath = urlParts.slice(0, -1).join('.');
+  const basePath = imageUrl.split('.').slice(0, -1).join('.');
 
   const formats = ['jpeg', 'webp', 'avif'];
   const srcsets = {};

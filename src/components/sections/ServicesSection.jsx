@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Rocket, Code, Layout, Brain, ArrowRight } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 

@@ -7,11 +7,11 @@ export function LogoLoop({
   logoHeight = 60,
   gap = 60,
   hoverSpeed = 0,
-  scaleOnHover = false,
+  scaleOnHover: _scaleOnHover = false,
   fadeOut = true,
-  fadeOutColor = '#ffffff',
+  fadeOutColor: _fadeOutColor = '#ffffff',
   ariaLabel = 'Logo loop',
-  useCustomRender = true,
+  useCustomRender: _useCustomRender = true,
 }) {
   const [isHovering, setIsHovering] = useState(false);
 

@@ -3,7 +3,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 const MacOSDock = ({ 
   apps, 
   onAppClick, 
-  openApps = [],
+  openApps: _openApps = [],
   className = ''
 }) => {
   const [mouseX, setMouseX] = useState(null);
@@ -100,7 +100,8 @@ const MacOSDock = ({
       
       return minScale + (scaleFactor * (maxScale - minScale));
     });
-  }, [apps, baseIconSize, baseSpacing, effectWidth, maxScale, minScale]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [apps, effectWidth, maxScale, minScale]);
 
   const calculatePositions = useCallback((scales) => {
     let currentX = 0;

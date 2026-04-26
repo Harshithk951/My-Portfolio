@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Home, User, Briefcase, Brain, Mail } from 'lucide-react';
 import { TubeLightNavbar } from '@/components/ui/tube-light-navbar';
 

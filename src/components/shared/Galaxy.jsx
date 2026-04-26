@@ -250,6 +250,7 @@ export default function Galaxy({
         gl.clearColor(0, 0, 0, 1);
       }
 
+      // eslint-disable-next-line prefer-const
       let program;
 
       const resize = () => {

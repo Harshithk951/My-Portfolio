@@ -1,5 +1,4 @@
 import React, { useCallback, memo } from 'react';
-import { motion } from 'framer-motion';
 import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { Marquee } from '@/components/ui/marquee';

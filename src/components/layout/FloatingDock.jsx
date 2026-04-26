@@ -23,6 +23,7 @@ const FloatingDock = memo(() => {
     } else {
       smoothScrollTo(app.href);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

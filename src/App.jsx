@@ -112,6 +112,7 @@ function HomePage() {
       document.body.style.overflow = 'unset';
       window.removeEventListener('pageshow', handlePageShow);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduceMotion]);
 
   return (

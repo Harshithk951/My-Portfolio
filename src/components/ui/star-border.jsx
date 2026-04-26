@@ -1,11 +1,11 @@
 import React from 'react';
 
 export function StarBorder({
-  as = 'div',
+  as: _as = 'div',
   className = '',
   color = 'cyan',
   speed = '6s',
-  symbol = '*',
+  symbol: _symbol = '*',
   children,
   ...props
 }) {

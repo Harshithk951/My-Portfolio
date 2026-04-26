@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import { User, MapPin, Zap, ArrowRight, Code, Rocket } from 'lucide-react';
 
 const AboutBento = () => {
