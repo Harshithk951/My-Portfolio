@@ -18,20 +18,12 @@ import { ANIMATION_PRESETS } from '@/lib/animationConfig';
  * - TTFB (Time to First Byte): Server response time
  */
 const PerformanceDashboard = ({ onClose }) => {
-  const [metrics, setMetrics] = useState({});
-  const [performance, setPerformance] = useState(null);
-
-  useEffect(() => {
-    // Get stored metrics from window object (set by analytics.js)
-    const storedMetrics = window.__PERF_METRICS__ || {};
-    setMetrics(storedMetrics);
-
-    // Get Navigation Timing data
+  const [metrics, setMetrics] = useState(() => window.__PERF_METRICS__ || {});
+  const [performance] = useState(() => {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
       const navigationStart = timing.navigationStart;
-      
-      setPerformance({
+      return {
         dns: timing.domainLookupEnd - timing.domainLookupStart,
         tcp: timing.connectEnd - timing.connectStart,
         ttfb: timing.responseStart - navigationStart,
@@ -39,9 +31,12 @@ const PerformanceDashboard = ({ onClose }) => {
         domInteractive: timing.domInteractive - navigationStart,
         domComplete: timing.domComplete - navigationStart,
         pageLoadTime: timing.loadEventEnd - navigationStart,
-      });
+      };
     }
+    return null;
+  });
 
+  useEffect(() => {
     // Subscribe to metric updates
     const handleMetricUpdate = (e) => {
       setMetrics(e.detail);

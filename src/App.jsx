@@ -28,19 +28,18 @@ const PerformanceDashboard = lazy(() => import('@/components/shared/PerformanceD
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [heroReady, setHeroReady] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [showPerformance, setShowPerformance] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(() => prefersReducedMotion());
+  const [showPerformance, setShowPerformance] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('perf') === '1';
+  });
 
   // Memoize device detection to avoid recomputation
   // Shared via context to all child components
   const deviceInfo = useMemo(() => detectDeviceCapabilities(), []);
 
-  // Check for perf=1 URL parameter on mount
+  // Listen for perf=1 URL parameter changes
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('perf') === '1') {
-      setShowPerformance(true);
-    }
 
     // Listen for URL changes
     const handlePopState = () => {
@@ -53,9 +52,6 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    // Detect if user prefers reduced motion
-    setReduceMotion(prefersReducedMotion());
-
     // Listen for changes to prefers-reduced-motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handleChange = (e) => setReduceMotion(e.matches);
