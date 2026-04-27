@@ -36,7 +36,6 @@ export const useScrollDetection = () => {
   useEffect(() => {
     // If user prefers reduced motion, skip intersection observation
     if (reduceMotion) {
-      setIsHeroVisible(true);
       return;
     }
 

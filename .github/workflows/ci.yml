@@ -36,8 +36,8 @@ jobs:
           VITE_SUPABASE_ANON_KEY: "mock-anon-key-for-build-step"
 
       - name: SonarCloud Scan
-        if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: SonarSource/sonarcloud-github-action@master
+        if: ${{ github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]' }}
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

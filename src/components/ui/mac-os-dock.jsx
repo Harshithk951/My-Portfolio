@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 
 const MacOSDock = ({ 
   apps, 
@@ -8,7 +8,13 @@ const MacOSDock = ({
 }) => {
   const [mouseX, setMouseX] = useState(null);
   const [touchX, setTouchX] = useState(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice] = useState(() => {
+    return typeof window !== 'undefined' && (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  });
   const [currentScales, setCurrentScales] = useState(apps.map(() => 1));
   const [currentPositions, setCurrentPositions] = useState([]);
   const dockRef = useRef(null);
@@ -57,28 +63,37 @@ const MacOSDock = ({
   const minScale = 1.0;
   const baseSpacing = Math.max(4, baseIconSize * 0.08);
 
+  // Helper to compute positions from scales (used before calculatePositions is defined)
+  const computePositions = useCallback((scales, iconSize, spacing) => {
+    let currentX = 0;
+    return scales.map((scale) => {
+      const scaledWidth = iconSize * scale;
+      const centerX = currentX + (scaledWidth / 2);
+      currentX += scaledWidth + spacing;
+      return centerX;
+    });
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
-      setConfig(getResponsiveConfig());
+      const newConfig = getResponsiveConfig();
+      setConfig(newConfig);
+      // Reset scales and positions to match new config
+      const newBaseIconSize = newConfig.baseIconSize;
+      const newBaseSpacing = Math.max(4, newBaseIconSize * 0.08);
+      const newScales = apps.map(() => minScale);
+      setCurrentScales(newScales);
+      setCurrentPositions(computePositions(newScales, newBaseIconSize, newBaseSpacing));
+      // Update icon centers
+      iconCenters.current = apps.map((_, index) => 
+        (index * (newBaseIconSize + newBaseSpacing)) + (newBaseIconSize / 2)
+      );
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [getResponsiveConfig]);
+  }, [getResponsiveConfig, apps, minScale, computePositions]);
 
-  // Detect touch device capability
-  useEffect(() => {
-    const touchCapable = () => {
-      return (
-        typeof window !== 'undefined' && (
-          'ontouchstart' in window ||
-          navigator.maxTouchPoints > 0 ||
-          navigator.msMaxTouchPoints > 0
-        )
-      );
-    };
-    setIsTouchDevice(touchCapable());
-  }, []);
 
   const calculateTargetMagnification = useCallback((mousePosition) => {
     if (mousePosition === null) {
@@ -114,17 +129,7 @@ const MacOSDock = ({
     });
   }, [baseIconSize, baseSpacing]);
 
-  useEffect(() => {
-    const initialScales = apps.map(() => minScale);
-    const initialPositions = calculatePositions(initialScales);
-    setCurrentScales(initialScales);
-    setCurrentPositions(initialPositions);
-    
-    // Pre-calculate centers for magnification logic
-    iconCenters.current = apps.map((_, index) => 
-      (index * (baseIconSize + baseSpacing)) + (baseIconSize / 2)
-    );
-  }, [apps, calculatePositions, minScale, config, baseIconSize, baseSpacing]);
+  const animateToTargetRef = useRef(null);
 
   const animateToTarget = useCallback(() => {
     // Use touchX on touch devices, mouseX on desktop
@@ -155,9 +160,21 @@ const MacOSDock = ({
     );
     
     if (scalesNeedUpdate || positionsNeedUpdate || activeX !== null) {
-      animationFrameRef.current = requestAnimationFrame(animateToTarget);
+      animationFrameRef.current = requestAnimationFrame(() => animateToTargetRef.current?.());
     }
   }, [mouseX, touchX, calculateTargetMagnification, calculatePositions, currentScales, currentPositions, isTouchDevice]);
+
+  // Keep the ref in sync with the latest callback
+  useEffect(() => {
+    animateToTargetRef.current = animateToTarget;
+  }, [animateToTarget]);
+
+  // Pre-calculate centers for magnification logic on mount
+  useEffect(() => {
+    iconCenters.current = apps.map((_, index) => 
+      (index * (baseIconSize + baseSpacing)) + (baseIconSize / 2)
+    );
+  }, [apps, baseIconSize, baseSpacing]);
 
   useEffect(() => {
     if (animationFrameRef.current) {
