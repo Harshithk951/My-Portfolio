@@ -58,7 +58,7 @@ const ProjectsShowcase = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -95,9 +95,9 @@ const ProjectsShowcase = () => {
               </p>
 
               <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tech.map((tag, i) => (
+                {project.tech.map((tag) => (
                   <span 
-                    key={i}
+                    key={tag}
                     className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/80"
                   >
                     {tag}
