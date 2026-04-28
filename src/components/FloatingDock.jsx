@@ -24,12 +24,12 @@ const socialItems = [
         transition={{ delay: 0.5, duration: 0.5 }}
         className="flex items-center gap-2 px-4 py-3 bg-white/10 backdrop-blur-lg rounded-full border border-white/20"
       >
-        {navItems.map((item, index) => (
-          <DockIcon key={index} {...item} />
+        {navItems.map((item) => (
+          <DockIcon key={item.label} {...item} />
         ))}
         <div className="w-px h-8 bg-white/20 mx-2" />
-        {socialItems.map((item, index) => (
-          <DockIcon key={index} {...item} isExternal />
+        {socialItems.map((item) => (
+          <DockIcon key={item.label} {...item} isExternal />
         ))}
       </motion.div>
     </div>
