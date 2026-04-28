@@ -1,4 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import PropTypes from 'prop-types';
+
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
 
 const FloatingDock = () => {
@@ -72,6 +74,13 @@ const DockIcon = ({ icon: Icon, label, href, isExternal }) => {
       </span>
     </motion.button>
   );
+};
+
+DockIcon.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  isExternal: PropTypes.bool
 };
 
 export default FloatingDock;
