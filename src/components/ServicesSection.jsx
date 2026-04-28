@@ -68,7 +68,7 @@ const ServicesSection = () => {
             const Icon = service.icon;
             return (
               <motion.div
-                key={index}
+                key={service.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -94,9 +94,9 @@ const ServicesSection = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag, i) => (
+                  {service.tags.map((tag) => (
                     <span 
-                      key={i}
+                      key={tag}
                       className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80"
                     >
                       {tag}
