@@ -60,11 +60,11 @@ const AboutBento = () => {
         </div>
 
         <div className="journey-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
-          {cards.map((card, index) => {
+          {cards.map((card) => {
             const Icon = card.icon;
             return (
               <article
-                key={index}
+                key={card.title}
                 className={`glow-card ${card.color} p-6 sm:p-7 md:p-8 flex flex-col justify-start group h-full hover:-translate-y-2 transition-transform duration-300`}
               >
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors" aria-hidden="true">
