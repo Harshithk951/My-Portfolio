@@ -3,6 +3,7 @@ import { Send, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { submitContactForm } from '@/lib/supabase';
 import { sendAnalyticsEvent } from '@/lib/analytics';
+import confetti from 'canvas-confetti';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -74,14 +75,33 @@ const ContactForm = () => {
     setIsSubmitting(true);
     sendAnalyticsEvent('contact_click');
 
+    // Show immediate loading toast
+    const { dismiss } = toast({
+      title: "Sending Message...",
+      description: "Please wait while we secure your connection.",
+    });
+
     try {
       // Submit to Supabase
       const result = await submitContactForm(trimmedData);
 
       if (result.success) {
+        // Dismiss loading toast
+        dismiss();
+
+        // Trigger celebration confetti
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#ffffff', '#3b82f6', '#60a5fa']
+        });
+
         toast({
           title: "Message Sent Successfully! 🚀",
-          description: "Thank you for reaching out. I'll get back to you shortly.",
+          description: "Thank you for reaching out. I've received your message and will get back to you shortly.",
+          className: "bg-green-600 border-green-400 text-white font-bold",
+          duration: 6000,
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
@@ -89,6 +109,7 @@ const ContactForm = () => {
       }
       
     } catch (error) {
+      dismiss(); // Dismiss loading toast on error
       // Provide specific error messages based on error type
       let errorMessage = 'Something went wrong. Please try again later.';
       

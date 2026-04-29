@@ -59,7 +59,7 @@ export const submitContactForm = async (formData) => {
       return { success: true, data: newSubmission };
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('contact_submissions')
       .insert([
         {
@@ -69,11 +69,10 @@ export const submitContactForm = async (formData) => {
           message: formData.message,
           status: 'new'
         }
-      ])
-      .select();
+      ]);
 
     if (error) throw error;
-    return { success: true, data: data?.[0] };
+    return { success: true };
   } catch (error) {
     console.error('Error submitting contact form:', error);
     return { success: false, error: error?.message || 'Failed to submit form' };
