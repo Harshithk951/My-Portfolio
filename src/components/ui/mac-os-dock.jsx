@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 const MacOSDock = ({ 
   apps, 
@@ -354,6 +355,21 @@ const MacOSDock = ({
       </div>
     </div>
   );
+};
+
+
+MacOSDock.propTypes = {
+  apps: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      icon: PropTypes.elementType.isRequired,
+      isActive: PropTypes.bool
+    })
+  ).isRequired,
+  onAppClick: PropTypes.func.isRequired,
+  openApps: PropTypes.array,
+  className: PropTypes.string
 };
 
 export default MacOSDock;
