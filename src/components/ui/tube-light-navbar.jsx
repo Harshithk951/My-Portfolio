@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { smoothScrollTo } from '@/lib/utils';
@@ -50,5 +51,17 @@ export function TubeLightNavbar({ items, className }) {
     </motion.div>
   );
 }
+
+
+TubeLightNavbar.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired,
+      icon: PropTypes.elementType.isRequired
+    })
+  ).isRequired,
+  className: PropTypes.string
+};
 
 export default TubeLightNavbar;
