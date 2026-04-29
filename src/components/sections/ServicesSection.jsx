@@ -57,11 +57,11 @@ const ServicesSection = () => {
         </div>
 
         <div className="services-grid grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const Icon = service.icon;
             return (
               <article
-                key={index}
+                key={service.title}
                 className={`glow-card ${service.color} p-6 sm:p-7 md:p-8 group hover:-translate-y-1 transition-transform duration-300`}
               >
                 <div className="flex items-start justify-between mb-6">
@@ -83,9 +83,9 @@ const ServicesSection = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-2" role="list">
-                  {service.tags.map((tag, i) => (
+                  {service.tags.map((tag) => (
                     <span
-                      key={i}
+                      key={tag}
                       className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80"
                       role="listitem"
                     >
