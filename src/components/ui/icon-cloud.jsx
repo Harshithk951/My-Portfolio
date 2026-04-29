@@ -236,8 +236,8 @@ export function IconCloud({ images = [], className }) {
       projected.sort((a, b) => a.z - b.z);
 
       for (const { idx, x, y, z } of projected) {
-        // Skip rendering some icons on low-end for performance
-        if (isLowEnd && Math.random() > animationConfig.reduceIconCount) {
+        // Skip rendering some icons on low-end for performance (Deterministic skip to satisfy SonarCloud)
+        if (isLowEnd && (idx % 10) > (animationConfig.reduceIconCount * 10)) {
           continue;
         }
 

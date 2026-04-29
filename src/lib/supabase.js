@@ -39,11 +39,6 @@ const config = validateSupabaseConfig();
 // Only create client if config is valid; otherwise null
 export const supabase = config.valid ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
-// Log warnings during development
-if (!config.valid && import.meta.env.DEV) {
-  console.warn(`[Supabase] ${config.reason} — Contact form will use localStorage fallback.`);
-}
-
 export const submitContactForm = async (formData) => {
   try {
     // If Supabase not configured, use localStorage fallback
@@ -59,7 +54,7 @@ export const submitContactForm = async (formData) => {
       return { success: true, data: newSubmission };
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('contact_submissions')
       .insert([
         {
@@ -69,13 +64,14 @@ export const submitContactForm = async (formData) => {
           message: formData.message,
           status: 'new'
         }
-      ])
-      .select();
+      ]);
 
     if (error) throw error;
-    return { success: true, data: data?.[0] };
+    return { success: true };
   } catch (error) {
-    console.error('Error submitting contact form:', error);
+    if (import.meta.env.DEV) {
+      console.error('Error submitting contact form:', error);
+    }
     return { success: false, error: error?.message || 'Failed to submit form' };
   }
 };
