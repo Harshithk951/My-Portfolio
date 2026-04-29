@@ -49,11 +49,11 @@ const CTASection = () => {
         <div className="cta-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Contact Info Grid */}
           <div className="md:col-span-2 lg:col-span-1 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-1 gap-4">
-            {contactItems.map((item, index) => {
+            {contactItems.map((item) => {
               const Icon = item.icon;
               return (
                 <a
-                  key={index}
+                  key={item.label}
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
