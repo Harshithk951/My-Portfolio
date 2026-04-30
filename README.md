@@ -135,6 +135,7 @@ Open `http://localhost:3000` in your browser.
 
 ## 🚀 Recent Optimizations (April 2026)
 
+*   **Security & Integrity**: Hardened CI/CD pipeline by pinning all GitHub Actions to full commit SHAs, ensuring supply chain security.
 *   **SEO Refinement**: Optimized meta tags, automated sitemap updates, and robots.txt guidance.
 *   **Performance**: Improved asset delivery with optimized cache headers and WebP migration.
 *   **UI/UX**: Polished glassmorphism styles and refined interactive elements (ProjectCards/Navbar).
