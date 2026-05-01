@@ -31,6 +31,39 @@ function isMobile() {
   return window.innerWidth <= 768;
 }
 
+const loadImageFromUrl = (url) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+};
+
+const fetchAndCreateImage = async (src) => {
+  try {
+    const res = await fetch(src);
+    if (!res.ok) return null;
+    const contentType = res.headers.get("content-type") || "";
+
+    if (contentType.includes("svg")) {
+      let svgText = await res.text();
+      if (!svgText.includes("width=")) {
+        svgText = svgText.replace("<svg", '<svg width="128" height="128"');
+      }
+      const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      return loadImageFromUrl(url);
+    } else {
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      return loadImageFromUrl(url);
+    }
+  } catch {
+    return null;
+  }
+};
+
 // ── Component ────────────────────────────────────────────────────────
 
 export function IconCloud({ images = [], className }) {
@@ -61,41 +94,7 @@ export function IconCloud({ images = [], className }) {
   useEffect(() => {
     let cancelled = false;
 
-    const promises = images.map(async (src) => {
-      try {
-        const res = await fetch(src);
-        if (!res.ok) return null;
-        const contentType = res.headers.get("content-type") || "";
-
-        if (contentType.includes("svg")) {
-          let svgText = await res.text();
-          if (!svgText.includes("width=")) {
-            svgText = svgText.replace("<svg", '<svg width="128" height="128"');
-          }
-          const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
-          const url = URL.createObjectURL(blob);
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-            img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
-            img.src = url;
-          });
-        } else {
-          const blob = await res.blob();
-          const url = URL.createObjectURL(blob);
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-            img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
-            img.src = url;
-          });
-        }
-      } catch {
-        return null;
-      }
-    });
-
-    Promise.all(promises).then((results) => {
+    Promise.all(images.map(fetchAndCreateImage)).then((results) => {
       if (cancelled) return;
       imgsRef.current = results;
       setLoaded(true);
