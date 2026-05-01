@@ -138,7 +138,7 @@ function addStructuredData(data) {
   const script = document.createElement('script');
   script.type = 'application/ld+json';
   script.textContent = JSON.stringify(data);
-  script.setAttribute('data-seo-managed', 'true');
+  script.dataset.seoManaged = 'true';
   document.head.appendChild(script);
 }
 
