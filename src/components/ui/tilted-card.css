@@ -77,7 +77,7 @@
   border-radius: 15px;
   will-change: transform;
   transform: translateZ(0);
-  transition: brightness 0.3s ease-out;
+  transition: filter 0.3s ease-out;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -87,7 +87,7 @@
 }
 
 .tilted-card-inner:hover .tilted-card-img {
-  brightness: 1.05;
+  filter: brightness(1.05);
 }
 
 .tilted-card-overlay {
