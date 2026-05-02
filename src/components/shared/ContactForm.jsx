@@ -30,7 +30,7 @@ const ContactForm = () => {
     };
     
     // Email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@([^\s@.]+\.)+[^\s@.]+$/;
     
     // Basic validation - check all required fields are filled
     if (!trimmedData.name || !trimmedData.email || !trimmedData.message) {
