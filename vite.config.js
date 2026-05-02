@@ -2,6 +2,28 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
+function getVendorChunk(id) {
+  if (id.includes('node_modules/framer-motion')) return 'framer-motion';
+  if (id.includes('node_modules/ogl')) return 'ogl-renderer';
+  if (id.includes('node_modules/@radix-ui')) return 'radix-ui';
+  if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-icons')) return 'icons';
+  if (id.includes('node_modules/web-vitals')) return 'web-vitals';
+  if (id.includes('node_modules/react/') && !id.includes('node_modules/react-')) return 'vendor-react';
+  if (id.includes('node_modules/react-dom/')) return 'vendor-react-dom';
+  
+  const match = /node_modules\/(.+?)\//.exec(id);
+  if (match) return `vendor-${match[1].replace('@', '')}`;
+}
+
+function getSrcChunk(id) {
+  if (id.includes('/src/lib/')) return 'lib-utils';
+  if (id.includes('/src/components/layout/')) return 'layout-components';
+  if (id.includes('/src/components/sections/')) return 'sections';
+  if (id.includes('/src/components/ui/')) return 'ui-components';
+  if (id.includes('/src/components/shared/')) return 'shared-components';
+  if (id.includes('/src/hooks/')) return 'hooks';
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -19,69 +41,13 @@ export default defineConfig({
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
 
+
         manualChunks(id) {
-          // Split large vendor libraries into separate chunks for better caching
-          if (id.includes('node_modules/framer-motion')) {
-            return 'framer-motion';
-          }
-          if (id.includes('node_modules/ogl')) {
-            return 'ogl-renderer';
-          }
-          if (id.includes('node_modules/@radix-ui')) {
-            return 'radix-ui';
-          }
-          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-icons')) {
-            return 'icons';
-          }
-          if (id.includes('node_modules/web-vitals')) {
-            return 'web-vitals';
-          }
-          
-          // Split React and ReactDOM
-          if (id.includes('node_modules/react/') && !id.includes('node_modules/react-')) {
-            return 'vendor-react';
-          }
-          if (id.includes('node_modules/react-dom/')) {
-            return 'vendor-react-dom';
-          }
-
-          // Split shared utilities into their own chunk
-          if (id.includes('/src/lib/')) {
-            return 'lib-utils';
-          }
-
-          // Split layout components
-          if (id.includes('/src/components/layout/')) {
-            return 'layout-components';
-          }
-
-          // Split section components
-          if (id.includes('/src/components/sections/')) {
-            return 'sections';
-          }
-
-          // Split UI components
-          if (id.includes('/src/components/ui/')) {
-            return 'ui-components';
-          }
-
-          // Split shared components
-          if (id.includes('/src/components/shared/')) {
-            return 'shared-components';
-          }
-
-          // Split hooks
-          if (id.includes('/src/hooks/')) {
-            return 'hooks';
-          }
-
-          // Vendor libraries (default fallback)
           if (id.includes('node_modules/')) {
-            const match = /node_modules\/(.+?)\//.exec(id);
-            if (match) {
-              const vendor = match[1].replace('@', '');
-              return `vendor-${vendor}`;
-            }
+            return getVendorChunk(id);
+          }
+          if (id.includes('/src/')) {
+            return getSrcChunk(id);
           }
         },
       },
