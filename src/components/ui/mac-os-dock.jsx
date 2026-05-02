@@ -147,6 +147,7 @@ const MacOSDock = ({
     });
 
     setCurrentPositions(prevPositions => {
+      if (prevPositions.length === 0) return targetPositions;
       return prevPositions.map((currentPos, index) => {
         const diff = targetPositions[index] - currentPos;
         return currentPos + (diff * lerpFactor);
@@ -300,7 +301,9 @@ const MacOSDock = ({
       >
         {apps.map((app, index) => {
           const scale = currentScales[index];
-          const position = currentPositions[index] || 0;
+          const position = currentPositions[index] !== undefined 
+            ? currentPositions[index] 
+            : index * (baseIconSize + baseSpacing) + (baseIconSize / 2);
           const scaledSize = baseIconSize * scale;
           const Icon = app.icon;
           
