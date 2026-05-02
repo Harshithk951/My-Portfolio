@@ -193,6 +193,43 @@ export function IconCloud({ images = [], className }) {
 
     const TWO_PI = Math.PI * 2;
 
+    const renderIcon = (p, iconSize) => {
+      const { idx, x, y, z } = p;
+      // Skip rendering some icons on low-end for performance (Deterministic skip to satisfy SonarCloud)
+      if (isLowEnd && (idx % 10) > (animationConfig.reduceIconCount * 10)) {
+        return;
+      }
+
+      const img = imgsRef.current[idx];
+      const scale = (z + 1.3) / 2.3;
+      const size = iconSize * (0.5 + scale * 0.6);
+      const baseAlpha = 0.2 + scale * 0.8;
+      const alpha = isLowEnd ? baseAlpha * animationConfig.lowerAlpha : baseAlpha;
+
+      ctx.globalAlpha = alpha;
+
+      // Soft glow (desktop only)
+      if (showGlow) {
+        const grad = ctx.createRadialGradient(x, y, size * 0.1, x, y, size * 0.8);
+        grad.addColorStop(0, hexToRgba("#ffffff", 0.06 * alpha));
+        grad.addColorStop(1, "transparent");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 0.8, 0, TWO_PI);
+        ctx.fill();
+      }
+
+      if (img) {
+        const half = size / 2;
+        ctx.drawImage(img, x - half, y - half, size, size);
+      } else {
+        ctx.fillStyle = hexToRgba("#888", alpha);
+        ctx.beginPath();
+        ctx.arc(x, y, size * 0.35, 0, TWO_PI);
+        ctx.fill();
+      }
+    };
+
     const animate = () => {
       if (!isVisible.current) { animRef.current = null; return; }
 
@@ -234,40 +271,8 @@ export function IconCloud({ images = [], className }) {
 
       projected.sort((a, b) => a.z - b.z);
 
-      for (const { idx, x, y, z } of projected) {
-        // Skip rendering some icons on low-end for performance (Deterministic skip to satisfy SonarCloud)
-        if (isLowEnd && (idx % 10) > (animationConfig.reduceIconCount * 10)) {
-          continue;
-        }
-
-        const img = imgsRef.current[idx];
-        const scale = (z + 1.3) / 2.3;
-        const size = iconSize * (0.5 + scale * 0.6);
-        const baseAlpha = 0.2 + scale * 0.8;
-        const alpha = isLowEnd ? baseAlpha * animationConfig.lowerAlpha : baseAlpha;
-
-        ctx.globalAlpha = alpha;
-
-        // Soft glow (desktop only)
-        if (showGlow) {
-          const grad = ctx.createRadialGradient(x, y, size * 0.1, x, y, size * 0.8);
-          grad.addColorStop(0, hexToRgba("#ffffff", 0.06 * alpha));
-          grad.addColorStop(1, "transparent");
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(x, y, size * 0.8, 0, TWO_PI);
-          ctx.fill();
-        }
-
-        if (img) {
-          const half = size / 2;
-          ctx.drawImage(img, x - half, y - half, size, size);
-        } else {
-          ctx.fillStyle = hexToRgba("#888", alpha);
-          ctx.beginPath();
-          ctx.arc(x, y, size * 0.35, 0, TWO_PI);
-          ctx.fill();
-        }
+      for (const p of projected) {
+        renderIcon(p, iconSize);
       }
 
       ctx.globalAlpha = 1;
