@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 const FloatingDock = () => {
   const navItems = [
