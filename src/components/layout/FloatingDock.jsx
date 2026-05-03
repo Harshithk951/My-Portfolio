@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { smoothScrollTo } from '@/lib/utils';
-import { Home, User, Briefcase, Code, Mail, Github, Linkedin } from 'lucide-react';
+import { Home, User, Briefcase, Code, Mail, GithubIcon, LinkedinIcon } from 'lucide-react';
 import MacOSDock from '@/components/ui/mac-os-dock';
 
 const FloatingDock = memo(() => {
@@ -10,8 +10,8 @@ const FloatingDock = memo(() => {
     { id: 'projects', name: 'Projects', icon: Briefcase, href: '#projects' },
     { id: 'skills', name: 'Skills', icon: Code, href: '#skills' },
     { id: 'contact', name: 'Contact', icon: Mail, href: '#contact' },
-    { id: 'github', name: 'GitHub', icon: Github, href: 'https://github.com/Harshithk951', isExternal: true },
-    { id: 'linkedin', name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/harshith-kumar-dev', isExternal: true },
+    { id: 'github', name: 'GitHub', icon: GithubIcon, href: 'https://github.com/Harshithk951', isExternal: true },
+    { id: 'linkedin', name: 'LinkedIn', icon: LinkedinIcon, href: 'https://www.linkedin.com/in/harshith-kumar-dev', isExternal: true },
   ];
 
   const handleAppClick = useCallback((appId) => {

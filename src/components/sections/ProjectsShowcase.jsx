@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from 'react';
-import { ExternalLink, Github, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
+import { ExternalLink, GithubIcon, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { Marquee } from '@/components/ui/marquee';
 
@@ -31,7 +31,7 @@ const PROJECTS = [
     tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
     color: 'glow-blue',
     badge: 'Hackathon Winner 🏆',
-    icon: Github,
+    icon: GithubIcon,
     repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub',
     liveUrl: 'https://alumni-connect-nu.vercel.app/'
   },
@@ -105,7 +105,7 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
             aria-label={`View ${project.title} source code on GitHub`}
             title={`View ${project.title} on GitHub`}
           >
-            <Github size={20} />
+            <GithubIcon size={20} />
           </button>
           {project.liveUrl && (
             <button
