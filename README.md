@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./public/preview.png" alt="Portfolio Header" width="100%" style="border-radius: 15px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
+<img src="./public/portfolio-preview.png" alt="Portfolio Header" width="100%" style="border-radius: 15px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
 
 <br/>
 
