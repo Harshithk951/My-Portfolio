@@ -136,25 +136,27 @@ function HomePage() {
         </AnimatePresence>
 
         {!isLoading && (
-          <main id="main-content" className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
-            <Navbar />
-            <MobileMenu />
-            {heroReady && <Hero />}
-            <ErrorBoundary>
-              <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/70">Loading...</div></div>}>
-                <div className="flex flex-col space-y-0">
-                  <AboutBento />
-                  <SkillsMarquee />
-                  <ProjectsShowcase />
-                  <ServicesSection />
-                  <CTASection />
-                </div>
-                <Footer />
-              </Suspense>
-            </ErrorBoundary>
-          <FloatingDock />
-        </main>
-      )}
+          <>
+            <main id="main-content" className={`smooth-scroll animate-in fade-in duration-1000 bg-[#0b0b0b] ${reduceMotion ? 'reduce-motion' : ''}`}>
+              <Navbar />
+              <MobileMenu />
+              {heroReady && <Hero />}
+              <ErrorBoundary>
+                <Suspense fallback={<div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="text-white/70">Loading...</div></div>}>
+                  <div className="flex flex-col space-y-0">
+                    <AboutBento />
+                    <SkillsMarquee />
+                    <ProjectsShowcase />
+                    <ServicesSection />
+                    <CTASection />
+                  </div>
+                  <Footer />
+                </Suspense>
+              </ErrorBoundary>
+            </main>
+            <FloatingDock />
+          </>
+        )}
 
       {/* Performance Dashboard */}
       <AnimatePresence>
