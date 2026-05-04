@@ -10,7 +10,7 @@ const ASSETS_TO_CACHE = [
   '/robots.txt',
   '/sitemap.xml',
   '/cv.pdf',
-  '/hero-profile-624w.webp'
+  '/hero-profile.jpg'
 ];
 
 self.addEventListener('install', (event) => {
