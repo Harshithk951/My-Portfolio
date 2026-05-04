@@ -42,8 +42,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* CSS containment for paint optimization */
-  contain: layout style paint;
 }
 
 body::before {
