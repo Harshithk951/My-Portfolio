@@ -2,9 +2,6 @@
 
 <img src="./public/portfolio-preview.png" alt="Portfolio Header" width="100%" style="border-radius: 15px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
 
-<br/>
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=30&pause=1000&color=0099FF&center=true&vCenter=true&width=600&lines=🌌+Harshith+Kumar:+Digital+Universe;🚀+AI%2FML+Student;💻+Full+Stack+Architect" alt="Typing SVG" />
 
 <p align="center">
   <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a>
