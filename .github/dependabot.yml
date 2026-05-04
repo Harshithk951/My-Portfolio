@@ -4,14 +4,16 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # Ignore major/breaking updates for critical infrastructure to maintain stability
     ignore:
-      # Tailwind CSS v4 is a breaking rewrite (new PostCSS plugin, CSS-based config).
-      # Stay on v3.x until a deliberate migration is planned.
-      - dependency-name: "tailwindcss"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "tailwindcss-animate"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "monthly"
+      - dependency-name: "vite"
+        versions: [">= 7.0.0"]
+      - dependency-name: "@vitejs/plugin-react"
+        versions: [">= 5.0.0"]
+      - dependency-name: "@supabase/supabase-js"
+        versions: [">= 2.105.0"]
+      - dependency-name: "lucide-react"
+        versions: [">= 1.0.0"] # Keep at 0.x to maintain brand icon support or prevent breaking changes
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 5
