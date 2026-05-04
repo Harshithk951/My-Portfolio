@@ -1,4 +1,5 @@
-import { Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import ContactForm from '@/components/shared/ContactForm';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 
@@ -19,14 +20,14 @@ const CTASection = () => {
       color: 'glow-green'
     },
     {
-      icon: Github,
+      icon: FaGithub,
       label: 'GitHub',
       value: '@Harshithk951',
       href: 'https://github.com/Harshithk951',
       color: 'glow-blue'
     },
     {
-      icon: Linkedin,
+      icon: FaLinkedin,
       label: 'LinkedIn',
       value: 'Harshith Kumar',
       href: 'https://www.linkedin.com/in/harshith-kumar-dev',

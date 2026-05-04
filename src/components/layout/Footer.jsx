@@ -1,5 +1,6 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import { Mail, ArrowUp } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { smoothScrollTo } from '@/lib/utils';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 
@@ -39,8 +40,8 @@ const Footer = () => {
           </div>
 
           <div className="flex gap-4 sm:gap-5 md:gap-6">
-            <SocialIcon href="https://github.com/Harshithk951" icon={Github} />
-            <SocialIcon href="https://www.linkedin.com/in/harshith-kumar-dev" icon={Linkedin} />
+            <SocialIcon href="https://github.com/Harshithk951" icon={FaGithub} />
+            <SocialIcon href="https://www.linkedin.com/in/harshith-kumar-dev" icon={FaLinkedin} />
             <SocialIcon href="mailto:mharshithkumar6@gmail.com" icon={Mail} />
           </div>
 
