@@ -62,7 +62,7 @@ export const LazyImage = ({
     setImageType(type);
 
     // Build srcset if provided
-    if (srcSet && srcSet[format]) {
+    if (srcSet?.[format]) {
       setImageSrcSet(srcSet[format]);
     } else if (srcSet) {
       // Use jpeg srcset as fallback
