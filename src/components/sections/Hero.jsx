@@ -174,7 +174,7 @@ const Hero = memo(() => {
             <div className="mobile-bounce-image w-[240px] h-[360px] sm:w-[260px] sm:h-[390px] md:w-[320px] md:h-[480px] lg:w-[380px] lg:h-[580px]">
               <TiltedCard
                 imageSrc="/hero-profile-624w.jpg"
-                altText="Harshith Kumar - Full Stack Developer professional headshot"
+                altText="Harshith Kumar Mannepally - AI-First Full Stack Developer professional headshot"
                 captionText="Harshith Kumar - Full Stack Developer"
                 containerHeight="100%"
                 containerWidth="100%"

@@ -118,11 +118,30 @@ function HomePage() {
         <SEOHead 
           title="Harshith Kumar | AI-First Full Stack Developer"
           description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
-          keywords="Harshith Kumar, Harshith, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation, ResumeOptima, Crew Wellness AI, Software Engineering"
+          keywords="Harshith Kumar, Harshith, harshithkumar, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation, ResumeOptima, Crew Wellness AI, Software Engineering"
           ogImage="https://harshithkumar.in/preview.png"
           ogUrl="https://harshithkumar.in/"
           twitterHandle="@harshithk951"
           canonical="https://harshithkumar.in/"
+          structured={{
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Harshith Kumar Mannepally",
+            "alternateName": ["Harshith Kumar", "Harshith", "harshithkumar"],
+            "url": "https://harshithkumar.in",
+            "image": "https://harshithkumar.in/hero-profile.jpg",
+            "sameAs": [
+              "https://www.linkedin.com/in/harshith-kumar-dev",
+              "https://github.com/Harshithk951",
+              "https://twitter.com/harshithk951",
+              "https://www.instagram.com/harshith_kumar_mannepally"
+            ],
+            "jobTitle": "AI-First Full Stack Developer",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Freelance"
+            }
+          }}
         />
         <a 
           href="#main-content" 
