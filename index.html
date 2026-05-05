@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-TG87G85S');</script>
-	<!-- End Google Tag Manager -->
+	<!-- DNS Prefetch for analytics and third-party services (non-blocking) -->
+	<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+	<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
 	<meta charset="UTF-8" />
 	<link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -26,13 +27,7 @@
 	<meta name="format-detection" content="telephone=no" />
 
 	<!-- Preload Critical Resources -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	
-	<!-- DNS Prefetch for analytics and third-party services (non-blocking) -->
-	<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-	<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
 	
 	<!-- SEO Meta Tags -->
 	<meta name="description"
@@ -66,10 +61,7 @@
 	<meta name="twitter:creator" content="@harshithk951" />
 
 
-	<!-- Preconnect to critical origins -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
 
 	<!-- Preload critical fonts with font-display: swap for fast text rendering -->
 	<!-- Geist Variable Font (primary font) -->
@@ -82,7 +74,8 @@
 	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@100..1000&display=swap"></noscript>
 
 	<!-- Preload LCP hero image (WebP with JPEG fallback) -->
-	<link rel="preload" as="image" href="/hero-profile-624w.jpg" type="image/jpeg" fetchpriority="high">
+	<!-- Preload LCP hero image (Pre-resized 420w version for faster mobile LCP) -->
+	<link rel="preload" as="image" href="/hero-profile-420w.jpg" type="image/jpeg" fetchpriority="high">
 	<link rel="preload" as="image" href="/preview.png" fetchpriority="high">
 
 	<!-- Structured Data (JSON-LD) -->
@@ -155,6 +148,13 @@
 	<!-- End Google Tag Manager (noscript) -->
 
 	<div id="root"></div>
+	
+	<!-- Google Tag Manager (Non-blocking placement) -->
+	<script async>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TG87G85S');</script>
 	
 	<script type="module" src="/src/main.jsx"></script>
 </body>
