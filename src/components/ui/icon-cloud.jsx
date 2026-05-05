@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import { cn } from "@/lib/utils";
 import { useDeviceInfo } from "@/hooks/useDeviceContext";
 
@@ -319,5 +320,10 @@ export function IconCloud({ images = [], className }) {
     </div>
   );
 }
+
+IconCloud.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string),
+  className: PropTypes.string,
+};
 
 export default IconCloud;

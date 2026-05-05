@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import PropTypes from "prop-types";
 
 const MouseEnterContext = createContext([false, () => {}]);
 
@@ -75,6 +76,12 @@ export const CardContainer = ({ children, className = "", containerClassName = "
   );
 };
 
+CardContainer.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  containerClassName: PropTypes.string,
+};
+
 // ── CardBody ──────────────────────────────────────────────────────────
 export const CardBody = ({ children, className = "" }) => {
   return (
@@ -84,6 +91,11 @@ export const CardBody = ({ children, className = "" }) => {
       {children}
     </div>
   );
+};
+
+CardBody.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 // ── CardItem ──────────────────────────────────────────────────────────
@@ -116,6 +128,18 @@ export const CardItem = ({
       {children}
     </Component>
   );
+};
+
+CardItem.propTypes = {
+  as: PropTypes.elementType,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  translateX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  translateY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  translateZ: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rotateX: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rotateY: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rotateZ: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 // ── Hook (internal only — not exported to avoid HMR issues) ───────────

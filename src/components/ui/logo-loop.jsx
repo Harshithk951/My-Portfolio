@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export function LogoLoop({
   logos = [],
@@ -150,5 +151,26 @@ export function LogoLoop({
     </>
   );
 }
+
+LogoLoop.propTypes = {
+  logos: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      node: PropTypes.node,
+      src: PropTypes.string,
+      alt: PropTypes.string,
+    })
+  ),
+  speed: PropTypes.number,
+  direction: PropTypes.oneOf(['left', 'right']),
+  logoHeight: PropTypes.number,
+  gap: PropTypes.number,
+  hoverSpeed: PropTypes.number,
+  scaleOnHover: PropTypes.bool,
+  fadeOut: PropTypes.bool,
+  fadeOutColor: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  useCustomRender: PropTypes.bool,
+};
 
 export default LogoLoop;

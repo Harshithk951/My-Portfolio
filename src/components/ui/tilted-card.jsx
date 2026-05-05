@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { SPRING_SMOOTH } from '@/lib/animationConfig';
 import './tilted-card.css';
@@ -147,3 +148,19 @@ export default function TiltedCard({
     </figure>
   );
 }
+
+TiltedCard.propTypes = {
+  imageSrc: PropTypes.string.isRequired,
+  altText: PropTypes.string,
+  captionText: PropTypes.string,
+  containerHeight: PropTypes.string,
+  containerWidth: PropTypes.string,
+  imageHeight: PropTypes.string,
+  imageWidth: PropTypes.string,
+  scaleOnHover: PropTypes.number,
+  rotateAmplitude: PropTypes.number,
+  showMobileWarning: PropTypes.bool,
+  showTooltip: PropTypes.bool,
+  overlayContent: PropTypes.node,
+  displayOverlayContent: PropTypes.bool,
+};

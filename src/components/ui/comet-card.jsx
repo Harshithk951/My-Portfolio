@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 import {
   motion,
   useMotionValue,
@@ -96,4 +97,11 @@ export const CometCard = ({
       </motion.div>
     </div>
   );
+};
+
+CometCard.propTypes = {
+  rotateDepth: PropTypes.number,
+  translateDepth: PropTypes.number,
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
