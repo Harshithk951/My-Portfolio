@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * LazyImage Component - Optimized for responsive images and modern formats
@@ -132,6 +133,16 @@ export const LazyImage = ({
       {...props}
     />
   );
+};
+
+LazyImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  placeholderSrc: PropTypes.string,
+  srcSet: PropTypes.objectOf(PropTypes.string),
+  loadImmediately: PropTypes.bool,
+  onLoad: PropTypes.func,
 };
 
 export default LazyImage;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Mail, ArrowUp } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { smoothScrollTo } from '@/lib/utils';
@@ -88,6 +89,11 @@ const SocialIcon = ({ href, icon: Icon }) => {
       <Icon size={20} />
     </a>
   );
+};
+
+SocialIcon.propTypes = {
+  href: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
 };
 
 export default Footer;
