@@ -20,7 +20,7 @@ import { ANIMATION_PRESETS } from '@/lib/animationConfig';
 const PerformanceDashboard = ({ onClose }) => {
   const [metrics, setMetrics] = useState(() => window.__PERF_METRICS__ || {});
   const [performance] = useState(() => {
-    if (window.performance && window.performance.timing) {
+    if (window.performance?.timing) {
       const timing = window.performance.timing;
       const navigationStart = timing.navigationStart;
       return {
