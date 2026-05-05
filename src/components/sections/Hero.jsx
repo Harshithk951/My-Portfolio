@@ -46,7 +46,7 @@ const Hero = memo(() => {
       link.download = 'Harshith_Kumar_CV.pdf';
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
+      link.remove();
 
       toast({
         title: "CV Download",
