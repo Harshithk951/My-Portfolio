@@ -13,6 +13,7 @@
  */
 
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const SEOHead = ({
   title,
@@ -88,6 +89,19 @@ const SEOHead = ({
   }, [title, description, keywords, ogImage, ogUrl, ogType, twitterHandle, twitterCardType, canonical, structured]);
 
   return null;
+};
+
+SEOHead.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.string,
+  ogImage: PropTypes.string,
+  ogUrl: PropTypes.string,
+  ogType: PropTypes.string,
+  twitterHandle: PropTypes.string,
+  twitterCardType: PropTypes.string,
+  canonical: PropTypes.string,
+  structured: PropTypes.object,
 };
 
 /**

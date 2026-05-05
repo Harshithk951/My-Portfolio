@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export function StarBorder({
   as: _as = 'div',
@@ -44,5 +45,14 @@ export function StarBorder({
     </div>
   );
 }
+
+StarBorder.propTypes = {
+  as: PropTypes.elementType,
+  className: PropTypes.string,
+  color: PropTypes.string,
+  speed: PropTypes.string,
+  symbol: PropTypes.string,
+  children: PropTypes.node,
+};
 
 export default StarBorder;

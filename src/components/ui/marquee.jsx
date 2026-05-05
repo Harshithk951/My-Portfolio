@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { cn } from "@/lib/utils";
 
 export function Marquee({
@@ -131,5 +132,16 @@ export function Marquee({
     </>
   );
 }
+
+Marquee.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  duration: PropTypes.number,
+  pauseOnHover: PropTypes.bool,
+  direction: PropTypes.oneOf(["left", "right", "up", "down"]),
+  fade: PropTypes.bool,
+  fadeAmount: PropTypes.number,
+  reverse: PropTypes.bool,
+};
 
 export default Marquee;

@@ -1,5 +1,6 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { detectDeviceCapabilities } from '@/lib/utils';
 
 const vertexShader = `
@@ -395,3 +396,23 @@ export default function Galaxy({
     />
   );
 }
+
+Galaxy.propTypes = {
+  focal: PropTypes.arrayOf(PropTypes.number),
+  rotation: PropTypes.arrayOf(PropTypes.number),
+  starSpeed: PropTypes.number,
+  density: PropTypes.number,
+  hueShift: PropTypes.number,
+  disableAnimation: PropTypes.bool,
+  speed: PropTypes.number,
+  mouseInteraction: PropTypes.bool,
+  glowIntensity: PropTypes.number,
+  saturation: PropTypes.number,
+  mouseRepulsion: PropTypes.bool,
+  repulsionStrength: PropTypes.number,
+  twinkleIntensity: PropTypes.number,
+  rotationSpeed: PropTypes.number,
+  autoCenterRepulsion: PropTypes.number,
+  transparent: PropTypes.bool,
+  className: PropTypes.string,
+};
