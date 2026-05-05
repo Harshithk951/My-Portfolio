@@ -1,4 +1,5 @@
 import React, { useCallback, memo } from 'react';
+import PropTypes from 'prop-types';
 import { ExternalLink, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { sendAnalyticsEvent } from '@/lib/analytics';
@@ -153,6 +154,21 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
 });
 
 ProjectCard.displayName = 'ProjectCard';
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+    color: PropTypes.string.isRequired,
+    badge: PropTypes.string,
+    icon: PropTypes.elementType.isRequired,
+    repoUrl: PropTypes.string.isRequired,
+    liveUrl: PropTypes.string
+  }).isRequired,
+  handleGitHub: PropTypes.func.isRequired,
+  handleLive: PropTypes.func.isRequired
+};
 
 // ── Main Component ────────────────────────────────────────────────────
 const ProjectsShowcase = memo(() => {
