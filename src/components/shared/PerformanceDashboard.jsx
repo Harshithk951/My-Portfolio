@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { X, Activity, Zap, AlertCircle } from 'lucide-react';
 import { ANIMATION_PRESETS } from '@/lib/animationConfig';
@@ -183,6 +184,10 @@ const PerformanceDashboard = ({ onClose }) => {
       </div>
     </motion.div>
   );
+};
+
+PerformanceDashboard.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default PerformanceDashboard;
