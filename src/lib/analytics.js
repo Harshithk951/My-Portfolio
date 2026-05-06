@@ -5,9 +5,9 @@
  * @param {object} [payload]  Optional key/value pairs sent with the event
  */
 export function sendAnalyticsEvent(eventName, payload = {}) {
-  if (typeof window === 'undefined') return;      // SSR-safe
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: eventName, ...payload });
+  if (typeof globalThis === 'undefined') return;      // SSR-safe
+  globalThis.dataLayer = globalThis.dataLayer || [];
+  globalThis.dataLayer.push({ event: eventName, ...payload });
 }
 
 /**
@@ -24,14 +24,14 @@ export function sendToAnalytics({ id, name, value, delta }) {
   });
 
   // Store metrics for performance dashboard
-  if (typeof window !== 'undefined') {
-    window.__PERF_METRICS__ = window.__PERF_METRICS__ || {};
+  if (typeof globalThis !== 'undefined') {
+    globalThis.__PERF_METRICS__ = globalThis.__PERF_METRICS__ || {};
     
     // Determine unit based on metric type
     let unit = 'ms';
     if (name === 'CLS') unit = '';
     
-    window.__PERF_METRICS__[name] = {
+    globalThis.__PERF_METRICS__[name] = {
       value: typeof value === 'number' ? value : delta || value,
       unit,
       timestamp: Date.now(),
@@ -40,9 +40,9 @@ export function sendToAnalytics({ id, name, value, delta }) {
 
     // Dispatch custom event for dashboard real-time updates
     const event = new CustomEvent('perf-metric-update', {
-      detail: window.__PERF_METRICS__,
+      detail: globalThis.__PERF_METRICS__,
     });
-    window.dispatchEvent(event);
+    globalThis.dispatchEvent(event);
 
     // Log to console in dev mode
     if (import.meta.env.DEV) {

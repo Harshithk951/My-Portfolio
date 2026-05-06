@@ -255,7 +255,7 @@ export default function Galaxy({
       let program;
 
       const resize = () => {
-        const dpr = isLowEnd ? 1 : Math.min(window.devicePixelRatio, 2);
+        const dpr = isLowEnd ? 1 : Math.min(globalThis.devicePixelRatio, 2);
         renderer.setSize(ctn.offsetWidth * dpr, ctn.offsetHeight * dpr);
         if (program) {
           program.uniforms.uResolution.value = new Color(
@@ -265,7 +265,7 @@ export default function Galaxy({
           );
       }
     }
-    window.addEventListener('resize', resize, false);
+    globalThis.addEventListener('resize', resize, false);
     resize();
 
     const geometry = new Triangle(gl);
@@ -351,7 +351,7 @@ export default function Galaxy({
 
     return () => {
       cancelAnimationFrame(animateId);
-      window.removeEventListener('resize', resize);
+      globalThis.removeEventListener('resize', resize);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);

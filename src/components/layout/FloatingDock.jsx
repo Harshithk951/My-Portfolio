@@ -22,13 +22,13 @@ const FloatingDock = memo(() => {
   useEffect(() => {
     const onScroll = () => {
       // Trigger when scrolled past ~60% of viewport height (past Hero)
-      setIsVisible(window.scrollY > window.innerHeight * 0.6);
+      setIsVisible(globalThis.scrollY > globalThis.innerHeight * 0.6);
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    globalThis.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // Check on mount
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => globalThis.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleAppClick = useCallback((appId) => {
@@ -36,7 +36,7 @@ const FloatingDock = memo(() => {
     if (!app) return;
 
     if (app.isExternal) {
-      window.open(app.href, '_blank', 'noopener,noreferrer');
+      globalThis.open(app.href, '_blank', 'noopener,noreferrer');
     } else {
       smoothScrollTo(app.href);
     }

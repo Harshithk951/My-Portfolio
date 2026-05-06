@@ -21,15 +21,15 @@ export const CardContainer = ({ children, className = "", containerClassName = "
   // Detect if device supports hover (for tablets with touch + mouse capability)
   useEffect(() => {
     const checkHoverSupport = () => {
-      if (typeof window === 'undefined') return true;
+      if (typeof globalThis === 'undefined') return true;
       // Check if device supports hover via media query simulation
-      const hasMouse = window.matchMedia('(hover: hover)').matches;
+      const hasMouse = globalThis.matchMedia('(hover: hover)').matches;
       setSupportsHover(hasMouse);
     };
     
     checkHoverSupport();
-    window.addEventListener('resize', checkHoverSupport);
-    return () => window.removeEventListener('resize', checkHoverSupport);
+    globalThis.addEventListener('resize', checkHoverSupport);
+    return () => globalThis.removeEventListener('resize', checkHoverSupport);
   }, []);
 
   const handleMouseMove = useCallback((e) => {
