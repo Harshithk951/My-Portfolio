@@ -30,7 +30,7 @@ function HomePage() {
   const [heroReady, setHeroReady] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(() => prefersReducedMotion());
   const [showPerformance, setShowPerformance] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(globalThis.location.search);
     return params.get('perf') === '1';
   });
 
@@ -43,17 +43,17 @@ function HomePage() {
 
     // Listen for URL changes
     const handlePopState = () => {
-      const newParams = new URLSearchParams(window.location.search);
+      const newParams = new URLSearchParams(globalThis.location.search);
       setShowPerformance(newParams.get('perf') === '1');
     };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    globalThis.addEventListener('popstate', handlePopState);
+    return () => globalThis.removeEventListener('popstate', handlePopState);
   }, []);
 
   useEffect(() => {
     // Listen for changes to prefers-reduced-motion
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = globalThis.matchMedia('(prefers-reduced-motion: reduce)');
     const handleChange = (e) => setReduceMotion(e.matches);
     mediaQuery.addEventListener('change', handleChange);
 
@@ -62,7 +62,7 @@ function HomePage() {
 
   useEffect(() => {
     // Reset scroll to top on mount
-    window.scrollTo(0, 0);
+    globalThis.scrollTo(0, 0);
     
     // Initialize page load timer for protection mechanisms
     initializePageLoadTimer();
@@ -97,17 +97,17 @@ function HomePage() {
       if (event.persisted) {
         setIsLoading(false);
         document.body.style.overflow = 'unset';
-        window.scrollTo(0, 0);
+        globalThis.scrollTo(0, 0);
         setHeroReady(true);
       }
     };
 
-    window.addEventListener('pageshow', handlePageShow);
+    globalThis.addEventListener('pageshow', handlePageShow);
 
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = 'unset';
-      window.removeEventListener('pageshow', handlePageShow);
+      globalThis.removeEventListener('pageshow', handlePageShow);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduceMotion]);
