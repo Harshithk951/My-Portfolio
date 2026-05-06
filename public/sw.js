@@ -13,16 +13,16 @@ const ASSETS_TO_CACHE = [
   '/hero-profile.jpg'
 ];
 
-self.addEventListener('install', (event) => {
+globalThis.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
-  self.skipWaiting();
+  globalThis.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+globalThis.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -32,10 +32,10 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-  self.clients.claim();
+  globalThis.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
+globalThis.addEventListener('fetch', (event) => {
   // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
   
   // Static assets and scripts
   if (
-    url.origin === self.location.origin && 
+    url.origin === globalThis.location.origin && 
     (url.pathname.startsWith('/assets/') || ASSETS_TO_CACHE.includes(url.pathname))
   ) {
     event.respondWith(
