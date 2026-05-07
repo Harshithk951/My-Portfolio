@@ -174,12 +174,12 @@ ProjectCard.propTypes = {
 const ProjectsShowcase = memo(() => {
   const handleGitHub = useCallback((repoUrl) => {
     sendAnalyticsEvent('github_click', { url: repoUrl });
-    window.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
+    globalThis.open(repoUrl || 'https://github.com/Harshithk951', '_blank', 'noopener,noreferrer');
   }, []);
 
   const handleLive = useCallback((liveUrl) => {
     sendAnalyticsEvent('project_open', { url: liveUrl });
-    window.open(liveUrl, '_blank', 'noopener,noreferrer');
+    globalThis.open(liveUrl, '_blank', 'noopener,noreferrer');
   }, []);
 
   return (

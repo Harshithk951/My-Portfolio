@@ -155,10 +155,10 @@ export const createPictureElement = ({ src, alt, srcSet }) => {
  * const width = getOptimalImageWidth();
  */
 export const getOptimalImageWidth = () => {
-  if (typeof window === 'undefined') return 1280;
+  if (typeof globalThis === 'undefined') return 1280;
 
-  const dpr = window.devicePixelRatio || 1;
-  const viewportWidth = window.innerWidth;
+  const dpr = globalThis.devicePixelRatio || 1;
+  const viewportWidth = globalThis.innerWidth;
   
   // Calculate based on viewport and DPR
   return Math.ceil(viewportWidth * dpr);

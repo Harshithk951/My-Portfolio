@@ -19,10 +19,10 @@ import { ANIMATION_PRESETS } from '@/lib/animationConfig';
  * - TTFB (Time to First Byte): Server response time
  */
 const PerformanceDashboard = ({ onClose }) => {
-  const [metrics, setMetrics] = useState(() => window.__PERF_METRICS__ || {});
+  const [metrics, setMetrics] = useState(() => globalThis.__PERF_METRICS__ || {});
   const [performance] = useState(() => {
-    if (window.performance?.timing) {
-      const timing = window.performance.timing;
+    if (globalThis.performance?.timing) {
+      const timing = globalThis.performance.timing;
       const navigationStart = timing.navigationStart;
       return {
         dns: timing.domainLookupEnd - timing.domainLookupStart,
@@ -43,8 +43,8 @@ const PerformanceDashboard = ({ onClose }) => {
       setMetrics(e.detail);
     };
 
-    window.addEventListener('perf-metric-update', handleMetricUpdate);
-    return () => window.removeEventListener('perf-metric-update', handleMetricUpdate);
+    globalThis.addEventListener('perf-metric-update', handleMetricUpdate);
+    return () => globalThis.removeEventListener('perf-metric-update', handleMetricUpdate);
   }, []);
 
   const getMetricStatus = (name, value) => {
@@ -153,11 +153,11 @@ const PerformanceDashboard = ({ onClose }) => {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <span className="text-slate-500">Screen Size:</span>
-              <span className="text-cyan-400 ml-2">{window.innerWidth}x{window.innerHeight}</span>
+              <span className="text-cyan-400 ml-2">{globalThis.innerWidth}x{globalThis.innerHeight}</span>
             </div>
             <div>
               <span className="text-slate-500">Pixel Ratio:</span>
-              <span className="text-cyan-400 ml-2">{window.devicePixelRatio}x</span>
+              <span className="text-cyan-400 ml-2">{globalThis.devicePixelRatio}x</span>
             </div>
             <div>
               <span className="text-slate-500">User Agent:</span>

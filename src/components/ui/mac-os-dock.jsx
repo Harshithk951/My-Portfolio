@@ -10,8 +10,8 @@ const MacOSDock = ({
   const [mouseX, setMouseX] = useState(null);
   const [touchX, setTouchX] = useState(null);
   const [isTouchDevice] = useState(() => {
-    return typeof window !== 'undefined' && (
-      'ontouchstart' in window ||
+    return typeof globalThis !== 'undefined' && (
+      'ontouchstart' in globalThis ||
       navigator.maxTouchPoints > 0 ||
       navigator.msMaxTouchPoints > 0
     );
@@ -26,11 +26,11 @@ const MacOSDock = ({
   const lastTouchTime = useRef(0);
 
   const getResponsiveConfig = useCallback(() => {
-    if (typeof window === 'undefined') {
+    if (typeof globalThis === 'undefined') {
       return { baseIconSize: 56, maxScale: 1.6, effectWidth: 240 };
     }
 
-    const smallerDimension = Math.min(window.innerWidth, window.innerHeight);
+    const smallerDimension = Math.min(globalThis.innerWidth, globalThis.innerHeight);
     
     if (smallerDimension < 480) {
       return {
@@ -91,8 +91,8 @@ const MacOSDock = ({
       );
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    globalThis.addEventListener('resize', handleResize);
+    return () => globalThis.removeEventListener('resize', handleResize);
   }, [getResponsiveConfig, apps, minScale, computePositions]);
 
 

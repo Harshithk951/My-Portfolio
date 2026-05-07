@@ -29,7 +29,7 @@ function hexToRgba(hex, a) {
 }
 
 function isMobile() {
-  return window.innerWidth <= 768;
+  return globalThis.innerWidth <= 768;
 }
 
 const loadImageFromUrl = (url) => {
@@ -152,7 +152,7 @@ export function IconCloud({ images = [], className }) {
 
     const mobile = isMobile();
     // Cap DPR: 1 on mobile, up to 2 on desktop
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 2);
+    const dpr = Math.min(globalThis.devicePixelRatio || 1, mobile ? 1 : 2);
 
     let resizeTimer;
     const resize = () => {

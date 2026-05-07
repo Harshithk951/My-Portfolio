@@ -7,7 +7,7 @@ import { sendAnalyticsEvent } from '@/lib/analytics';
 
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({
+    globalThis.scrollTo({
       top: 0,
       behavior: 'smooth'
     });

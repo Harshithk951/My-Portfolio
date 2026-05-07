@@ -26,7 +26,7 @@ export function cn(...inputs) {
  *   - networkType: string ('4g', '3g', 'slow-2g', 'unknown')
  */
 export function detectDeviceCapabilities() {
-  if (typeof window === 'undefined') {
+  if (typeof globalThis === 'undefined') {
     return {
       isMobile: false,
       isTablet: false,
@@ -44,7 +44,7 @@ export function detectDeviceCapabilities() {
   
   const hasTouch = () => {
     return (
-      'ontouchstart' in window ||
+      'ontouchstart' in globalThis ||
       navigator.maxTouchPoints > 0 ||
       navigator.msMaxTouchPoints > 0
     );
@@ -60,7 +60,7 @@ export function detectDeviceCapabilities() {
     isTablet,
     isLowEnd,
     hasTouch: hasTouch(),
-    pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+    pixelRatio: Math.min(globalThis.devicePixelRatio || 1, 2),
     networkType,
   };
 }
@@ -72,8 +72,8 @@ export function detectDeviceCapabilities() {
  * @returns {boolean} True if prefers-reduced-motion is set
  */
 export function prefersReducedMotion() {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (typeof globalThis === 'undefined') return false;
+  return globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 
@@ -94,7 +94,7 @@ export function initializePageLoadTimer() {
 }
 
 /**
- * Check if we're within the protection window
+ * Check if we're within the protection globalThis
  */
 function isInLoadProtectionWindow() {
   if (!pageLoadStartTime) return true;
@@ -109,11 +109,11 @@ function isInLoadProtectionWindow() {
 /**
  * Smoothly scrolls to a specific element by ID.
  * Uses native smooth scrolling for best performance.
- * Respects page load window - won't scroll during initial 0.8 seconds.
+ * Respects page load globalThis - won't scroll during initial 0.8 seconds.
  * @param {string} id - The ID of the element to scroll to (e.g., '#contact').
  */
 export function smoothScrollTo(id) {
-  // Don't allow scrolling during initial page load window
+  // Don't allow scrolling during initial page load globalThis
   if (isInLoadProtectionWindow()) {
     return; // Silently ignore scroll requests during loading
   }
@@ -122,9 +122,9 @@ export function smoothScrollTo(id) {
   if (element) {
     const navbarOffset = 40; // Pixels to offset from top
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.scrollY - navbarOffset;
+    const offsetPosition = elementPosition + globalThis.scrollY - navbarOffset;
 
-    window.scrollTo({
+    globalThis.scrollTo({
       top: offsetPosition,
       behavior: 'smooth'
     });
