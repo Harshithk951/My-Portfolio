@@ -85,10 +85,10 @@ function HomePage() {
       document.body.style.overflow = 'unset';
       
       // Delay Hero render to ensure smooth transition
-      if (!reduceMotion) {
-        setTimeout(() => setHeroReady(true), heroDelay);
-      } else {
+      if (reduceMotion) {
         setHeroReady(true);
+      } else {
+        setTimeout(() => setHeroReady(true), heroDelay);
       }
     }, loadDuration);
 

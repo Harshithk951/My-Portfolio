@@ -180,8 +180,8 @@ const Hero = memo(() => {
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
-                rotateAmplitude={!isMobile ? 14 : 0}
-                scaleOnHover={!isMobile ? 1.1 : 1}
+                rotateAmplitude={isMobile ? 0 : 14}
+                scaleOnHover={isMobile ? 1 : 1.1}
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
