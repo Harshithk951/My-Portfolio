@@ -139,7 +139,7 @@ const PerformanceDashboard = ({ onClose }) => {
             <div className="grid grid-cols-2 gap-2 text-xs">
               {Object.entries(performance).map(([key, value]) => (
                 <div key={key} className="bg-slate-800/50 p-2 rounded border border-slate-700">
-                  <div className="text-slate-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</div>
+                  <div className="text-slate-400 capitalize">{key.replaceAll(/([A-Z])/g, ' $1')}</div>
                   <div className="font-mono text-cyan-400 font-semibold">{Math.round(value)}ms</div>
                 </div>
               ))}
