@@ -90,6 +90,7 @@ export default function TiltedCard({
   return (
     <figure
       ref={ref}
+      role="presentation"
       className="tilted-card-figure"
       style={{
         height: containerHeight,

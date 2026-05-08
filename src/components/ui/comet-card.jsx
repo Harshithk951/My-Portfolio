@@ -77,6 +77,7 @@ export const CometCard = ({
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        role="presentation"
         style={{
           rotateX,
           rotateY,
