@@ -68,6 +68,8 @@ export function Marquee({
       </style>
       <div
         ref={containerRef}
+        role="region"
+        aria-label="Scrolling marquee"
         className={cn(
           "flex w-full overflow-hidden",
           isVertical && "flex-col",
