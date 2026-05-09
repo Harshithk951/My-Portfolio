@@ -55,7 +55,7 @@ export function sendToAnalytics({ id, name, value, delta }) {
  * Report Web Vitals using standard Observer API
  */
 export function reportWebVitals(onPerfEntry) {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
+  if (onPerfEntry && typeof onPerfEntry === 'function') {
     import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
       onCLS(onPerfEntry);
       onFCP(onPerfEntry);
