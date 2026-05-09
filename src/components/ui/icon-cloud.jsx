@@ -307,15 +307,8 @@ export function IconCloud({ images = [], className }) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
-      role="button"
-      aria-roledescription="Interactive 3D skill cloud"
-      aria-label="Interactive 3D skill cloud visualization"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-        }
-      }}
+      role="img"
+      aria-label="3D skill cloud visualization"
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full cursor-grab active:cursor-grabbing" role="presentation" />
     </div>
