@@ -24,7 +24,7 @@ function fibonacciSphere(n) {
 }
 
 function hexToRgba(hex, a) {
-  const n = parseInt(hex.replace("#", ""), 16);
+  const n = Number.parseInt(hex.replace("#", ""), 16);
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 }
 
