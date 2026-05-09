@@ -307,7 +307,8 @@ export function IconCloud({ images = [], className }) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
-      role="img"
+      role="button"
+      aria-roledescription="Interactive 3D skill cloud"
       aria-label="Interactive 3D skill cloud visualization"
       tabIndex={0}
       onKeyDown={(e) => {
