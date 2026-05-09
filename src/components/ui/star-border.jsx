@@ -52,6 +52,7 @@ StarBorder.propTypes = {
   color: PropTypes.string,
   speed: PropTypes.string,
   symbol: PropTypes.string,
+  style: PropTypes.object,
   children: PropTypes.node,
 };
 
