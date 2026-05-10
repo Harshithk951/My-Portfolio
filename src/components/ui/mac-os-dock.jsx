@@ -61,7 +61,7 @@ const MacOSDock = ({
 
   const [config, setConfig] = useState(getResponsiveConfig);
   const { baseIconSize, maxScale, effectWidth } = config;
-  const minScale = 1.0;
+  const minScale = 1;
   const baseSpacing = Math.max(4, baseIconSize * 0.08);
 
   // Helper to compute positions from scales (used before calculatePositions is defined)

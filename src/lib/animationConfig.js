@@ -75,7 +75,7 @@ export const TRANSITION_TIMINGS = {
 
   // Longer transitions (500ms+)
   SLOW: 0.8,
-  SLOWER: 1.0,
+  SLOWER: 1,
   SLOWEST: 1.5,
 };
 

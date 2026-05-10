@@ -105,25 +105,25 @@ export function Marquee({
             isPaused && "paused",
           )}
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div
-              key={`first-${index}`}
+              key={`first-${item.key}`}
               className={cn("flex shrink-0", isVertical && "w-full")}
             >
               {item}
             </div>
           ))}
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div
-              key={`second-${index}`}
+              key={`second-${item.key}`}
               className={cn("flex shrink-0", isVertical && "w-full")}
             >
               {item}
             </div>
           ))}
-          {items.map((item, index) => (
+          {items.map((item) => (
             <div
-              key={`third-${index}`}
+              key={`third-${item.key}`}
               className={cn("flex shrink-0", isVertical && "w-full")}
             >
               {item}
