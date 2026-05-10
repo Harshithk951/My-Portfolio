@@ -77,14 +77,13 @@ const MobileMenu = memo(() => {
       {/* Backdrop - close menu when clicking outside */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            role="button"
-            aria-hidden="true"
+            aria-label="Close menu"
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-[-1] bg-black/20"
+            className="fixed inset-0 z-[-1] bg-black/20 border-none p-0 outline-none"
           />
         )}
       </AnimatePresence>

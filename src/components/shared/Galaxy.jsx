@@ -178,15 +178,15 @@ const detectDeviceCapabilitiesLocal = () => {
 
 export default function Galaxy({
   focal = [0.5, 0.5],
-  rotation = [1.0, 0.0],
+  rotation = [1, 0],
   starSpeed = 0.5,
   density = 1,
   hueShift = 140,
   disableAnimation = false,
-  speed = 1.0,
+  speed = 1,
   mouseInteraction = true,
   glowIntensity = 0.3,
-  saturation = 0.0,
+  saturation = 0,
   mouseRepulsion = true,
   repulsionStrength = 2,
   twinkleIntensity = 0.3,
@@ -198,8 +198,8 @@ export default function Galaxy({
   const ctnDom = useRef(null);
   const targetMousePos = useRef({ x: 0.5, y: 0.5 });
   const smoothMousePos = useRef({ x: 0.5, y: 0.5 });
-  const targetMouseActive = useRef(0.0);
-  const smoothMouseActive = useRef(0.0);
+  const targetMouseActive = useRef(0);
+  const smoothMouseActive = useRef(0);
 
   useEffect(() => {
     if (!ctnDom.current) return;
@@ -292,7 +292,7 @@ export default function Galaxy({
         uTwinkleIntensity: { value: adjustedTwinkle },
         uRotationSpeed: { value: rotationSpeed },
         uRepulsionStrength: { value: repulsionStrength },
-        uMouseActiveFactor: { value: 0.0 },
+        uMouseActiveFactor: { value: 0 },
         uAutoCenterRepulsion: { value: autoCenterRepulsion },
         uTransparent: { value: transparent },
       },
@@ -314,7 +314,7 @@ export default function Galaxy({
       animateId = requestAnimationFrame(update);
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
-        program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
+        program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10;
       }
 
       const lerpFactor = 0.05;
@@ -335,13 +335,13 @@ export default function Galaxy({
     const handleMouseMove = (e) => {
       const rect = ctn.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height;
+      const y = 1 - (e.clientY - rect.top) / rect.height;
       targetMousePos.current = { x, y };
-      targetMouseActive.current = 1.0;
+      targetMouseActive.current = 1;
     };
 
     const handleMouseLeave = () => {
-      targetMouseActive.current = 0.0;
+      targetMouseActive.current = 0;
     };
 
     if (mouseInteraction) {

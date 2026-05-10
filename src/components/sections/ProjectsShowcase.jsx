@@ -139,16 +139,16 @@ const ProjectCard = React.memo(({ project, handleGitHub, handleLive }) => {
         {project.description}
       </p>
 
-      <div className="flex flex-wrap gap-2 mt-auto" aria-label="Technologies used">
-        {project.tech.map((tag, i) => (
-          <span
-            key={i}
-            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/75"
+      <ul className="flex flex-wrap gap-2 mt-auto" aria-label="Technologies used">
+        {project.tech.map((tag) => (
+          <li
+            key={tag}
+            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/75 list-none"
           >
             {tag}
-          </span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 });
