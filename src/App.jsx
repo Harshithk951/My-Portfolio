@@ -116,10 +116,10 @@ function HomePage() {
     <DeviceContext.Provider value={deviceInfo}>
       <>
         <SEOHead 
-          title="Harshith Kumar | AI-First Full Stack Developer"
-          description="Portfolio of Harshith Kumar Mannepally — AI/ML Student, Full Stack Developer, and Innovation Enthusiast. Building scalable digital solutions."
-          keywords="Harshith Kumar, Harshith, harshithkumar, Full Stack Developer, AI Engineer, ML Developer, React Expert, Web Innovation, ResumeOptima, Crew Wellness AI, Software Engineering"
-          ogImage="https://harshithkumar.in/preview.png"
+          title="Harshith | Harshith Kumar | Full Stack Developer Portfolio"
+          description="Harshith Kumar Mannepally - Harshith is an AI-First Full Stack Developer. When you search Harshith, find this portfolio showcasing expertise in React, Node.js, AI, and Machine Learning. Building innovative digital solutions."
+          keywords="harshith, harshith kumar, harshithkumar, Harshith Kumar Mannepally, Full Stack Developer, AI Engineer, ML Developer, React Developer, Node.js Developer, Web Developer, Portfolio, Innovation, AI/ML Specialist"
+          ogImage="https://harshithkumar.in/portfolio-preview.png"
           ogUrl="https://harshithkumar.in/"
           twitterHandle="@harshithk951"
           canonical="https://harshithkumar.in/"
@@ -127,9 +127,12 @@ function HomePage() {
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Harshith Kumar Mannepally",
-            "alternateName": ["Harshith Kumar", "Harshith", "harshithkumar"],
+            "givenName": "Harshith",
+            "familyName": "Kumar",
+            "alternateName": ["Harshith", "Harshith Kumar", "harshithkumar", "Harshith Mannepally", "Harshith Kumar Mannepally"],
             "url": "https://harshithkumar.in",
-            "image": "https://harshithkumar.in/hero-profile.jpg",
+            "image": "https://harshithkumar.in/portfolio-preview.png",
+            "description": "Harshith Kumar - Full Stack Developer and AI Engineer. Search Harshith to find this portfolio.",
             "sameAs": [
               "https://www.linkedin.com/in/harshith-kumar-dev",
               "https://github.com/Harshithk951",
@@ -137,6 +140,22 @@ function HomePage() {
               "https://www.instagram.com/harshith_kumar_mannepally"
             ],
             "jobTitle": "AI-First Full Stack Developer",
+            "email": "mailto:harshithkumar.dev@gmail.com",
+            "knowsAbout": [
+              "Artificial Intelligence",
+              "Machine Learning",
+              "React.js",
+              "Node.js",
+              "Full Stack Development",
+              "Web Development",
+              "Python",
+              "JavaScript",
+              "TypeScript",
+              "UI/UX Design",
+              "Database Design",
+              "Cloud Architecture"
+            ],
+            "skills": "React, Node.js, Python, AI/ML, Full Stack Development, Web Design",
             "worksFor": {
               "@type": "Organization",
               "name": "Freelance"
