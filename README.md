@@ -1,7 +1,12 @@
 <div align="center">
 
-<img src="./public/portfolio-preview.png" alt="Portfolio Header" width="100%" style="border-radius: 15px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
+# 👋 Welcome to Harshith Kumar's Portfolio
 
+<img src="./public/portfolio-preview.png" alt="Harshith Kumar - Full Stack Developer Portfolio Header" width="100%" style="border-radius: 15px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
+
+**Harshith Kumar Mannepally** - AI-First Full Stack Developer | AI/ML Engineer | Innovation Enthusiast
+
+> This is the repository for **Harshith Kumar's professional developer portfolio** showcasing expertise in Full Stack Development, Artificial Intelligence, and Machine Learning.
 
 <p align="center">
   <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a>
@@ -11,11 +16,13 @@
 </p>
 
 <h3>
-  <a href="https://www.harshithkumar.in">🚀 Live Demo</a>
+  <a href="https://www.harshithkumar.in">🚀 View Live Portfolio</a>
   <span> · </span>
-  <a href="https://github.com/Harshithk951/My-Portfolio/issues">🐛 Report Bug</a>
+  <a href="https://www.linkedin.com/in/harshith-kumar-dev">💼 LinkedIn (Harshith Kumar)</a>
   <span> · </span>
-  <a href="mailto:mharshithkumar6@gmail.com">📧 Contact Me</a>
+  <a href="https://github.com/Harshithk951">🐙 GitHub (Harshithk951)</a>
+  <span> · </span>
+  <a href="mailto:harshithkumar.dev@gmail.com">📧 Contact Harshith</a>
 </h3>
 
 </div>
@@ -26,7 +33,7 @@
 
 <img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Alien%20Monster.png" alt="Alien Monster" width="45" />
 
-This repository houses the source code for my **high-performance, motion-driven developer portfolio**. Designed to sit at the bleeding edge of **Artificial Intelligence** and **Modern Web Development**, the architecture is built for extreme speed, fluid cinematic animations, and unparalleled visual storytelling.
+This repository houses the source code for **Harshith Kumar's high-performance, motion-driven developer portfolio**. Designed to sit at the bleeding edge of **Artificial Intelligence** and **Modern Web Development**, the architecture is built for extreme speed, fluid cinematic animations, and unparalleled visual storytelling.
 
 It utilizes an advanced **glassmorphic UI**, **bento-style grid layouts**, and a dynamic **macOS-style floating dock** to deliver a premium user experience.
 
@@ -47,6 +54,7 @@ flowchart TB
         UI <--> Motion
         UI <--> Styles
     end
+```
 
     subgraph Hosting["Deployment & Edge Delivery"]
         Vercel["Vercel Edge Network"]
@@ -62,7 +70,8 @@ flowchart TB
     CDN -.->|Serves Static Bundle| Client
     UI -->|API Requests| Supabase
     GitHub -->|Automated Deployments| Vercel
-```
+
+````
 
 ### Component Hierarchy
 The UI is built on atomic design principles:
@@ -115,7 +124,7 @@ My-Portfolio/
 │   └── index.css           # Global CSS tokens, reset, and custom animations
 ├── index.html              # Entry point
 └── vite.config.js          # Vite build and plugin configuration
-```
+````
 
 ---
 
@@ -124,12 +133,14 @@ My-Portfolio/
 <img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" alt="Rocket" width="45" />
 
 ### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/Harshithk951/My-Portfolio.git
 cd My-Portfolio
 ```
 
 ### 2️⃣ Install Dependencies
+
 ```bash
 npm install
 # or
@@ -137,9 +148,11 @@ yarn install
 ```
 
 ### 3️⃣ Run Development Server
+
 ```bash
 npm run dev
 ```
+
 Open `http://localhost:5173` in your browser.
 
 ---
@@ -150,16 +163,44 @@ Open `http://localhost:5173` in your browser.
 
 The portfolio is continuously audited to maintain perfection across core web vitals.
 
-| Category       | Score | Metric Focus |
-| -------------- | ----- | ------------ |
-| **Performance**    | 🟢 98+ | FCP, LCP, TBT optimization |
-| **Accessibility**  | 🟢 100 | Contrast, ARIA labels, semantic tags |
+| Category           | Score  | Metric Focus                                  |
+| ------------------ | ------ | --------------------------------------------- |
+| **Performance**    | 🟢 98+ | FCP, LCP, TBT optimization                    |
+| **Accessibility**  | 🟢 100 | Contrast, ARIA labels, semantic tags          |
 | **Best Practices** | 🟢 100 | HTTPS, secure dependencies, no console errors |
-| **SEO**            | 🟢 100 | Meta tags, robots.txt, dynamic sitemap |
+| **SEO**            | 🟢 100 | Meta tags, robots.txt, dynamic sitemap        |
 
 ---
 
-## 🤝 Connect With Me
+## 👨‍💻 About Harshith Kumar
+
+**Harshith Kumar Mannepally** (also known as Harshith or harshithkumar) is an **AI-First Full Stack Developer** and **AI/ML Engineer** passionate about building innovative digital solutions.
+
+### 🎯 Expertise
+
+- **Full Stack Development**: React, Node.js, JavaScript, TypeScript
+- **Artificial Intelligence & Machine Learning**: Python, TensorFlow, scikit-learn
+- **Web Technologies**: Vite, Tailwind CSS, Framer Motion, Web Design
+- **Cloud & DevOps**: Database Design, Cloud Architecture, Performance Optimization
+
+### 🏆 Notable Projects
+
+- **ResumeOptima**: AI-powered resume optimization platform
+- **Crew Wellness AI**: Intelligent wellness management system
+- **Portfolio Projects**: Showcasing expertise in modern web development and AI integration
+
+### 🔗 Find Harshith Online
+
+- **Portfolio**: [harshithkumar.in](https://harshithkumar.in) - Official portfolio website
+- **LinkedIn**: [Harshith Kumar](https://www.linkedin.com/in/harshith-kumar-dev) - Professional profile
+- **GitHub**: [Harshithk951](https://github.com/Harshithk951) - Open source contributions
+- **Email**: harshithkumar.dev@gmail.com
+
+> **Search for "Harshith", "Harshith Kumar", or "harshithkumar"** to find more about this developer's work and portfolio.
+
+---
+
+## 🤝 Connect With Harshith Kumar
 
 <img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand.png" alt="Waving Hand" width="45" />
 
@@ -167,10 +208,10 @@ The portfolio is continuously audited to maintain perfection across core web vit
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/harshith-kumar-dev/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Harshithk951)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:mharshithkumar6@gmail.com)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:harshithkumar.dev@gmail.com)
 
-**Harshith Kumar**  
-*Building the future with code and intelligence.*
+**Harshith Kumar Mannepally**  
+_AI-First Full Stack Developer | Building the future with code and intelligence._
 
 ⭐ **If you like this project or find it helpful, please give it a star!** ⭐
 
