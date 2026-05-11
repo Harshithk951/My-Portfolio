@@ -133,6 +133,18 @@ function HomePage() {
             "url": "https://harshithkumar.in",
             "image": "https://harshithkumar.in/portfolio-preview.png",
             "description": "Harshith Kumar - Full Stack Developer and AI Engineer. Search Harshith to find this portfolio.",
+            "profiles": [
+              {
+                "@type": "Organization",
+                "name": "LinkedIn",
+                "url": "https://www.linkedin.com/in/harshith-kumar-dev"
+              },
+              {
+                "@type": "Organization",
+                "name": "GitHub",
+                "url": "https://github.com/Harshithk951"
+              }
+            ],
             "sameAs": [
               "https://www.linkedin.com/in/harshith-kumar-dev",
               "https://github.com/Harshithk951",
