@@ -121,7 +121,7 @@ function HomePage() {
           keywords="harshith, harshith kumar, harshithkumar, Harshith Kumar Mannepally, Full Stack Developer, AI Engineer, ML Developer, React Developer, Node.js Developer, Web Developer, Portfolio, Innovation, AI/ML Specialist"
           ogImage="https://harshithkumar.in/portfolio-preview.png"
           ogUrl="https://harshithkumar.in/"
-          twitterHandle="@harshithk951"
+          twitterHandle="@harshith_k52619"
           canonical="https://harshithkumar.in/"
           structured={{
             "@context": "https://schema.org",
@@ -136,7 +136,7 @@ function HomePage() {
             "sameAs": [
               "https://www.linkedin.com/in/harshith-kumar-dev",
               "https://github.com/Harshithk951",
-              "https://twitter.com/harshithk951",
+              "https://x.com/harshith_k52619",
               "https://www.instagram.com/harshith_kumar_mannepally"
             ],
             "jobTitle": "AI-First Full Stack Developer",
