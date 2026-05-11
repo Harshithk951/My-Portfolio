@@ -307,7 +307,6 @@ export function IconCloud({ images = [], className }) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
-      role="application"
       aria-label="3D skill cloud visualization"
       tabIndex={-1}
     >

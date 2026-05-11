@@ -82,17 +82,16 @@ const ServicesSection = () => {
                   {service.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2" role="list">
+                <ul className="flex flex-wrap gap-2">
                   {service.tags.map((tag) => (
-                    <span
+                    <li
                       key={tag}
-                      className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80"
-                      role="listitem"
+                      className="px-3 py-1 bg-white/5 rounded-lg text-xs font-medium tracking-wide text-white/80 list-none"
                     >
                       {tag}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </article>
             );
           })}

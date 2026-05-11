@@ -90,7 +90,7 @@ export function LogoLoop({
           {/* Single set - duplicated by CSS animation for seamless loop */}
           {logos.map((logo, index) => (
             <div
-              key={`logo-${index}`}
+              key={`first-${logo.title || index}`}
               className="logo-loop-item"
               style={{ height: `${logoHeight}px`, width: `${logoHeight}px` }}
               title={logo.title}
@@ -119,7 +119,7 @@ export function LogoLoop({
           {/* Duplicate set for seamless loop */}
           {logos.map((logo, index) => (
             <div
-              key={`logo-dup-${index}`}
+              key={`dup-${logo.title || logo.src}`}
               className="logo-loop-item"
               style={{ height: `${logoHeight}px`, width: `${logoHeight}px` }}
               title={logo.title}
