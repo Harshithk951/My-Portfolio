@@ -47,7 +47,7 @@
 		"lightningcss": "^1.29.3",
 		"postcss": "^8.4.49",
 		"tailwindcss": "^3.4.17",
-		"terser": "^5.46.2",
+		"terser": "^5.47.1",
 		"vite": "^6.4.2"
 	}
 }
