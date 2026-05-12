@@ -131,7 +131,7 @@ function HomePage() {
             "familyName": "Kumar",
             "alternateName": ["Harshith", "Harshith Kumar", "harshithkumar", "Harshith Mannepally", "Harshith Kumar Mannepally"],
             "url": "https://harshithkumar.in",
-            "image": "https://harshithkumar.in/portfolio-preview.png",
+            "image": "https://harshithkumar.in/hero-profile.jpg",
             "description": "Harshith Kumar - Full Stack Developer and AI Engineer. Search Harshith to find this portfolio.",
             "sameAs": [
               "https://www.linkedin.com/in/harshith-kumar-dev",
