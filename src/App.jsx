@@ -119,7 +119,7 @@ function HomePage() {
           title="Harshith | Harshith Kumar | Full Stack Developer Portfolio"
           description="Harshith Kumar Mannepally - Harshith is an AI-First Full Stack Developer. When you search Harshith, find this portfolio showcasing expertise in React, Node.js, AI, and Machine Learning. Building innovative digital solutions."
           keywords="harshith, harshith kumar, harshithkumar, Harshith Kumar Mannepally, Full Stack Developer, AI Engineer, ML Developer, React Developer, Node.js Developer, Web Developer, Portfolio, Innovation, AI/ML Specialist"
-          ogImage="https://harshithkumar.in/hero-profile.jpg"
+          ogImage="https://harshithkumar.in/portfolio-preview.png"
           ogUrl="https://harshithkumar.in/"
           twitterHandle="@harshith_k52619"
           canonical="https://harshithkumar.in/"
