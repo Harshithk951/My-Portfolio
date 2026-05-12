@@ -223,14 +223,18 @@ export default function Galaxy({
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctn.appendChild(canvas);
       return () => {
-        if (ctn.contains(canvas)) {
-          ctn.removeChild(canvas);
-        }
+        canvas.remove();
       };
     }
 
     // Adjust density for low-end devices
-    const adjustedDensity = isLowEnd ? density * 0.4 : isMobile ? density * 0.6 : density;
+    let adjustedDensity = density;
+    if (isLowEnd) {
+      adjustedDensity = density * 0.4;
+    } else if (isMobile) {
+      adjustedDensity = density * 0.6;
+    }
+
     const adjustedGlow = isLowEnd ? glowIntensity * 0.5 : glowIntensity;
     const adjustedTwinkle = isLowEnd ? twinkleIntensity * 0.3 : twinkleIntensity;
 
@@ -356,9 +360,7 @@ export default function Galaxy({
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);
       }
-      if (ctn.contains(gl.canvas)) {
-        ctn.removeChild(gl.canvas);
-      }
+      gl.canvas.remove();
       try {
         gl.getExtension('WEBGL_lose_context')?.loseContext();
       } catch (e) {

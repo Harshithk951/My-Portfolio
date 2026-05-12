@@ -188,8 +188,16 @@ export function IconCloud({ images = [], className }) {
     document.addEventListener("visibilitychange", onVisibility);
 
     // Responsive icon size
-    const getIconSize = (w) => (w <= 480 ? 32 : w <= 768 ? 38 : 46);
-    const getRadiusMul = (w) => (w <= 480 ? 0.65 : w <= 768 ? 0.7 : 0.75);
+    const getIconSize = (w) => {
+      if (w <= 480) return 32;
+      if (w <= 768) return 38;
+      return 46;
+    };
+    const getRadiusMul = (w) => {
+      if (w <= 480) return 0.65;
+      if (w <= 768) return 0.7;
+      return 0.75;
+    };
     const showGlow = !mobile && !isLowEnd; // skip glow on mobile or low-end devices for perf
 
     const TWO_PI = Math.PI * 2;
