@@ -139,6 +139,18 @@ function HomePage() {
               "https://x.com/harshith_k52619",
               "https://www.instagram.com/harshith_kumar_mannepally"
             ],
+            "profiles": [
+              {
+                "@type": "ProfilePage",
+                "name": "LinkedIn",
+                "url": "https://www.linkedin.com/in/harshith-kumar-dev"
+              },
+              {
+                "@type": "ProfilePage",
+                "name": "GitHub",
+                "url": "https://github.com/Harshithk951"
+              }
+            ],
             "jobTitle": "AI-First Full Stack Developer",
             "email": "mailto:harshithkumar.dev@gmail.com",
             "knowsAbout": [
