@@ -223,9 +223,7 @@ export default function Galaxy({
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctn.appendChild(canvas);
       return () => {
-        if (ctn.contains(canvas)) {
-          ctn.removeChild(canvas);
-        }
+        canvas.remove();
       };
     }
 
@@ -356,9 +354,7 @@ export default function Galaxy({
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);
       }
-      if (ctn.contains(gl.canvas)) {
-        ctn.removeChild(gl.canvas);
-      }
+      gl.canvas.remove();
       try {
         gl.getExtension('WEBGL_lose_context')?.loseContext();
       } catch (e) {
