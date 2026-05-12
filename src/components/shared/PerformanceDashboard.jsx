@@ -119,7 +119,11 @@ const PerformanceDashboard = ({ onClose }) => {
                   <div className="w-full bg-black/40 rounded h-1">
                     <div
                       className={`h-full rounded transition-all ${
-                        status === 'good' ? 'bg-green-500' : status === 'needs-improvement' ? 'bg-yellow-500' : 'bg-red-500'
+                        {
+                          'good': 'bg-green-500',
+                          'needs-improvement': 'bg-yellow-500',
+                          'poor': 'bg-red-500'
+                        }[status] || 'bg-slate-500'
                       }`}
                       style={{
                         width: `${Math.min((data.value / 5000) * 100, 100)}%`,

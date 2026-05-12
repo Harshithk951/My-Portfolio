@@ -121,7 +121,7 @@ function HomePage() {
           keywords="harshith, harshith kumar, harshithkumar, Harshith Kumar Mannepally, Full Stack Developer, AI Engineer, ML Developer, React Developer, Node.js Developer, Web Developer, Portfolio, Innovation, AI/ML Specialist"
           ogImage="https://harshithkumar.in/portfolio-preview.png"
           ogUrl="https://harshithkumar.in/"
-          twitterHandle="@harshithk951"
+          twitterHandle="@harshith_k52619"
           canonical="https://harshithkumar.in/"
           structured={{
             "@context": "https://schema.org",
@@ -131,25 +131,25 @@ function HomePage() {
             "familyName": "Kumar",
             "alternateName": ["Harshith", "Harshith Kumar", "harshithkumar", "Harshith Mannepally", "Harshith Kumar Mannepally"],
             "url": "https://harshithkumar.in",
-            "image": "https://harshithkumar.in/portfolio-preview.png",
+            "image": "https://harshithkumar.in/hero-profile.jpg",
             "description": "Harshith Kumar - Full Stack Developer and AI Engineer. Search Harshith to find this portfolio.",
+            "sameAs": [
+              "https://www.linkedin.com/in/harshith-kumar-dev",
+              "https://github.com/Harshithk951",
+              "https://x.com/harshith_k52619",
+              "https://www.instagram.com/harshith_kumar_mannepally"
+            ],
             "profiles": [
               {
-                "@type": "Organization",
+                "@type": "ProfilePage",
                 "name": "LinkedIn",
                 "url": "https://www.linkedin.com/in/harshith-kumar-dev"
               },
               {
-                "@type": "Organization",
+                "@type": "ProfilePage",
                 "name": "GitHub",
                 "url": "https://github.com/Harshithk951"
               }
-            ],
-            "sameAs": [
-              "https://www.linkedin.com/in/harshith-kumar-dev",
-              "https://github.com/Harshithk951",
-              "https://twitter.com/harshithk951",
-              "https://www.instagram.com/harshith_kumar_mannepally"
             ],
             "jobTitle": "AI-First Full Stack Developer",
             "email": "mailto:harshithkumar.dev@gmail.com",

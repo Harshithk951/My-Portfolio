@@ -43,6 +43,35 @@ export function LogoLoop({
     flexShrink: 0,
   };
 
+  const renderLogoContent = (logo) => {
+    if (logo.node) {
+      return (
+        <span
+          style={{
+            fontSize: `${logoHeight * 0.6}px`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {logo.node}
+        </span>
+      );
+    }
+    
+    if (logo.src) {
+      return (
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          style={{ height: '100%', objectFit: 'contain' }}
+        />
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <>
       <style>
@@ -96,24 +125,7 @@ export function LogoLoop({
               title={logo.title}
               aria-label={logo.title || `Logo ${index + 1}`}
             >
-              {logo.node ? (
-                <span
-                  style={{
-                    fontSize: `${logoHeight * 0.6}px`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {logo.node}
-                </span>
-              ) : logo.src ? (
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  style={{ height: '100%', objectFit: 'contain' }}
-                />
-              ) : null}
+              {renderLogoContent(logo)}
             </div>
           ))}
           {/* Duplicate set for seamless loop */}
@@ -126,24 +138,7 @@ export function LogoLoop({
               aria-label={logo.title || `Logo ${index + 1}`}
               aria-hidden="true"
             >
-              {logo.node ? (
-                <span
-                  style={{
-                    fontSize: `${logoHeight * 0.6}px`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {logo.node}
-                </span>
-              ) : logo.src ? (
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  style={{ height: '100%', objectFit: 'contain' }}
-                />
-              ) : null}
+              {renderLogoContent(logo)}
             </div>
           ))}
         </div>
