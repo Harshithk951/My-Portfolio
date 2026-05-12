@@ -228,7 +228,13 @@ export default function Galaxy({
     }
 
     // Adjust density for low-end devices
-    const adjustedDensity = isLowEnd ? density * 0.4 : isMobile ? density * 0.6 : density;
+    let adjustedDensity = density;
+    if (isLowEnd) {
+      adjustedDensity = density * 0.4;
+    } else if (isMobile) {
+      adjustedDensity = density * 0.6;
+    }
+
     const adjustedGlow = isLowEnd ? glowIntensity * 0.5 : glowIntensity;
     const adjustedTwinkle = isLowEnd ? twinkleIntensity * 0.3 : twinkleIntensity;
 
