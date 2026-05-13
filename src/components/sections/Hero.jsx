@@ -52,7 +52,8 @@ const Hero = memo(() => {
         title: "CV Download",
         description: "Your CV download has started! 📄",
       });
-    } catch {
+    } catch (err) {
+      console.error('Failed to download CV:', err);
       toast({
         title: "Download Failed",
         description: "Something went wrong. Please try again.",

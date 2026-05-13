@@ -63,7 +63,7 @@ export function reportWebVitals(onPerfEntry) {
       onTTFB(onPerfEntry);
       onINP(onPerfEntry);
     }).catch(err => {
-      // Could not load web-vitals
+      console.warn('Could not load web-vitals:', err);
     });
   }
 }
