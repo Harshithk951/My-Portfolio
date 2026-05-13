@@ -33,7 +33,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
       .then(registration => {
       })
       .catch(registrationError => {
-        // SW registration failed
+        console.error('SW registration failed:', registrationError);
       });
   });
 }

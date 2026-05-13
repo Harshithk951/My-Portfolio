@@ -60,7 +60,8 @@ const fetchAndCreateImage = async (src) => {
       const url = URL.createObjectURL(blob);
       return loadImageFromUrl(url);
     }
-  } catch {
+  } catch (err) {
+    console.error('Error fetching image:', err);
     return null;
   }
 };

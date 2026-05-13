@@ -57,7 +57,8 @@ export const checkImageFormatSupport = async (format) => {
   
   try {
     return canvas.toDataURL(mimeType) !== canvas.toDataURL('image/png');
-  } catch {
+  } catch (err) {
+    console.warn(`Format check failed for ${format}:`, err);
     return false;
   }
 };

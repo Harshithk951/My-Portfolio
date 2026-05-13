@@ -109,6 +109,7 @@ const ContactForm = () => {
       }
       
     } catch (error) {
+      console.error('Contact form submission error:', error);
       dismiss(); // Dismiss loading toast on error
       // Provide specific error messages based on error type
       let errorMessage = 'Something went wrong. Please try again later.';

@@ -364,7 +364,7 @@ export default function Galaxy({
       try {
         gl.getExtension('WEBGL_lose_context')?.loseContext();
       } catch (e) {
-        // Context already lost
+        console.warn('Context already lost:', e);
       }
     };
     } catch (error) {
