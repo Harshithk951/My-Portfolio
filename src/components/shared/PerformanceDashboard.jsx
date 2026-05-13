@@ -21,18 +21,19 @@ import { ANIMATION_PRESETS } from '@/lib/animationConfig';
 const PerformanceDashboard = ({ onClose }) => {
   const [metrics, setMetrics] = useState(() => globalThis.__PERF_METRICS__ || {});
   const [performance] = useState(() => {
-    if (globalThis.performance?.timing) {
-      const timing = globalThis.performance.timing;
-      const navigationStart = timing.navigationStart;
-      return {
-        dns: timing.domainLookupEnd - timing.domainLookupStart,
-        tcp: timing.connectEnd - timing.connectStart,
-        ttfb: timing.responseStart - navigationStart,
-        download: timing.responseEnd - timing.responseStart,
-        domInteractive: timing.domInteractive - navigationStart,
-        domComplete: timing.domComplete - navigationStart,
-        pageLoadTime: timing.loadEventEnd - navigationStart,
-      };
+    if (globalThis.performance?.getEntriesByType) {
+      const [navEntry] = globalThis.performance.getEntriesByType('navigation');
+      if (navEntry) {
+        return {
+          dns: navEntry.domainLookupEnd - navEntry.domainLookupStart,
+          tcp: navEntry.connectEnd - navEntry.connectStart,
+          ttfb: navEntry.responseStart,
+          download: navEntry.responseEnd - navEntry.responseStart,
+          domInteractive: navEntry.domInteractive,
+          domComplete: navEntry.domComplete,
+          pageLoadTime: navEntry.loadEventEnd,
+        };
+      }
     }
     return null;
   });
