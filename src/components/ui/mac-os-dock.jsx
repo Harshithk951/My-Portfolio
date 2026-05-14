@@ -271,7 +271,6 @@ const MacOSDock = ({
   return (
     <div 
       ref={dockRef}
-      role="presentation"
       className={`backdrop-blur-md ${className}`}
       style={{
         width: `${contentWidth + padding * 2}px`,
