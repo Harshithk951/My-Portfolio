@@ -7,6 +7,7 @@ import React, {
   useRef,
   useCallback,
   useEffect,
+  useMemo,
 } from "react";
 import PropTypes from "prop-types";
 
@@ -55,8 +56,10 @@ export const CardContainer = ({ children, className = "", containerClassName = "
     }
   }, [supportsHover]);
 
+  const contextValue = useMemo(() => [isMouseEntered, setIsMouseEntered], [isMouseEntered]);
+
   return (
-    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+    <MouseEnterContext.Provider value={contextValue}>
       <div
         className={`flex items-center justify-center ${containerClassName}`}
         style={{ perspective: "1000px" }}
