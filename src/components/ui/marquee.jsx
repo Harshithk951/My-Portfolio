@@ -17,13 +17,14 @@ export function Marquee({
   const [isPaused, setIsPaused] = React.useState(false);
 
   // Apply reverse prop by flipping direction
-  const finalDirection = reverse
-    ? direction === "left"
-      ? "right"
-      : direction === "up"
-      ? "down"
-      : direction
-    : direction;
+  const getFinalDirection = () => {
+    if (!reverse) return direction;
+    if (direction === "left") return "right";
+    if (direction === "up") return "down";
+    return direction;
+  };
+  
+  const finalDirection = getFinalDirection();
 
   const items = React.Children.toArray(children);
   const isVertical = finalDirection === "up" || finalDirection === "down";
@@ -66,9 +67,8 @@ export function Marquee({
         }
       `}
       </style>
-      <div
+      <section
         ref={containerRef}
-        role="region"
         aria-label="Scrolling marquee"
         className={cn(
           "flex w-full overflow-hidden",
@@ -130,7 +130,7 @@ export function Marquee({
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }
