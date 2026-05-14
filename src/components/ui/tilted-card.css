@@ -80,9 +80,6 @@
   transition: filter 0.3s ease-out;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.tilted-card-img {
   image-rendering: crisp-edges;
 }
 
