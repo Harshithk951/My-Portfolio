@@ -17,13 +17,14 @@ export function Marquee({
   const [isPaused, setIsPaused] = React.useState(false);
 
   // Apply reverse prop by flipping direction
-  const finalDirection = reverse
-    ? direction === "left"
-      ? "right"
-      : direction === "up"
-      ? "down"
-      : direction
-    : direction;
+  const getFinalDirection = () => {
+    if (!reverse) return direction;
+    if (direction === "left") return "right";
+    if (direction === "up") return "down";
+    return direction;
+  };
+  
+  const finalDirection = getFinalDirection();
 
   const items = React.Children.toArray(children);
   const isVertical = finalDirection === "up" || finalDirection === "down";
