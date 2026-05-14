@@ -66,9 +66,8 @@ export function Marquee({
         }
       `}
       </style>
-      <div
+      <section
         ref={containerRef}
-        role="region"
         aria-label="Scrolling marquee"
         className={cn(
           "flex w-full overflow-hidden",
@@ -130,7 +129,7 @@ export function Marquee({
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

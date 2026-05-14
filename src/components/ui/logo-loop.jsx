@@ -108,9 +108,8 @@ export function LogoLoop({
           }
         `}
       </style>
-      <div
+      <section
         style={containerStyle}
-        role="region"
         aria-label={ariaLabel}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -142,7 +141,7 @@ export function LogoLoop({
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }
