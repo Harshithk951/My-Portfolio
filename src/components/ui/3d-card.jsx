@@ -69,7 +69,6 @@ export const CardContainer = ({ children, className = "", containerClassName = "
           onMouseEnter={handleMouseEnter}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          role="presentation"
           className={`relative transition-all duration-200 ease-linear ${className}`}
           style={{ transformStyle: "preserve-3d" }}
         >
