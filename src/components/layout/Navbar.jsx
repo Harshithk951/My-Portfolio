@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, User, Briefcase, Brain, Mail } from 'lucide-react';
+import { Home, User, Briefcase, Brain, Mail, Building2, Microscope } from 'lucide-react';
 import { TubeLightNavbar } from '@/components/ui/tube-light-navbar';
 
 const Navbar = () => {
@@ -7,7 +7,9 @@ const Navbar = () => {
     { name: 'Home', href: '#home', icon: Home },
     { name: 'About', href: '#about', icon: User },
     { name: 'Skills', href: '#skills', icon: Brain },
+    { name: 'Experience', href: '#experience', icon: Building2 },
     { name: 'Projects', href: '#projects', icon: Briefcase },
+    { name: 'Research', href: '#research', icon: Microscope },
     { name: 'Contact', href: '#contact', icon: Mail },
   ];
 

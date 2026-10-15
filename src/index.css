@@ -228,7 +228,9 @@ body::after {
 /* Scoped inclusion for specific grids */
 .journey-grid .glow-card,
 .services-grid .glow-card,
-.cta-grid .glow-card {
+.cta-grid .glow-card,
+.research-grid .glow-card,
+.experience-grid .glow-card {
   @apply glass-card-premium;
 }
 

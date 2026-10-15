@@ -1,39 +1,40 @@
 import React, { useMemo } from 'react';
 import LogoLoop from '@/components/ui/logo-loop';
-import { 
-  SiReact,
-  SiNodedotjs,
+import {
   SiPython,
-  SiTensorflow,
-  SiMongodb,
-  SiPostgresql,
-  SiDocker,
-  SiGit,
-  SiJavascript,
   SiTypescript,
+  SiReact,
   SiNextdotjs,
-  SiExpress,
-  SiTailwindcss,
-  SiFigma,
+  SiNodedotjs,
+  SiFastapi,
+  SiPostgresql,
+  SiSqlite,
+  SiDocker,
+  SiKubernetes,
+  SiGit,
+  SiGithub,
 } from 'react-icons/si';
-import { FaAws } from 'react-icons/fa';
+import { FaAws, FaMicrosoft } from 'react-icons/fa';
+import { Sparkles, Bot, TestTube } from 'lucide-react';
 
 const SKILL_LOGOS = [
-  { icon: SiReact, name: 'React' },
-  { icon: SiNodedotjs, name: 'Node.js' },
   { icon: SiPython, name: 'Python' },
-  { icon: SiTensorflow, name: 'TensorFlow' },
-  { icon: SiMongodb, name: 'MongoDB' },
-  { icon: SiPostgresql, name: 'PostgreSQL' },
-  { icon: SiDocker, name: 'Docker' },
-  { icon: SiGit, name: 'Git' },
-  { icon: SiJavascript, name: 'JavaScript' },
   { icon: SiTypescript, name: 'TypeScript' },
+  { icon: SiReact, name: 'React' },
   { icon: SiNextdotjs, name: 'Next.js' },
-  { icon: SiExpress, name: 'Express' },
-  { icon: SiTailwindcss, name: 'Tailwind CSS' },
-  { icon: SiFigma, name: 'Figma' },
+  { icon: SiNodedotjs, name: 'Node.js' },
+  { icon: SiFastapi, name: 'FastAPI' },
+  { icon: SiPostgresql, name: 'PostgreSQL' },
+  { icon: SiSqlite, name: 'SQLite' },
+  { icon: SiDocker, name: 'Docker' },
+  { icon: SiKubernetes, name: 'Kubernetes' },
+  { icon: SiGit, name: 'Git' },
+  { icon: SiGithub, name: 'GitHub' },
   { icon: FaAws, name: 'AWS' },
+  { icon: FaMicrosoft, name: 'Azure' },
+  { icon: Sparkles, name: 'LLM APIs' },
+  { icon: Bot, name: 'AI Agents' },
+  { icon: TestTube, name: 'Model Evaluation' },
 ];
 
 const SkillsMarquee = () => {
@@ -44,7 +45,6 @@ const SkillsMarquee = () => {
         className: 'text-3xl sm:text-4xl md:text-5xl',
       }),
       title: skill.name,
-      href: '#',
     })), 
     []
   );

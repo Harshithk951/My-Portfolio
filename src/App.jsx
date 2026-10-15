@@ -17,7 +17,9 @@ import { Toaster } from '@/components/ui/toaster';
 // Lazy load below-the-fold components
 const AboutBento = lazy(() => import('@/components/sections/AboutBento'));
 const SkillsMarquee = lazy(() => import('@/components/sections/SkillsMarquee'));
+const ExperienceSection = lazy(() => import('@/components/sections/ExperienceSection'));
 const ProjectsShowcase = lazy(() => import('@/components/sections/ProjectsShowcase'));
+const ResearchSection = lazy(() => import('@/components/sections/ResearchSection'));
 const ServicesSection = lazy(() => import('@/components/sections/ServicesSection'));
 const CTASection = lazy(() => import('@/components/sections/CTASection'));
 const Footer = lazy(() => import('@/components/layout/Footer'));
@@ -116,29 +118,34 @@ function HomePage() {
     <DeviceContext.Provider value={deviceInfo}>
       <>
         <SEOHead 
-          title="Harshith | Harshith Kumar | Full Stack Developer Portfolio"
-          description="Harshith Kumar Mannepally - Harshith is an AI-First Full Stack Developer. When you search Harshith, find this portfolio showcasing expertise in React, Node.js, AI, and Machine Learning. Building innovative digital solutions."
-          keywords="harshith, harshith kumar, harshithkumar, Harshith Kumar Mannepally, Full Stack Developer, AI Engineer, ML Developer, React Developer, Node.js Developer, Web Developer, Portfolio, Innovation, AI/ML Specialist"
+          title="Harshith Kumar | AI Engineer & AI Researcher"
+          description="Harshith Kumar (Harshith) — AI Engineer & AI Researcher. CS (AI & ML) student building full stack and AI-powered applications with Python, TypeScript, React, Next.js and FastAPI."
+          keywords="Harshith, Harshith Kumar, harshithkumar, AI Engineer, AI Researcher, Machine Learning, LLM, AI Agents, Federated Learning, FastAPI, Python, Open Source Contributor, Uttaranchal University"
           ogImage="https://harshithkumar.in/portfolio-preview.png"
           ogUrl="https://harshithkumar.in/"
-          twitterHandle="@harshith_k52619"
+          twitterHandle="@harshithk951"
           canonical="https://harshithkumar.in/"
           structured={{
             "@context": "https://schema.org",
             "@type": "Person",
-            "name": "Harshith Kumar Mannepally",
+            "name": "Harshith Kumar Mannepalli",
             "givenName": "Harshith",
             "familyName": "Kumar",
-            "alternateName": ["Harshith", "Harshith Kumar", "harshithkumar", "Harshith Mannepally", "Harshith Kumar Mannepally"],
+            "alternateName": ["Harshith", "Harshith Kumar", "harshithkumar", "Harshith Mannepalli", "Harshith Kumar Mannepalli"],
             "url": "https://harshithkumar.in",
             "image": "https://harshithkumar.in/hero-profile.jpg",
-            "description": "Harshith Kumar - Full Stack Developer and AI Engineer. Search Harshith to find this portfolio.",
+            "description": "B.Tech Computer Science (AI & ML) student at Uttaranchal University, Dehradun. Open source contributor at Cal.com and freeCodeCamp, with two IEEE conference papers.",
             "sameAs": [
               "https://www.linkedin.com/in/harshith-kumar-dev",
               "https://github.com/Harshithk951",
-              "https://x.com/harshith_k52619",
+              "https://x.com/harshithk951",
               "https://www.instagram.com/harshith_kumar_mannepally"
             ],
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Uttaranchal University",
+              "sameAs": "https://www.uttaranchaluniversity.ac.in/"
+            },
             "profiles": [
               {
                 "@type": "ProfilePage",
@@ -151,23 +158,25 @@ function HomePage() {
                 "url": "https://github.com/Harshithk951"
               }
             ],
-            "jobTitle": "AI-First Full Stack Developer",
-            "email": "mailto:harshithkumar.dev@gmail.com",
+            "jobTitle": "AI Engineer & AI Researcher",
+            "email": "mailto:mharshithkumar6@gmail.com",
             "knowsAbout": [
               "Artificial Intelligence",
               "Machine Learning",
-              "React.js",
-              "Node.js",
-              "Full Stack Development",
-              "Web Development",
+              "Large Language Models",
+              "AI Agents",
+              "Federated Learning",
+              "Continual Learning",
               "Python",
-              "JavaScript",
               "TypeScript",
-              "UI/UX Design",
-              "Database Design",
-              "Cloud Architecture"
+              "FastAPI",
+              "React",
+              "Next.js",
+              "PostgreSQL",
+              "Docker",
+              "Kubernetes"
             ],
-            "skills": "React, Node.js, Python, AI/ML, Full Stack Development, Web Design",
+            "skills": "Python, TypeScript, FastAPI, React, Next.js, PostgreSQL, Docker, Kubernetes, LLMs, AI Agents",
             "worksFor": {
               "@type": "Organization",
               "name": "Freelance"
@@ -196,7 +205,9 @@ function HomePage() {
                   <div className="flex flex-col space-y-0">
                     <AboutBento />
                     <SkillsMarquee />
+                    <ExperienceSection />
                     <ProjectsShowcase />
+                    <ResearchSection />
                     <ServicesSection />
                     <CTASection />
                   </div>
