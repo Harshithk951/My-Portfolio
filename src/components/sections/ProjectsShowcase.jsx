@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
-import { ExternalLink, Trophy, Heart, TrendingUp, Users, FileSearch, Palette, Plane, CheckSquare } from 'lucide-react';
+import { ExternalLink, Trophy, ShieldCheck, Users, FileSearch, Plane, Bot } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { sendAnalyticsEvent } from '@/lib/analytics';
 import { Marquee } from '@/components/ui/marquee';
@@ -8,8 +8,26 @@ import { Marquee } from '@/components/ui/marquee';
 // ── Project Data ──────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    title: 'RecoveryOS',
+    description: 'AI-driven revenue-recovery system where AI suggestions pass through a rule-based safety layer — risk limits, retry budgets, cooldowns and a kill-switch — before any action. Idempotent webhooks, an execution ledger with reconciliation, and an append-only audit trail. Across 135 failed-payment test cases the AI lane recovered ₹20,726 extra with zero unsafe actions and zero duplicate executions. 232/232 unit tests and 36/36 validation checks passing.',
+    tech: ['TypeScript', 'Node.js', 'SQLite', 'REST APIs', 'Docker'],
+    color: 'glow-pink',
+    badge: 'AI Safety Layer',
+    icon: ShieldCheck,
+    repoUrl: 'https://github.com/Harshithk951/Ai-Revenue-Recovery'
+  },
+  {
+    title: 'Smart Sales Intelligence Agent',
+    description: 'Modular 4-stage AI workflow (Orchestrator → Research → Analysis → Outreach) with per-stage latency, error and usage tracking, plus a Next.js 15 dashboard with real-time execution timelines.',
+    tech: ['Python', 'FastAPI', 'Next.js', 'React'],
+    color: 'glow-blue',
+    badge: 'AI Agent',
+    icon: Bot,
+    repoUrl: 'https://github.com/Harshithk951/sales-intelligence-agent'
+  },
+  {
     title: 'ResumeOptima',
-    description: 'AI-powered ATS Resume Analyzer with ultra-strict MNC scoring using Google Gemini 3 Pro — glassmorphism UI, JD matcher, and deterministic hybrid scoring engine.',
+    description: 'AI-powered ATS resume analyzer that scores resumes against a job description using an LLM and a deterministic hybrid scoring engine — glassmorphism UI with a JD matcher.',
     tech: ['React 19', 'TypeScript', 'Gemini 3 Pro', 'Tailwind CSS'],
     color: 'glow-pink',
     badge: 'AI Powered 🤖',
@@ -19,7 +37,7 @@ const PROJECTS = [
   },
   {
     title: 'Aviation Crew Wellness',
-    description: 'Next-gen SaaS platform for crew fatigue management with AI assistant, RBAC portals, real-time wellness tracking, smart rostering, and regulatory compliance.',
+    description: 'SaaS platform for crew fatigue management with an AI assistant, RBAC portals, real-time wellness tracking, smart rostering, and regulatory compliance.',
     tech: ['React 18', 'TypeScript', 'Gemini AI', 'Tailwind CSS'],
     color: 'glow-blue',
     badge: 'AI Powered 🤖',
@@ -29,58 +47,13 @@ const PROJECTS = [
   },
   {
     title: 'Uni-Connect Hub',
-    description: 'A comprehensive platform connecting university students with resources, events, and collaboration opportunities. Hackathon Winner 🏆',
-    tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
-    color: 'glow-blue',
-    badge: 'Hackathon Winner 🏆',
-    icon: FaGithub,
-    repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub',
-    liveUrl: 'https://alumni-connect-nu.vercel.app/'
-  },
-  {
-    title: 'Smart Health Care',
-    description: 'Complete clinic management system with patient records, appointment scheduling, and billing integration using modern stack.',
-    tech: ['React', 'Express', 'MongoDB', 'Firebase'],
+    description: 'Student-alumni networking platform with role-based access for 200+ users. PostgreSQL joins and indexes tuned from 2.3s to 0.6s (74% faster).',
+    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
     color: 'glow-green',
-    icon: Heart,
-    repoUrl: 'https://github.com/Harshithk951/Smart-Health-Care',
-    liveUrl: 'https://ramu-clinic.vercel.app/'
-  },
-  {
-    title: 'Smart Sales Agent',
-    description: 'AI-powered sales assistant using machine learning to optimize customer interactions and improve conversion rates.',
-    tech: ['React', 'Python', 'AI/ML', 'Node.js'],
-    color: 'glow-blue',
-    icon: TrendingUp,
-    repoUrl: 'https://github.com/Harshithk951/sales-intelligence-agent'
-  },
-  {
-    title: 'Achievers Club',
-    description: 'An elite community ecosystem for ambitious business leaders — premium dark-themed interface with 3D card tilts, parallax hero, and Supabase-powered contact forms.',
-    tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Supabase'],
-    color: 'glow-yellow',
+    badge: 'SIH Internal Round',
     icon: Users,
-    repoUrl: 'https://github.com/Harshithk951/Forever-Achievers-Club-',
-    liveUrl: 'https://forever-achievers-club-1.vercel.app/'
-  },
-  {
-    title: 'AuraSpace Interiors',
-    description: 'Premium interior design studio website with cinematic parallax effects and Aura — a context-aware AI Design Consultant powered by Google Gemini.',
-    tech: ['React 18', 'Tailwind CSS', 'Gemini API', 'Vite'],
-    color: 'glow-pink',
-    icon: Palette,
-    repoUrl: 'https://github.com/Harshithk951/AuraSpace-Interiors',
-    liveUrl: 'https://interioir-designs.vercel.app/'
-  },
-  {
-    title: 'To-Do Full Stack',
-    description: 'Complete full-stack task management app with JWT authentication, protected routes, MySQL database, and RESTful API — deployed on Vercel + Render.',
-    tech: ['React', 'Node.js', 'Express', 'MySQL'],
-    color: 'glow-green',
-    badge: 'Full Stack 🚀',
-    icon: CheckSquare,
-    repoUrl: 'https://github.com/Harshithk951/To-Do-Full-Stack',
-    liveUrl: 'https://to-do-full-stack-tudm.vercel.app'
+    repoUrl: 'https://github.com/Harshithk951/Uni-Connect-Hub-',
+    liveUrl: 'https://alumni-connect-nu.vercel.app/'
   }
 ];
 
