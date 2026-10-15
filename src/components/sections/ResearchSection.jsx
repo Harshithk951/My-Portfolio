@@ -1,4 +1,4 @@
-import { Microscope, Award, Trophy } from 'lucide-react';
+import { Microscope, BadgeCheck, Trophy } from 'lucide-react';
 
 const RESEARCH = [
   {
@@ -69,7 +69,7 @@ const ResearchSection = () => {
           <article className="glow-card glow-yellow p-6 sm:p-7 md:p-8 flex flex-col" aria-labelledby="certifications-group-title">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-3 bg-white/10 rounded-2xl" aria-hidden="true">
-                <Award size={28} className="text-white" />
+                <BadgeCheck size={28} className="text-white" />
               </div>
               <h3 id="certifications-group-title" className="text-xl sm:text-2xl font-bold text-white">Certifications</h3>
             </div>
