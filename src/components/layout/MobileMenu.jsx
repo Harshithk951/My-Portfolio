@@ -1,5 +1,5 @@
 import { useState, useCallback, memo } from 'react';
-import { Menu, X, Home, User, Briefcase, Code, Mail } from 'lucide-react';
+import { Menu, X, Home, User, Briefcase, Code, Mail, Building2, Microscope } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { smoothScrollTo } from '@/lib/utils';
 import { ANIMATION_PRESETS } from '@/lib/animationConfig';
@@ -11,7 +11,9 @@ const MobileMenu = memo(() => {
     { id: 'home', name: 'Home', icon: Home, href: '#home' },
     { id: 'about', name: 'About', icon: User, href: '#about' },
     { id: 'skills', name: 'Skills', icon: Code, href: '#skills' },
+    { id: 'experience', name: 'Experience', icon: Building2, href: '#experience' },
     { id: 'projects', name: 'Projects', icon: Briefcase, href: '#projects' },
+    { id: 'research', name: 'Research', icon: Microscope, href: '#research' },
     { id: 'contact', name: 'Contact', icon: Mail, href: '#contact' },
   ];
 

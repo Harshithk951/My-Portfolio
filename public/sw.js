@@ -3,7 +3,7 @@
  * Handles caching for assets to allow offline viewing and faster repeat loads.
  */
 
-const CACHE_NAME = 'portfolio-pwa-v1';
+const CACHE_NAME = 'portfolio-pwa-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
