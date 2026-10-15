@@ -10,7 +10,7 @@ import { sendAnalyticsEvent } from '@/lib/analytics';
 import { useWordCycle } from '@/hooks/useWordCycle';
 import Galaxy from '@/components/shared/Galaxy';
 
-const WORDS = ['solves', 'builds', 'designs', 'creates', 'transforms'];
+const WORDS = ['builds', 'researches', 'evaluates', 'ships', 'explains'];
 
 const Hero = memo(() => {
   const { toast } = useToast();
@@ -105,7 +105,7 @@ const Hero = memo(() => {
             >
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-violet-500 to-amber-500 animate-pulse" />
               <span className="text-[10px] sm:text-sm font-medium tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 uppercase">
-                AI-First Full Stack Developer
+                AI Engineer &amp; AI Researcher
               </span>
             </motion.div>
 
@@ -136,7 +136,7 @@ const Hero = memo(() => {
             </div>
 
             <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl leading-relaxed">
-              AI/ML Student | Full Stack Developer | Building Digital Experiences that merge creativity with engineering precision.
+              AI/ML Student | LLM Systems &amp; Agents | IEEE Researcher | Open-Source Contributor
             </p>
 
             <motion.div
@@ -175,8 +175,8 @@ const Hero = memo(() => {
             <div className="mobile-bounce-image w-[240px] h-[360px] sm:w-[260px] sm:h-[390px] md:w-[320px] md:h-[480px] lg:w-[380px] lg:h-[580px]">
               <TiltedCard
                 imageSrc="/hero-profile.jpg"
-                altText="Harshith Kumar Mannepally - AI-First Full Stack Developer professional headshot"
-                captionText="Harshith Kumar - Full Stack Developer"
+                altText="Harshith Kumar Mannepalli - AI Engineer & AI Researcher professional headshot"
+                captionText="Harshith Kumar - AI Engineer & AI Researcher"
                 containerHeight="100%"
                 containerWidth="100%"
                 imageHeight="100%"

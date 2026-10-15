@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rocket, Code, Layout, Brain, ArrowRight } from 'lucide-react';
+import { Bot, FileText, Layers, Container, ArrowRight } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const ServicesSection = () => {
@@ -7,31 +7,31 @@ const ServicesSection = () => {
 
   const services = [
     {
-      icon: Rocket,
-      title: 'MVP Development',
-      description: 'Turn your startup idea into a working product in weeks. I build functional MVPs that help you validate fast and scale sooner.',
-      tags: ['Startups', 'SaaS', 'Rapid Dev'],
+      icon: Bot,
+      title: 'LLM & AI Agent Development',
+      description: 'Design and ship LLM-powered applications and AI agents, with rule-based safety layers that keep automated actions within defined limits.',
+      tags: ['LLM APIs', 'AI Agents', 'FastAPI'],
       color: 'glow-pink'
     },
     {
-      icon: Code,
-      title: 'Full Stack Web Apps',
-      description: 'Robust, scalable web applications using the latest tech stack. From database design to frontend interactivity, I handle it all.',
-      tags: ['React', 'Node.js', 'PostgreSQL'],
+      icon: FileText,
+      title: 'AI Research & Paper Writing',
+      description: 'Applied AI research authored in LaTeX/Overleaf, including two IEEE conference papers on federated continual learning and cognitive-fatigue detection.',
+      tags: ['IEEE', 'LaTeX', 'Overleaf'],
       color: 'glow-yellow'
     },
     {
-      icon: Layout,
-      title: 'UI/UX & Frontend',
-      description: 'Pixel-perfect, responsive, and animated interfaces that users love. I focus on smooth interactions and accessible design.',
-      tags: ['Framer Motion', 'Tailwind', 'Design'],
+      icon: Layers,
+      title: 'Full-Stack AI Products',
+      description: 'End-to-end AI products: FastAPI backends, Next.js and React frontends, backed by PostgreSQL.',
+      tags: ['FastAPI', 'Next.js', 'PostgreSQL'],
       color: 'glow-green'
     },
     {
-      icon: Brain,
-      title: 'Automations & ML',
-      description: 'Intelligent automation solutions and ML models to optimize workflows and add smart features to your applications.',
-      tags: ['Python', 'AI', 'Automation'],
+      icon: Container,
+      title: 'Containerized Deployment & CI/CD',
+      description: 'Containerized deployment and CI/CD pipelines with Docker, Kubernetes, GitHub Actions and Microsoft Azure.',
+      tags: ['Docker', 'Kubernetes', 'Azure'],
       color: 'glow-blue'
     }
   ];

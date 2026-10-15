@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { User, MapPin, Zap, ArrowRight, Code, Rocket } from 'lucide-react';
+import { User, Bot, Microscope, GitPullRequest, Container, Target } from 'lucide-react';
 
 const AboutBento = () => {
   const sectionRef = useRef(null);
@@ -8,42 +8,42 @@ const AboutBento = () => {
     {
       icon: User,
       title: 'Who I Am',
-      description: "Hey, I'm Harshith Kumar Mannepally, an AI/ML Student at Uttaranchal University. I'm a passionate developer who loves turning ideas into reality.",
+      description: "Hey, I'm Harshith Kumar Mannepalli, a Computer Science (AI & ML) student at Uttaranchal University in Dehradun, expected May 2027. I build full stack and AI-powered applications.",
       color: 'glow-pink',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
     {
-      icon: MapPin,
-      title: 'My Roots',
-      description: "Growing up in Hyderabad and adapting to new environments shaped my resilience. It taught me to embrace change and find opportunity in every challenge.",
+      icon: Bot,
+      title: 'What I Build',
+      description: "LLM-powered applications and AI agents. In RecoveryOS, AI suggestions pass through a rule-based safety layer — risk limits, retry budgets, cooldowns and a kill-switch — before any action runs.",
       color: 'glow-yellow',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
     {
-      icon: Zap,
-      title: 'The Spark',
-      description: "My journey began at Dilsukhnagar Public School, where curiosity met discipline. Early exposure to computers ignited a lifelong passion for technology.",
+      icon: Microscope,
+      title: 'Research',
+      description: "Two IEEE conference papers: federated continual learning with EWC for IoT edge devices, and AgriCogNet, an explainable ensemble for detecting cognitive fatigue in farm workers.",
       color: 'glow-yellow',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
     {
-      icon: ArrowRight,
-      title: 'The Transition',
-      description: "Sri Chaitanya Jr College helped me mature, stay disciplined, and focus on my goals. It was a period of rigorous preparation and mental fortitude.",
+      icon: GitPullRequest,
+      title: 'Open Source',
+      description: "Five pull requests merged into Cal.com and freeCodeCamp production codebases after maintainer code review — core library logic, CI/CD workflows, automated validation and accessibility fixes.",
       color: 'glow-green',
       colSpan: 'md:col-span-2 lg:col-span-1'
     },
     {
-      icon: Code,
-      title: 'The Pivot',
-      description: "Uttaranchal University was the turning point where I dove deep into AI/ML and Full Stack Dev. Here, I started building real-world projects.",
+      icon: Container,
+      title: 'Engineering Practice',
+      description: "Containerized deployment with Docker, Kubernetes and CI/CD, backed by unit testing, API testing, debugging and performance optimization.",
       color: 'glow-blue',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
     {
-      icon: Rocket,
-      title: 'The Mission',
-      description: "Growing as a Developer, Creator & Entrepreneur. My mission is to build solutions that impact lives and drive innovation in the tech ecosystem.",
+      icon: Target,
+      title: "What I'm Looking For",
+      description: "An entry-level Software Engineer role focused on AI-driven products, where I can ship safe, evaluated AI systems.",
       color: 'glow-green',
       colSpan: 'md:col-span-1 lg:col-span-1'
     }
