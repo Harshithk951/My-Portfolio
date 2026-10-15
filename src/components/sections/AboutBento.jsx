@@ -23,7 +23,7 @@ const AboutBento = () => {
       icon: Microscope,
       title: 'Research',
       description: "Two IEEE conference papers: federated continual learning with EWC for IoT edge devices, and AgriCogNet, an explainable ensemble for detecting cognitive fatigue in farm workers.",
-      color: 'glow-yellow',
+      color: 'glow-blue',
       colSpan: 'md:col-span-1 lg:col-span-1'
     },
     {
@@ -44,7 +44,7 @@ const AboutBento = () => {
       icon: Target,
       title: "What I'm Looking For",
       description: "An entry-level Software Engineer role focused on AI-driven products, where I can ship safe, evaluated AI systems.",
-      color: 'glow-green',
+      color: 'glow-yellow',
       colSpan: 'md:col-span-1 lg:col-span-1'
     }
   ];
@@ -54,7 +54,7 @@ const AboutBento = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="mb-16 text-center">
           <h2 id="about-title" className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tighter mb-4 text-white">
-            My Journey
+            About Me
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto rounded-full" aria-hidden="true" />
         </div>

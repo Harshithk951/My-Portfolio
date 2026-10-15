@@ -121,8 +121,8 @@ const Hero = memo(() => {
               aria-live="polite"
               aria-atomic="true"
             >
-              <span>I am a guy who</span>
-              <span className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white text-black font-bold text-base sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              <span>I&apos;m an engineer who</span>
+              <span className="min-w-[7ch] text-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white text-black font-bold text-base sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                 <motion.span
                   key={currentWord}
                   {...ANIMATION_PRESETS.FADE_IN}
@@ -136,7 +136,7 @@ const Hero = memo(() => {
             </div>
 
             <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl leading-relaxed">
-              AI/ML Student | LLM Systems &amp; Agents | IEEE Researcher | Open-Source Contributor
+              AI/ML Student | LLM Systems &amp; Agents | Two IEEE Conference Papers | Open-Source Contributor
             </p>
 
             <motion.div

@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.1.0",
 	"description": "AI Engineer & AI Researcher portfolio — full stack and AI-powered applications",
-	"author": "Harshith Kumar Mannepally",
+	"author": "Harshith Kumar Mannepalli",
 	"scripts": {
 		"dev": "vite --host :: --port 3000",
 		"build": "vite build",
