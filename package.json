@@ -2,7 +2,7 @@
 	"name": "harshith-portfolio",
 	"type": "module",
 	"version": "0.1.0",
-	"description": "Premium AI-First Full Stack Developer Portfolio",
+	"description": "AI Engineer & AI Researcher portfolio — full stack and AI-powered applications",
 	"author": "Harshith Kumar Mannepally",
 	"scripts": {
 		"dev": "vite --host :: --port 3000",
